@@ -1,0 +1,28 @@
+.docs-side-nav {
+  background-color: $black-04;
+  padding-top: 24px;
+  box-shadow: -1px solid $black-08;
+  grid-area: sidebar;
+  .cui-side-nav {
+    max-width: 15rem;
+    .cui-list-item {
+      &--primary {
+        padding: 0 rem-calc(20);
+  
+        .cui-list-item__left,
+        .cui-list-item__right {
+          color: $black-60;
+          fill: $black-60;
+        }
+      }
+    
+      &--secondary {
+        padding-left: rem-calc(56);
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}

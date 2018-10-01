@@ -1,0 +1,18 @@
+.hero {
+  min-height: rem-calc(576);
+}
+
+.cui-page-header {
+
+&__container {
+
+  max-width: rem-calc(576);
+  margin: 0 auto rem-calc(48);
+
+  .cui-page-header--left & {
+    margin-right: rem-calc(48);
+    margin-left: 0;
+
+  }
+}
+}

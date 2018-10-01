@@ -1,0 +1,9 @@
+
+.cui-page-header {
+  grid-area: page-header;
+
+  &__title {
+    font-size: rem-calc(62);
+    line-height: rem-calc(80);
+  }
+}
