@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const WP_URL = process.env.WP_URL || 'http://wp.collab-ui.dev.cc';
 
 const config = {

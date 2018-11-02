@@ -14,8 +14,6 @@ class SideNavContainer extends React.PureComponent {
     const {
       // error,
       // loading,
-      hide,
-      location,
       routes,
     } = this.props;
 
@@ -103,7 +101,7 @@ class SideNavContainer extends React.PureComponent {
       </div>
     );
 
-    return !hide && sideNav;
+    return sideNav;
   }
 }
 

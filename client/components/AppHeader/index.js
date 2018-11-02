@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -8,14 +7,13 @@ import {
   ListItem,
   Topbar,
   TopbarNav,
-  TopbarMobile,
+  // TopbarMobile,
   TopbarRight,
   // Popover,
   // Button,
 } from '@collab-ui/react';
 import logo from '../../assets/collaboration-design.svg';
 import getUser from '../../services/user/actions';
-import HomePage from '../../containers/HomePage';
 
 class AppHeader extends Component {
   state = {
@@ -124,19 +122,9 @@ class AppHeader extends Component {
       </div>
     );
 
-    const homepageNav = !hideNav
-      ? // <React.Fragment>
-        //   <TopbarMobile>
-        { navItems }
-      : //   </TopbarMobile>
-        // <TopbarNav>{navItems}</TopbarNav>
-        // </React.Fragment>
-        null;
-
     return (
       <Fragment>
         <Topbar color="light" image={wordMark} brandAnchorElement={<NavLink to="/" />} fixed>
-
           {!hideNav && <TopbarNav>{navItems}</TopbarNav>}
           {/* <TopbarNav>{navItems}</TopbarNav> */}
           {/* <TopbarNav>Hello</TopbarNav> */}
@@ -148,14 +136,15 @@ class AppHeader extends Component {
 }
 
 AppHeader.propTypes = {
-  // actions: PropTypes.object.isRequired,
   getUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  path: PropTypes.string,
   photo: PropTypes.string,
 };
 
 AppHeader.defaultProps = {
   isAuthenticated: false,
+  path: '',
   photo: null,
 };
 
@@ -167,14 +156,7 @@ function mapStateToProps(state) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(actions, dispatch)
-//   };
-// }
-
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
   { getUser }
 )(AppHeader);

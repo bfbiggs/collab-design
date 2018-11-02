@@ -33,7 +33,9 @@ class Hero extends React.PureComponent {
             'cui-page-header__container ' +
             (textAlign === 'left' ? 'cui-page-header--left' : '')
           }>
-          <h1 className="cui-hero__title cui-font-color--alternate cui-h1--bold" dangerouslySetInnerHTML={{ __html: title }} />
+        {/* eslint-disable react/no-danger */}
+        <h1 className="cui-hero__title cui-font-color--alternate cui-h1--bold" dangerouslySetInnerHTML={{ __html: title }} />
+        {/* eslint-enable react/no-danger */}
           {leadElement()}
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, NavLink, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import SideNav from '../SideNav';
+import { Spinner } from '@collab-ui/react';
 import fetchComponentData from './actions';
 import DesignTab from '../../components/DesignTab';
 import CodeTab from '../../components/CodeTab';
@@ -22,8 +22,7 @@ class ComponentPage extends React.Component {
     const {
       child,
       components,
-      // error,
-      // loading,
+      loading,
       lead,
       match,
       title,
@@ -32,9 +31,8 @@ class ComponentPage extends React.Component {
     const component = components[id];
 
     return (
-      <div className="docs-main">
+      <React.Fragment>
         {!component ? <PageHeader title={title} lead={lead} textAlign="left" /> : <PageHeader title={component.pageTitle} lead={component.pageSubTitle} textAlign="left" />}
-        <SideNav hide={false} />
         {component && (
           <React.Fragment>
             <div className="cui-button-group cui-button-group--blue">
@@ -49,16 +47,19 @@ class ComponentPage extends React.Component {
               </NavLink>
             </div>
             <div className="docs-content-area docs-content-area--with-pagenav">
-              <Switch>
-                <Route path={`${match.path}/style`} render={props => <DesignTab {...props} sections={component.style} />} />
-                <Route path={`${match.path}/usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
-                <Route path={`${match.path}/code`} render={props => <CodeTab {...props} sections={component.code && component.code} />} />
-                <Redirect exact path={`${match.path}/`} to={`${match.path}/style`} />
-              </Switch>
+              {loading
+                ? <Spinner />
+                : <Switch>
+                    <Route path={`${match.path}/style`} render={props => <DesignTab {...props} sections={component.style} />} />
+                    <Route path={`${match.path}/usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
+                    <Route path={`${match.path}/code`} render={props => <CodeTab {...props} sections={component.code && component.code} />} />
+                    <Redirect exact path={`${match.path}/`} to={`${match.path}/style`} />
+                  </Switch>
+              }
             </div>
           </React.Fragment>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
