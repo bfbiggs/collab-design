@@ -7,24 +7,27 @@ class DesignTab extends React.PureComponent {
 
   render() {
     const { sections } = this.props;
+
     return (
       <React.Fragment>
         <div className="docs-content__column">
-          {sections &&
-            sections.map((section, idx) => {
-              return <Section section={section} key={idx} />;
-            })}
+          {
+            sections
+            && sections.map((section, idx) => (
+              <Section section={section} key={`${section}-${idx}`} />
+            ))
+            || 'Coming Soon'
+          }
         </div>
-
         <div className="docs-content__nav">
-          {sections &&
-            sections.map(section => {
-              return (
-                <li key={section.sectionId}>
-                  <a href={`#${section.sectionId}`}>{section.sectionTitleText}</a>
-                </li>
-              );
-            })}
+          {
+            sections
+            && sections.map(section => (
+              <li key={section.sectionId}>
+                <a href={`#${section.sectionId}`}>{section.sectionTitleText}</a>
+              </li>
+            ))
+          }
         </div>
       </React.Fragment>
     );
@@ -32,7 +35,7 @@ class DesignTab extends React.PureComponent {
 }
 
 DesignTab.propTypes = {
-  sections: PropTypes.array.isRequired,
+  sections: PropTypes.array,
 };
 
 export default DesignTab;

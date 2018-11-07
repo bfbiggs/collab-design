@@ -9,6 +9,7 @@ export default {
     alias: {
       'react': path.resolve('./node_modules/react'),
       'react-dom': path.resolve('./node_modules/react-dom'),
+      'images': path.resolve('./node_modules/@collab-ui/core/images/'),
     },
     symlinks: false,
   },
@@ -44,7 +45,10 @@ export default {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include: [
+          path.resolve(__dirname, "client"),
+          path.resolve(__dirname, "node_modules/@collab-ui/react/examples")
+        ],
         use: ['babel-loader']
       },
       {

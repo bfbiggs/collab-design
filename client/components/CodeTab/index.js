@@ -1,36 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { startCase, toLower } from 'lodash';
 import CodeBlock from '../../collab-ui/CodeBlock';
-// import PropTypes from 'prop-types';
 
 class CodeTab extends React.PureComponent {
   static displayName = 'CodeTab';
 
+  renderComponent(component, section) {
+    try {
+      return require(`../../../node_modules/@collab-ui/react/examples/${component}/${section}.js`).default;
+    } catch (e) {
+      return null;
+    }
+  }
+
   render() {
     const { sections } = this.props;
+
+    const mkTitleCase = str => startCase(toLower(str));
+
+    const rmWhiteSpace = str => str.replace(/\s/g, '');
+
+    const componentTitleCase = rmWhiteSpace(
+      mkTitleCase(sections.name)
+    );
+
     const codeSections = sections.sections;
 
     return (
       <React.Fragment>
         <div className="docs-content__column">
-          {codeSections &&
+          {
+            codeSections
+            &&
             codeSections.map((section, idx) => {
+              const Component = this.renderComponent(componentTitleCase, section.name);
+              
               return (
                 <div className="docs-section" key={idx}  style={{ marginBottom: '17px' }}>
                   <h4 className="cui-h4--bold cui-font-color--alternate" id={section.section}>
                     {section.name}
                   </h4>
+                  {
+                    Component 
+                    && <Component />
+                  }
                   <h5 style={{ margin: '12px 0 48px 0' }}>
                     {section.description}
                   </h5>
                   <CodeBlock>
-                    {section.examples.react && section.examples.react[0].example || 'No'}
+                    {
+                      section.variations.react
+                        && section.variations.react[0]
+                        && section.variations.react[0].example 
+                        || 'No'
+                    }
                   </CodeBlock>
-              </div>
+                </div>
               );
-            })}
-            {
-              sections.props && sections.props.react.length >= 0 &&
+            })
+          }
+          {
+            sections.props 
+            && sections.props.react.length >= 0 
+            && (
               <div className="docs-section docs-grid">
                 <h4 className="cui-h4--bold cui-font-color--alternate" id={sections.name + 'Props'}  style={{ marginBottom: '12px' }}>
                   Props
@@ -56,17 +89,18 @@ class CodeTab extends React.PureComponent {
                   })
                 }
               </div>
-            }
+            )
+          }
         </div>
         <div className="docs-content__nav">
-          {codeSections &&
-            codeSections.map(section => {
-              return (
-                <li key={section.section}>
-                  <a href={`#${section.section}`}>{section.name}</a>
-                </li>
-              );
-            })}
+          {
+            codeSections
+            && codeSections.map((section, idx) => (
+              <li key={`${section.section}-${idx}`}>
+                <a href={`#${section.section}`}>{section.name}</a>
+              </li>
+            ))
+          }
         </div>
       </React.Fragment>
     );
