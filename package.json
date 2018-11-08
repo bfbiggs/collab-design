@@ -33,7 +33,7 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-react": "^7.0.0",
-    "@collab-ui/react": "^9.8.1",
+    "@collab-ui/react": "^9.10.4",
     "dotenv": "^6.1.0",
     "object-assign": "~4.1.0",
     "query-string": "^6.1.0",
@@ -54,7 +54,7 @@
     "babel-loader": "~7.1.1",
     "babel-plugin-transform-react-constant-elements": "~6.23.0",
     "babel-plugin-transform-react-remove-prop-types": "~0.4.6",
-    "babel-polyfill": "~6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "~1.6.0",
     "babel-preset-react": "~6.24.1",
     "babel-preset-stage-1": "~6.24.1",
@@ -137,7 +137,14 @@
     "env": {
       "development": {
         "presets": [
-          "env",
+          [
+            "env",
+            {
+              "targets": {
+                "node": "current"
+              }
+            }
+          ],
           "react",
           "stage-1"
         ]

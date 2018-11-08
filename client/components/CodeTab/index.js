@@ -2,17 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { startCase, toLower } from 'lodash';
 import CodeBlock from '../../collab-ui/CodeBlock';
+import AsyncComponent from '../AsyncComponent';
 
 class CodeTab extends React.PureComponent {
   static displayName = 'CodeTab';
-
-  renderComponent(component, section) {
-    try {
-      return require(`../../../node_modules/@collab-ui/react/examples/${component}/${section}.js`).default;
-    } catch (e) {
-      return null;
-    }
-  }
 
   render() {
     const { sections } = this.props;
@@ -33,18 +26,15 @@ class CodeTab extends React.PureComponent {
           {
             codeSections
             &&
-            codeSections.map((section, idx) => {
-              const Component = this.renderComponent(componentTitleCase, section.name);
-              
+            codeSections.map((section, idx) => {              
               return (
                 <div className="docs-section" key={idx}  style={{ marginBottom: '17px' }}>
                   <h4 className="cui-h4--bold cui-font-color--alternate" id={section.section}>
                     {section.name}
                   </h4>
-                  {
-                    Component 
-                    && <Component />
-                  }
+                  <AsyncComponent 
+                    loader={() => import(`@collab-ui/react/examples/${componentTitleCase}/${section.name}.js`)}
+                  />
                   <h5 style={{ margin: '12px 0 48px 0' }}>
                     {section.description}
                   </h5>

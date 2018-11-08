@@ -13,10 +13,18 @@ const GLOBALS = {
 
 export default {
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json']
+    extensions: ['*', '.js', '.jsx', '.json'],
+    alias: {
+      'react': path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom'),
+      'images': path.resolve('./node_modules/@collab-ui/core/images/'),
+    },
   },
   devtool: 'source-map', // more info:https://webpack.js.org/guides/production/#source-mapping and https://webpack.js.org/configuration/devtool/
-  entry: path.resolve(__dirname, 'client/index'),
+  entry: [
+    'babel-polyfill',
+    path.resolve(__dirname, 'client/index'),
+  ],
   target: 'web',
   mode: 'production',
   output: {
@@ -61,7 +69,10 @@ export default {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include: [
+          path.resolve(__dirname, "client"),
+          path.resolve(__dirname, "node_modules/@collab-ui/react/examples")
+        ],
         use: ['babel-loader']
       },
       {
