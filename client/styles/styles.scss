@@ -4,6 +4,12 @@ $images-path: '~@collab-ui/core/images';
 @import '~@collab-ui/core/scss/collab-ui';
 @import '~@collab-ui/core/scss/layouts/sites';
 @import '../collab-ui/CodeBlock/Prism';
+//TODO: Below 2 imported for Footer
+@import '~@collab-ui/core/scss/settings/fonts';
+@import '~@collab-ui/core/scss/settings/media';
+
+@import '../collab-ui/CodeBlock/CodeBlock';
+@import '../collab-ui/CodeBlock/Prism';
 @import '../collab-ui/Hero/hero';
 @import '../collab-ui/PageHeader/PageHeader';
 @import '../components/CodeTab/CodeTab';
@@ -11,6 +17,7 @@ $images-path: '~@collab-ui/core/images';
 @import '../containers/ComponentPage/ComponentPage';
 @import '../containers/HomePage/home';
 @import '../containers/SideNav/SideNav';
+@import '../collab-ui/Footer/Footer';
 
 body {
   background-color: $white;
@@ -35,13 +42,14 @@ body {
 .docs-main {
   display: grid;
   grid-template-columns: 240px 1fr;
-  grid-template-rows: 80px auto 48px 1fr;
+  grid-template-rows: 80px auto 48px 1fr auto;
   grid-template-areas:
     'topbar topbar'
     '. page-header'
     '. tabs'
     'sidebar main'
-    'home home';
+    'home home'
+    'page-footer page-footer';
 
     &--home {
       grid-template-columns: 100%;
