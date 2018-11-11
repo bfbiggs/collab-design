@@ -9,10 +9,10 @@ const SectionSchema = new Schema(
     name: String,
     displayName: String,
     variations: {
-      core: [VariationSchema],
-      react: [VariationSchema],
-      angular: [VariationSchema],
-      angularjs: [VariationSchema],
+      core: VariationSchema,
+      react: VariationSchema,
+      angular: VariationSchema,
+      angularjs: VariationSchema,
     },
     hideCode: Boolean
   },

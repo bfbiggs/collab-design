@@ -7,15 +7,26 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Start Server",
+      "runtimeExecutable": "babel-node",
+      "runtimeArgs": ["server/server.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "launch file",
+      "program": "${file}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch via Babel (works)",
       "cwd": "${workspaceRoot}",
       "port": 9229,
       "program": "",
       "runtimeExecutable": "yarn",
       "console": "integratedTerminal",
-      "runtimeArgs": [
-          "start:server"
-      ]
-  }
+      "runtimeArgs": ["start:server"]
+    }
   ]
 }
