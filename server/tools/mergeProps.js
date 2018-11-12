@@ -4,9 +4,7 @@ const mergeProps = async (existingProps, newProps) => {
   const mergedProps = {};
   try {
     for (const variation of config.VARIATIONS) {
-      if ((!Array.isArray(existingProps[variation]) || !existingProps[variation].length) && (!Array.isArray(newProps[variation]) || !newProps[variation].length)) {
-        return;
-      } else if (Array.isArray(existingProps[variation]) && existingProps[variation].length && (!Array.isArray(newProps[variation]) || !newProps[variation].length)) {
+      if (Array.isArray(existingProps[variation]) && existingProps[variation].length && (!Array.isArray(newProps[variation]) || !newProps[variation].length)) {
         mergedProps[variation] = existingProps[variation];
       } else {
         mergedProps[variation] = newProps[variation];

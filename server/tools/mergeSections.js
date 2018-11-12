@@ -6,9 +6,14 @@ const mergeSections = async (existingSections, newSections) => {
   try {
     for (const newSection of newSections) {
       const { name } = newSection;
-      const existingSection = existingSections.find(newSection => {
-        return newSection.name === name;
-      });
+      let existingSection;
+      if (!existingSections) {
+        return newSection;
+      } else {
+        existingSection = existingSections.find(newSection => {
+          return newSection.name === name;
+        });
+      }
 
       const mergedVariations = {};
       for (const variation of config.VARIATIONS) {
@@ -16,7 +21,7 @@ const mergeSections = async (existingSections, newSections) => {
         const newVariation = get(get(newSection, 'variations'), variation);
 
         if (!existingVariation && !newVariation) {
-          return;
+          mergedVariations[variation] = {};
         } else if (existingVariation && !newVariation) {
           mergedVariations[variation] = existingVariation;
         } else {
