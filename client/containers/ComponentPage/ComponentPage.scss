@@ -2,6 +2,45 @@
   grid-area: tabs;
 }
 
+.docs-section {
+  &:not(:first-of-type) {
+    padding-top: rem-calc(64)
+  }
+
+  &__title {
+    margin-bottom: rem-calc(12);
+  }
+
+  &__body {
+    .s1 {
+      font-size: rem-calc(16);
+      line-height: rem-calc(24);
+      font-family: $brand-font-light;
+      color: $gray-1;
+    }
+  }
+}
+
+.docs-sub-section {
+  ul {
+    list-style-type: none;
+    
+    li:before {
+      content: '\2014';
+      position: absolute;
+      margin-left: -20px;
+    }
+
+    .s1 {
+      font-size: rem-calc(16);
+      line-height: rem-calc(24);
+      font-family: $brand-font-light;
+      color: $gray-1;
+    }
+  } 
+
+}
+
 .#{$button-group__class}--blue {
   > .#{$button__class} {
     @include flex;

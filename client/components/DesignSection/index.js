@@ -2,20 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SubSection from '../../components/SubSection';
 
-class Section extends React.PureComponent {
+class DesignSection extends React.PureComponent {
   static displayName = 'Section';
 
   render() {
     const { section } = this.props;
     return (
       <div className="docs-section">
-        <h4 className="cui-h4--bold cui-font-color--alternate" id={section.sectionId}>
+        <h4 className="cui-h4--bold cui-font-color--alternate docs-section__title" id={section.sectionId}>
           {section.sectionTitleText}
         </h4>
         {/* eslint-disable react/no-danger */}
-        <div dangerouslySetInnerHTML={{ __html: section.sectionBodyContent }} />
+        <div className="docs-section__body" dangerouslySetInnerHTML={{ __html: section.sectionBodyContent }} />
         {/* eslint-enable react/no-danger */}
-        <img src={section.sectionImage} alt={section.sectionImageDescription} />
+        {
+          section.sectionImage
+          && <img src={section.sectionImage} alt={section.sectionImageDescription} />
+        }
         <div>{section.sectionImageDescription}</div>
         {section.subSections &&
           section.subSections.map((subSection, idx) => {
@@ -26,10 +29,10 @@ class Section extends React.PureComponent {
   }
 }
 
-Section.propTypes = {
+DesignSection.propTypes = {
   section: PropTypes.object,
 };
 
-Section.defaultProps = {};
+DesignSection.defaultProps = {};
 
-export default Section;
+export default DesignSection;

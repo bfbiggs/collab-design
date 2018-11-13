@@ -35,6 +35,7 @@ class Hero extends React.PureComponent {
           }>
         {/* eslint-disable react/no-danger */}
         <h1 className="cui-hero__title cui-font-color--alternate cui-h1--bold" dangerouslySetInnerHTML={{ __html: title }} />
+        <h5 dangerouslySetInnerHTML={{ __html: description }} />
         {/* eslint-enable react/no-danger */}
           {leadElement()}
         </div>

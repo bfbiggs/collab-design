@@ -1,28 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import hljs from 'highlight.js/lib/highlight';
-import xml from 'highlight.js/lib/languages/xml';
-import javascript from 'highlight.js/lib/languages/javascript';
-hljs.registerLanguage(`javascript`, javascript);
-hljs.registerLanguage(`xml`, xml);
-
-// This way is easy, but adds 170K gzipped to bundle since all langs are included.
-// import Highlight from 'react-highlight';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-jsx.min';
 
 class CodeExample extends React.Component {
   componentDidMount() {
-    hljs.initHighlightingOnLoad();
-    hljs.highlightBlock(this.element);
+    Prism.highlightAll();
   }
 
   render() {
+    const { children, codeType } = this.props;
 
     return (
-      <pre>
-        <code  
-          ref={ref => this.element = ref}
-        >
-          {this.props.children}
+      <pre >
+        <code className={`language-${codeType}`}>
+          {children}
         </code>
       </pre>
     );
@@ -31,10 +23,12 @@ class CodeExample extends React.Component {
 
 CodeExample.propTypes = {
   children: PropTypes.string.isRequired,
+  codeType: PropTypes.string,
 };
 
 CodeExample.defaultProps = {
   children: null,
+  codeType: 'jsx'
 };
 
 export default CodeExample;

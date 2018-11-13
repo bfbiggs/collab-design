@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from '../Section';
+import DesignSection from '../DesignSection';
 
 class DesignTab extends React.PureComponent {
   static displayName = 'DesignTab';
@@ -14,7 +14,7 @@ class DesignTab extends React.PureComponent {
           {
             sections
             && sections.map((section, idx) => (
-              <Section section={section} key={`${section}-${idx}`} />
+              <DesignSection section={section} key={`${section}-${idx}`} />
             ))
             || 'Coming Soon'
           }

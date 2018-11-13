@@ -30,9 +30,42 @@ class ComponentPage extends React.Component {
     const id = child.object_id;
     const component = components[id];
 
+    const verifyCodeExamples = () => {
+      const findCodeExamples = sections => (
+        sections.reduce(
+          (agg, section) => {
+
+            if(
+              agg
+                || section.variations.core.example
+                || section.variations.react.example
+                || section.variations.angular.example
+                || section.variations.angularjs.example
+            ) {
+              return true;
+            } else return false;
+
+            
+          }, false)
+        );
+
+      return component.code
+        && component.code.sections
+        && findCodeExamples(component.code.sections)
+        && (
+          <NavLink
+            className="cui-button cui-button--36"
+            activeClassName='active'
+            to={`${match.url}/code`}
+          >
+            Code
+          </NavLink>
+        );
+    };
+
     return (
       <React.Fragment>
-        {!component ? <PageHeader title={title} lead={lead} textAlign="left" /> : <PageHeader title={component.pageTitle} lead={component.pageSubTitle} textAlign="left" />}
+        {!component ? <PageHeader title={title} lead={lead} textAlign="left" /> : <PageHeader title={component.pageTitle} lead={component.mainDescription} textAlign="left" />}
         {component && (
           <React.Fragment>
             <div className="cui-button-group cui-button-group--blue">
@@ -42,9 +75,7 @@ class ComponentPage extends React.Component {
               <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/usage`}>
                 Usage
               </NavLink>
-              <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/code`}>
-                Code
-              </NavLink>
+              {verifyCodeExamples()}
             </div>
             <div className="docs-content-area docs-content-area--with-pagenav">
               {loading

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { startCase, toLower } from 'lodash';
-import CodeBlock from '../../collab-ui/CodeBlock';
-import AsyncComponent from '../AsyncComponent';
+import CodeSection from '../CodeSection';
 
 class CodeTab extends React.PureComponent {
   static displayName = 'CodeTab';
@@ -10,15 +8,17 @@ class CodeTab extends React.PureComponent {
   render() {
     const { sections } = this.props;
 
-    const mkTitleCase = str => startCase(toLower(str));
-
-    const rmWhiteSpace = str => str.replace(/\s/g, '');
-
-    const componentTitleCase = rmWhiteSpace(
-      mkTitleCase(sections.name)
-    );
-
     const codeSections = sections.sections;
+
+    const findCodeExample = section => {
+      return (
+        section.variations.react.example
+        && { type: 'jsx', example: section.variations.react.example}
+        ||
+        section.variations.core.example
+        && { type: 'html', example: section.variations.core.example}
+      );
+    };
 
     return (
       <React.Fragment>
@@ -26,27 +26,21 @@ class CodeTab extends React.PureComponent {
           {
             codeSections
             &&
-            codeSections.map((section, idx) => {              
+            codeSections.map((section, idx) => {
+              const codeExample = findCodeExample(section);   
+
               return (
-                <div className="docs-section" key={idx}  style={{ marginBottom: '17px' }}>
-                  <h4 className="cui-h4--bold cui-font-color--alternate" id={section.section}>
-                    {section.name}
-                  </h4>
-                  <AsyncComponent 
-                    loader={() => import(`@collab-ui/react/examples/${componentTitleCase}/${section.name}.js`)}
+                codeExample
+                && (
+                  <CodeSection 
+                    name={section.name}
+                    component={sections.name}
+                    example={codeExample.example}
+                    language={codeExample.type}
+                    description={section.description}
+                    key={`${section.name}-${idx}`}
                   />
-                  <h5 style={{ margin: '12px 0 48px 0' }}>
-                    {section.description}
-                  </h5>
-                  <CodeBlock>
-                    {
-                      section.variations.react
-                        && section.variations.react[0]
-                        && section.variations.react[0].example 
-                        || 'No'
-                    }
-                  </CodeBlock>
-                </div>
+                )
               );
             })
           }
@@ -55,8 +49,8 @@ class CodeTab extends React.PureComponent {
             && sections.props.react.length >= 0 
             && (
               <div className="docs-section docs-grid">
-                <h4 className="cui-h4--bold cui-font-color--alternate" id={sections.name + 'Props'}  style={{ marginBottom: '12px' }}>
-                  Props
+                <h4 className="cui-h4--bold cui-font-color--alternate docs-grid__title" id={sections.name + 'Props'}>
+                  Prop Types
                 </h4>
                 <div className='docs-grid__row'>
                   <div className='docs-grid__cell'>Prop</div>

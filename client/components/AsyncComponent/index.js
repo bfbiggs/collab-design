@@ -22,13 +22,21 @@ class AsyncComponent extends React.Component {
     const { Component } = this.state;
     const { Placeholder, ...props } = this.props;
 
-    return Component ? <Component {...props} /> : Placeholder;
+    const getPlaceholder = () => (
+      typeof Placeholder === 'string'
+      /* eslint-disable */
+        ? <div dangerouslySetInnerHTML={{__html: Placeholder}} />
+      /* eslint-enable */
+        : Placeholder
+    );
+
+    return Component ? <Component {...props} /> : getPlaceholder() ;
   }
 }
 
 AsyncComponent.defaultProps ={
   Placeholder: <div>Not Found</div>
-}
+};
 
 AsyncComponent.propTypes = {
   loader: PropTypes.func.isRequired,

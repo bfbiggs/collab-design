@@ -6,4 +6,12 @@
     font-size: rem-calc(62);
     line-height: rem-calc(80);
   }
+  &__lead {
+    margin-top: rem-calc(12);
+
+    .s1 {
+      font-size: rem-calc(20);
+      line-height: rem-calc(32);
+    }
+  }
 }

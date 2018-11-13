@@ -8,10 +8,7 @@ class SubSection extends React.PureComponent {
     const { subSection } = this.props;
     return (
       <div className="docs-sub-section row">
-        <div className={`medium-${12 - subSection.subSectionImageSize} columns`}>
-          <h5 className="cui-h5--bold cui-font-color--alternate" id={subSection.subSectionId}>
-            {subSection.subSectionTitleText}
-          </h5>
+        <div className={`medium-${12 - subSection.subSectionImageSize}`}>
           {/* eslint-disable react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: subSection.subSectionBodyContent }} />
           {/* eslint-enable react/no-danger */}
