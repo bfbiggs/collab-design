@@ -69,7 +69,7 @@ router.route('/').post(async (req, res) => {
 
             const uploadedImage = await request(imageUploadOptions);
             const imageUrl = uploadedImage.source_url;
-            feedbackBody['9'] = imageUrl;
+            feedbackBody['10'] = imageUrl;
           }
 
           const formOptions = {
