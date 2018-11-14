@@ -8,6 +8,7 @@ const SectionSchema = new Schema(
   {
     name: String,
     displayName: String,
+    description: String,
     variations: {
       core: VariationSchema,
       react: VariationSchema,

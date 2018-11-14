@@ -2,6 +2,7 @@ import express from 'express';
 import components from './routes/components';
 import menu from './routes/menu';
 import pages from './routes/pages';
+import feedback from './routes/feedback';
 
 const router = express.Router();
 
@@ -23,6 +24,7 @@ router.route('/').get(async (req, res) => {
 router.use('/components/', components);
 router.use('/pages/', pages);
 router.use('/menu/', menu);
+router.use('/feedback/', feedback);
 
 // router
 //   .route('/components')
