@@ -29,9 +29,8 @@ router.route('/').post(async (req, res) => {
     const token = oAuth.access_token;
 
     const incomingForm = new formidable.IncomingForm();
-    const imageForm = {};
     const feedbackBody = {};
-    let fileName;
+    const files = [];
 
     incomingForm
       .parse(req)
@@ -39,37 +38,39 @@ router.route('/').post(async (req, res) => {
         feedbackBody[name] = field;
       })
       .on('file', (name, file) => {
-        fileName = file.name;
-        imageForm.file = {
+        const fileData = {
           value: fs.createReadStream(file.path),
           options: {
-              filename: fileName,
+              filename: file.name,
               contentType: file.type
           }
         };
-
+        files.push(fileData);
         hasAttachment = true;
       })
       .on('end', async () => {
         try {
           if (hasAttachment) {
-            const imageUploadOptions = {
-              method: 'POST',
-              url: `${config.WP_URL}/wp-json/wp/v2/media`,
-              headers: {
-                'Cache-Control': 'no-cache',
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${token}`,
-                processData: false,
-                'Content-Disposition': `attachment; filename=${fileName}`,
-              },
-              formData: imageForm,
-              json: true,
-            };
+            feedbackBody['10'] = [];
+            for (let file of files) {
+              const imageUploadOptions = {
+                method: 'POST',
+                url: `${config.WP_URL}/wp-json/wp/v2/media`,
+                headers: {
+                  'Cache-Control': 'no-cache',
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: `Bearer ${token}`,
+                  processData: false,
+                  'Content-Disposition': `attachment; filename=${file.options.name}`,
+                },
+                formData: { file },
+                json: true,
+              };
 
-            const uploadedImage = await request(imageUploadOptions);
-            const imageUrl = uploadedImage.source_url;
-            feedbackBody['10'] = imageUrl;
+              const uploadedImage = await request(imageUploadOptions);
+              feedbackBody['10'].push(uploadedImage.source_url);
+
+            }
           }
 
           const formOptions = {
