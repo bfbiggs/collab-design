@@ -3,6 +3,7 @@ import components from './routes/components';
 import menu from './routes/menu';
 import pages from './routes/pages';
 import feedback from './routes/feedback';
+import icons from './routes/icons';
 
 const router = express.Router();
 
@@ -25,6 +26,7 @@ router.use('/components/', components);
 router.use('/pages/', pages);
 router.use('/menu/', menu);
 router.use('/feedback/', feedback);
+router.use('/icons/', icons);
 
 // router
 //   .route('/components')
