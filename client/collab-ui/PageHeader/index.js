@@ -15,7 +15,7 @@ const PageHeader = props => {
 };
 
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   lead: PropTypes.string,
   textAlign: PropTypes.string,
 };
@@ -23,6 +23,7 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   lead: null,
   textAlign: 'center',
+  title: null,
 };
 
 export default PageHeader;

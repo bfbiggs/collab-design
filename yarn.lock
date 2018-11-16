@@ -201,10 +201,10 @@
   resolved "https://registry.yarnpkg.com/@collab-ui/icons/-/icons-3.33.0.tgz#d4ed7f0628cf7d91b623e9228edcda50d7f64926"
   integrity sha512-dfcuZFeWm/0NV7uE7HGe/VRIXPsoYRm2xj4RWea44B1MuEjyCpdjYyCoiGkoGn1Hc2+eAYMzQCKTr1N7O0a4ew==
 
-"@collab-ui/react@^9.10.4":
-  version "9.10.4"
-  resolved "https://registry.yarnpkg.com/@collab-ui/react/-/react-9.10.4.tgz#321f56b416116fcf18b0d141ad2091d5b8ec22f3"
-  integrity sha512-N80EoOuHZ/Nxt/tCF1odLuIcrHi8O9t1lyjbAj768ivhiZE7cbIPLeSdrch+cVuCWg2pxjmzA/fXlHlFByGfIA==
+"@collab-ui/react@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@collab-ui/react/-/react-10.0.0.tgz#c6c2186184ab4f1d82e0a26728ac33b95c936cbc"
+  integrity sha512-gy/LWiaEZERNfsZ677DZTJbYNfASqNwqtkI94s6N1CiAcEgu086DAx0q7ud3AZR7Eky87DFfZ/zRxji1RMt+wA==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.47"
     "@collab-ui/core" "^10.35.0"

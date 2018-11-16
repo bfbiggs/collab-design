@@ -1,19 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { startCase, toLower } from 'lodash';
+import { connect } from 'react-redux';
 import CodeBlock from '../../collab-ui/CodeBlock';
 import AsyncComponent from '../AsyncComponent';
+import { Button } from '@collab-ui/react';
+import { setCodePreference } from '../../containers/ComponentPage/actions';
 
-class CodeSection extends React.PureComponent {
+class CodeSection extends React.Component {
   static displayName = 'CodeSection';
 
   render() {
     const { 
       name,
+      codePreference,
       component,
       example,
-      language,
-      description,  
+      description,
+      setCodePreference,  
+      variations,
      } = this.props;
 
      const mkTitleCase = str => startCase(toLower(str));
@@ -23,6 +28,31 @@ class CodeSection extends React.PureComponent {
      const componentTitleCase = rmWhiteSpace(
        mkTitleCase(component)
      );
+
+     const countExamples = () => {
+      let count = 0;
+
+      for(const codeLanguage in variations) {
+        variations[codeLanguage].example
+          ? count+=1
+          : count;
+      }
+
+      return count;
+     };
+
+     const loopCodeExamples = () => {
+       return Object.keys(variations).reduce((agg, curr) => {
+         return !agg && variations[curr].example
+          ? { example: variations[curr].example, language: curr === 'core' ? 'html' : 'jsx' }
+          : agg;
+       }, null
+       );
+     };
+
+     const codeExample = variations[codePreference].example
+        ? { example: variations[codePreference].example, language: codePreference === 'core' ? 'html' : 'jsx' }
+        : loopCodeExamples();
 
      return (
       <div className="docs-section">
@@ -36,28 +66,60 @@ class CodeSection extends React.PureComponent {
           loader={() => import(`@collab-ui/react/examples/${componentTitleCase}/${rmWhiteSpace(name)}.js`)}
           Placeholder={example}
         />
-        <CodeBlock codeType={language}>
-          {example}
+        {
+            countExamples() > 1
+            &&
+            <div
+              className='cui-button-group cui-button-group--pill cui-button-group--justified'
+            >
+              {
+                variations.core.example &&
+                <Button 
+                  ariaLabel='Core'
+                  onClick={() => setCodePreference('core')}
+                >
+                  <h5 className='cui-h5--bold'>Core</h5>
+                </Button>
+              }
+              {
+                variations.react.example &&
+                <Button 
+                  onClick={() => setCodePreference('react')}
+                  ariaLabel='React'
+                >
+                  <h5 className='cui-h5--bold'>React</h5>
+                </Button>
+              }
+            </div>
+        }
+        <CodeBlock key={codeExample.language} codeType={codeExample.language}>
+          {codeExample.example}
         </CodeBlock>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  codePreference: state.componentsReducer.codePreference,
+});
+
 CodeSection.defaultProps = {
-  name: '',
   component: '',
+  description: '',
   example: '',
-  language: '',
-  description: '',  
+  name: '',
+  setCodePreference: null,
 };
 
 CodeSection.propTypes = {
-  name: PropTypes.string,
   component: PropTypes.string,
-  example: PropTypes.string,
-  language: PropTypes.string,
+  codePreference: PropTypes.string.isRequired,
   description: PropTypes.string,
+  example: PropTypes.string,
+  name: PropTypes.string,
+  setCodePreference: PropTypes.func,
+  variations: PropTypes.shape({}).isRequired,
 };
 
-export default CodeSection;
+export default connect(mapStateToProps, { setCodePreference })(CodeSection);

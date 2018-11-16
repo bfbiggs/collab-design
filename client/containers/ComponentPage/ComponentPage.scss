@@ -1,7 +1,3 @@
-.#{$button-group__class} {
-  grid-area: tabs;
-}
-
 .docs-section {
   &:not(:first-of-type) {
     padding-top: rem-calc(64)
@@ -40,6 +36,11 @@
   } 
 
 }
+
+.#{$button-group__class}--blue {
+  grid-area: tabs;
+}
+
 
 .#{$button-group__class}--blue {
   > .#{$button__class} {

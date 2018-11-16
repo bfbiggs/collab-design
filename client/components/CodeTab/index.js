@@ -36,9 +36,9 @@ class CodeTab extends React.PureComponent {
                     name={section.name}
                     component={sections.name}
                     example={codeExample.example}
-                    language={codeExample.type}
                     description={section.description}
                     key={`${section.name}-${idx}`}
+                    variations={section.variations}
                   />
                 )
               );
@@ -93,6 +93,7 @@ class CodeTab extends React.PureComponent {
 
 CodeTab.propTypes = {
   sections: PropTypes.shape({}),
+  codePreference: PropTypes.string.isRequired
 };
 
 export default CodeTab;

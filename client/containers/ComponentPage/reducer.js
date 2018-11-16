@@ -4,6 +4,7 @@ const initialState = {
   components: {},
   loading: false,
   error: null,
+  codePreference: 'core',
 };
 
 const componentReducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const componentReducer = (state = initialState, action) => {
         },
         loading: false,
         error: null,
+      });
+    case types.SET_CODE_PREFERENCE:
+      return Object.assign({}, state, {
+        ...state,
+        codePreference: action.codePreference,
       });
     default:
       return state;

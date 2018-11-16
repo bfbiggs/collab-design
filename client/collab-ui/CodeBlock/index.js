@@ -8,6 +8,10 @@ class CodeExample extends React.Component {
     Prism.highlightAll();
   }
 
+  compondentDidUpdate() {
+    Prism.highlightAll();
+  }
+
   render() {
     const { children, codeType } = this.props;
 
@@ -22,7 +26,7 @@ class CodeExample extends React.Component {
 }
 
 CodeExample.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.string,
   codeType: PropTypes.string,
 };
 
