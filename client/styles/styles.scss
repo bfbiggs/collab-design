@@ -23,6 +23,10 @@ body {
   background-color: $white;
 }
 
+.cui--sites {
+  height: 100%;
+}
+
 .cui-top-bar {
   grid-area: topbar;
   padding: 0 32px;
@@ -34,29 +38,30 @@ body {
 
   &--with-pagenav {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: minmax(0, 1fr) 300px;
     grid-template-rows: auto;
     grid-template-areas: 'pagecolumn pagenav';  }
 }
 
 .docs-main {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 1fr);
   grid-template-rows: 80px auto 48px 1fr auto;
   grid-template-areas:
     'topbar topbar'
     '. page-header'
     '. tabs'
     'sidebar main'
-    'home home'
     'page-footer page-footer';
+  min-height: 100%;
 
     &--home {
       grid-template-columns: 100%;
-      grid-template-rows: 80px 1fr;
+      grid-template-rows: 80px 1fr auto;
       grid-template-areas:
         'topbar'
-        'home';
+        'home'
+        'page-footer';
 
       .docs-side-nav {
         display: none;

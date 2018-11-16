@@ -19,8 +19,8 @@ class App extends React.Component {
           <Header />
           <SideNav />
           <Routes />
+          <AppFooter />
         </div>
-        <AppFooter />
       </React.Fragment>
     );
   }
