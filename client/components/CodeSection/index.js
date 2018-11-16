@@ -76,6 +76,7 @@ class CodeSection extends React.Component {
                 variations.core.example &&
                 <Button 
                   ariaLabel='Core'
+                  className={`${codePreference === 'core' && 'active' || ''}`}
                   onClick={() => setCodePreference('core')}
                 >
                   <h5 className='cui-h5--bold'>Core</h5>
@@ -84,8 +85,9 @@ class CodeSection extends React.Component {
               {
                 variations.react.example &&
                 <Button 
-                  onClick={() => setCodePreference('react')}
                   ariaLabel='React'
+                  className={`${codePreference === 'react' && 'active' || ''}`}
+                  onClick={() => setCodePreference('react')}
                 >
                   <h5 className='cui-h5--bold'>React</h5>
                 </Button>
