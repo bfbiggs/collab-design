@@ -15,8 +15,15 @@ router
   .route('/')
   .get(async (req, res) => {
     try {
-      let components = await Component.find();
-      res.json(components);
+
+      if (req.query.wide) {
+        let components = await Component.find();
+        res.json(components);
+      } else {
+        const wpFetch = await fetch(`${config.WP_CHILD_PAGES_URL}/components`);
+        const wpComponentList = await wpFetch.json();
+        res.json(wpComponentList);
+      }
     } catch (err) {
       res.send(err);
     }
