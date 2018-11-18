@@ -1,6 +1,7 @@
 import express from 'express';
 import mergeArrays from '../tools/mergeArrays';
 import Icon from '../models/icon';
+import mergeWith from 'lodash/mergeWith';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router
       const icon = await Icon.findOrCreate({ name: iconData.name }, iconData);
       if (icon.created) res.json(icon);
 
-      const newIcon = _.mergeWith(icon.doc, iconData, mergeArrays);
+      const newIcon = mergeWith(icon.doc, iconData, mergeArrays);
       const updatedIcon = await Icon.findByIdAndUpdate(newIcon.id, newIcon, {
         new: true,
       });
@@ -59,7 +60,7 @@ router
   .patch(async (req, res) => {
     try {
       const oldIcon = await Icon.findOne({ name: req.params.icon_name });
-      const newIcon = _.mergeWith(oldIcon, req.body, mergeArrays);
+      const newIcon = mergeWith(oldIcon, req.body, mergeArrays);
       const icon = await Icon.findByIdAndUpdate(newIcon.id, newIcon, {
         new: true,
       });

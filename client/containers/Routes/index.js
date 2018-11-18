@@ -21,12 +21,12 @@ class Routes extends React.Component {
   render() {
     const { error, loading, routes } = this.props;
     const createRoutes = routes.map((item, idx) => {
-      if (item.object_slug === 'components') {
+      if (item.object_slug === 'components' || item.object_slug === 'style') {
         return [
-          <Route key={`${item.id}`} exact path="/components" render={props => <ParentPage {...props} item={item} title={item.title} />} />,
+          <Route key={`${item.id}`} exact path="/components/" render={props => <ParentPage {...props} item={item} title={item.title} />} />,
           item.children.map(child => {
             const childPath = child.path.replace(/\/$/, '');
-            return [<Route key={`${child.id}`} path={`/${childPath}`} render={props => <ComponentPage {...props} child={child} />} />];
+            return [<Route key={`${child.id}`} path={`/${childPath}/`} render={props => <ComponentPage {...props} child={child} />} />];
           }),
         ];
       }

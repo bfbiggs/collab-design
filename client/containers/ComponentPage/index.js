@@ -47,7 +47,7 @@ class ComponentPage extends React.Component {
               return true;
             } else return false;
 
-            
+
           }, false)
         );
 
@@ -59,21 +59,34 @@ class ComponentPage extends React.Component {
 
     const hasCodeExamples = verifyCodeExamples();
 
+    const getDefaultTab = () => {
+      return component.style ? `${match.path}style`
+              : component.usage ? `${match.path}usage`
+                : hasCodeExamples ? `${match.path}code`
+                  : match.path;
+    };
+
     return (
-      !component 
-        ? <PageHeader textAlign="left" /> 
+      !component
+        ? <PageHeader textAlign="left" />
         : (
           <React.Fragment>
             <PageHeader title={component.pageTitle} lead={component.mainDescription} textAlign="left" />
             <div className="cui-button-group cui-button-group--blue">
-              <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/style`}>
-                Style
-              </NavLink>
-              <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/usage`}>
-                Usage
-              </NavLink>
               {
-                hasCodeExamples &&    
+                component.style &&
+                  <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/style`}>
+                    Style
+                  </NavLink>
+              }
+              {
+                component.usage &&
+                  <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/usage`}>
+                    Usage
+                  </NavLink>
+              }
+              {
+                hasCodeExamples &&
                   <NavLink
                     className="cui-button cui-button--36"
                     activeClassName='active'
@@ -87,10 +100,10 @@ class ComponentPage extends React.Component {
               {loading
                 ? <Spinner />
                 : <Switch>
-                    <Route path={`${match.path}/style`} render={props => <DesignTab {...props} sections={component.style} />} />
-                    <Route path={`${match.path}/usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
-                    <Route path={`${match.path}/code`} render={props => hasCodeExamples && <CodeTab {...props} sections={component.code && component.code} codePreference={codePreference} />} />
-                    <Redirect exact path={`${match.path}/`} to={`${match.path}/style`} />
+                    <Route path={`${match.path}style`} render={props => <DesignTab {...props} sections={component.style} />} />
+                    <Route path={`${match.path}usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
+                    <Route path={`${match.path}code`} render={props => hasCodeExamples && <CodeTab {...props} sections={component.code && component.code} codePreference={codePreference} />} />
+                    <Redirect exact path={`${match.path}`} to={getDefaultTab()} />
                   </Switch>
               }
             </div>
