@@ -26,4 +26,15 @@ router.route('/name/:slug').get(async (req, res) => {
   }
 });
 
+router.route('/name/:slug/children').get(async (req, res) => {
+  try {
+    const pageSlug = req.params.slug;
+    const wpFetch = await fetch(`${config.WP_CHILD_PAGES_URL}/${pageSlug}`);
+    const wpPage = await wpFetch.json();
+    res.json(wpPage);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 export default router;
