@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CodeSection from '../CodeSection';
+import PageLinks from '../../collab-ui/PageLinks';
 
 class CodeTab extends React.PureComponent {
   static displayName = 'CodeTab';
@@ -27,12 +28,12 @@ class CodeTab extends React.PureComponent {
             codeSections
             &&
             codeSections.map((section, idx) => {
-              const codeExample = findCodeExample(section);   
+              const codeExample = findCodeExample(section);
 
               return (
                 codeExample
                 && (
-                  <CodeSection 
+                  <CodeSection
                     name={section.name}
                     component={sections.name}
                     example={codeExample.example}
@@ -45,8 +46,8 @@ class CodeTab extends React.PureComponent {
             })
           }
           {
-            sections.props 
-            && sections.props.react.length >= 0 
+            sections.props
+            && sections.props.react.length >= 0
             && (
               <div className="docs-section docs-grid">
                 <h4 className="cui-h4--bold cui-font-color--alternate docs-grid__title" id={sections.name + 'Props'}>
@@ -77,14 +78,7 @@ class CodeTab extends React.PureComponent {
           }
         </div>
         <div className="docs-content__nav">
-          {
-            codeSections
-            && codeSections.map((section, idx) => (
-              <li key={`${section.section}-${idx}`}>
-                <a href={`#${section.section}`}>{section.name}</a>
-              </li>
-            ))
-          }
+          <PageLinks links={codeSections} />
         </div>
       </React.Fragment>
     );

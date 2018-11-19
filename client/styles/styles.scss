@@ -18,6 +18,7 @@ $images-path: '~@collab-ui/core/images';
 @import '../containers/HomePage/home';
 @import '../containers/SideNav/SideNav';
 @import '../collab-ui/Footer/Footer';
+@import '../collab-ui/PageLinks/PageLinks';
 
 body {
   background-color: $white;

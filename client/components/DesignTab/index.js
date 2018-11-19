@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DesignSection from '../DesignSection';
+import PageLinks from '../../collab-ui/PageLinks';
 
 class DesignTab extends React.PureComponent {
   static displayName = 'DesignTab';
@@ -20,14 +21,7 @@ class DesignTab extends React.PureComponent {
           }
         </div>
         <div className="docs-content__nav">
-          {
-            sections
-            && sections.map(section => (
-              <li key={section.sectionId}>
-                <a href={`#${section.sectionId}`}>{section.sectionTitleText}</a>
-              </li>
-            ))
-          }
+          <PageLinks links={sections} />
         </div>
       </React.Fragment>
     );
