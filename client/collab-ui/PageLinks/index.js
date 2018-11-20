@@ -6,6 +6,23 @@ export default class PageLinks extends React.Component {
     clickedIdx: 0,
   };
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    const { scrollY } = window;
+    const elm = document.querySelector('.cui-page-links__container');
+    const reTop = 322 <= scrollY ? 77 : (400 - scrollY);
+
+    elm.style.top = `${reTop}px`;
+    return reTop;
+  }
+
   selectLink = i => {
     this.setState({
       clickedIdx: i,
