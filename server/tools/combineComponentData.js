@@ -3,24 +3,27 @@ import prepareCodeSectionsData from './prepareCodeSectionsData';
 
 const combineComponentData = async (wpComponent, codeComponent) => {
   try {
-    const { acf, id, slug } = wpComponent;
-    const { pageTitle, pageSubTitle, pageHeroImage, mainDescription, mainImage, designSections, usageSections } = acf;
+    const { id, name, displayName, description, mainImage, thumbnailImage, content, parent, path, designSections, usageSections, homeSections, children } = wpComponent;
 
-    const style = await prepareWpSectionsData(designSections, slug);
-    const usage = await prepareWpSectionsData(usageSections, slug);
+    const style = await prepareWpSectionsData(designSections, name);
+    const usage = await prepareWpSectionsData(usageSections, name);
     const code = await prepareCodeSectionsData(codeComponent);
 
     const combineComponent = {
       id,
-      slug,
-      pageTitle,
-      pageSubTitle,
-      pageHeroImage,
-      mainDescription,
+      name,
+      displayName,
+      description,
       mainImage,
+      thumbnailImage,
+      content,
+      parent,
+      path,
       style,
       usage,
       code,
+      homeSections,
+      children,
     };
     return combineComponent;
   } catch (error) {

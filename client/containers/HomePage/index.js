@@ -7,31 +7,29 @@ import config from '../../config';
 class HomePage extends React.PureComponent {
 
   state = {
-      pageHeroImage: '',
-      pageSubTitle: '',
-      pageTitle: '',
+      mainImage: '',
+      description: '',
+      displayName: '',
       homeSections: [],
   }
 
   componentDidMount = () => {
     return fetch(`${config.PAGES_URL}/name/homepage`)
     .then(res => res.json())
-    .then(response => {
-      const homepage = response;
-      console.log(homepage); // eslint-disable-line no-console
-      const { pageHeroImage, pageSubTitle, pageTitle, homeSections, } = homepage.acf;
+    .then(homepage => {
+      const { mainImage, description, displayName, homeSections, } = homepage;
       this.setState({
-        pageHeroImage, pageSubTitle, pageTitle, homeSections,
+        mainImage, description, displayName, homeSections,
       });
     });
   }
 
   render () {
-    const { pageHeroImage, pageSubTitle, pageTitle, homeSections } = this.state;
+    const { mainImage, description, displayName, homeSections } = this.state;
 
     return (
       <div className="docs-home-page">
-        <Hero title={pageTitle} description={pageSubTitle} textAlign="center" image={pageHeroImage} className="docs-hero--home"/>
+        <Hero title={displayName} description={description} textAlign="center" image={mainImage} className="docs-hero--home"/>
 
         <div className="docs-home-sections">
           {homeSections && homeSections.map((section, idx) => {

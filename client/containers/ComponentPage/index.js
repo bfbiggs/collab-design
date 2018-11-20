@@ -71,7 +71,7 @@ class ComponentPage extends React.Component {
         ? <PageHeader textAlign="left" />
         : (
           <React.Fragment>
-            <PageHeader title={component.pageTitle} lead={component.mainDescription} textAlign="left" />
+            <PageHeader title={component.displayName} lead={component.description} textAlign="left" />
             <div className="cui-button-group cui-button-group--blue">
               {
                 component.style &&

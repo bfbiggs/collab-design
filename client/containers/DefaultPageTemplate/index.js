@@ -10,21 +10,20 @@ class DefaultPage extends React.Component {
   state = {
     loading: true,
     content: null,
-    pageHeroImage: null,
-    pageSubTitle: null,
-    pageTitle: null,
+    mainImage: null,
+    description: null,
+    displayName: null,
   };
 
   componentDidMount() {
-    return fetch(`${config.PAGES_URL}/id/${this.props.page.object_id}`)
+    return fetch(`${config.PAGES_URL}/${this.props.page.object_id}`)
     .then(res => res.json())
     .then(response => {
       const page = response;
-      const { pageHeroImage, pageSubTitle, pageTitle } = get(page, 'acf');
-      const content = get(page.content, 'rendered');
+      const { mainImage, description, displayName, content } = page;
       const loading = false;
       this.setState({
-        content, loading, pageHeroImage, pageSubTitle, pageTitle,
+        content, loading, mainImage, description, displayName,
       });
     });
   }
@@ -37,15 +36,15 @@ class DefaultPage extends React.Component {
     const {
       content,
       loading,
-      pageSubTitle,
-      pageTitle
+      description,
+      displayName
     } = this.state;
 
     return (
       <React.Fragment>
-        {!pageTitle
+        {!displayName
           ? <PageHeader title={title} lead={lead} textAlign="left" />
-          : <PageHeader title={pageTitle} lead={pageSubTitle} textAlign="left" />
+          : <PageHeader title={displayName} lead={description} textAlign="left" />
         }
         <div className="docs-content-area">
         {loading /* eslint-disable react/no-danger */

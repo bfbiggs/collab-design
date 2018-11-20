@@ -49,7 +49,7 @@ router
 router.route('/:component_id').get(async (req, res) => {
   try {
     const componentId = req.params.component_id;
-    const wpFetch = await fetch(`${config.WP_CONTENT_URL}/${componentId}`);
+    const wpFetch = await fetch(`${config.WP_PAGES_URL}/${componentId}`);
     const wpComponent = await wpFetch.json();
     const codeComponent = await Component.findOne({ id: componentId });
     // const codeComponent = mockCodeComponent;
