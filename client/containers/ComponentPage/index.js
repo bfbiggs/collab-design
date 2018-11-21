@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, NavLink, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Spinner } from '@collab-ui/react';
 import { fetchComponentData } from './actions';
 import DesignTab from '../../components/DesignTab';
 import CodeTab from '../../components/CodeTab';
 import PageHeader from '../../collab-ui/PageHeader';
+import GirdTab from '../../components/GirdTab';
 
 class ComponentPage extends React.Component {
+
   componentDidMount() {
     const {
       child,
@@ -19,6 +21,7 @@ class ComponentPage extends React.Component {
     if (!components[child.object_id]) {
       fetchComponentData(child.object_id);
     }
+
   }
 
   render() {
@@ -72,30 +75,7 @@ class ComponentPage extends React.Component {
         : (
           <React.Fragment>
             <PageHeader title={component.pageTitle} lead={component.mainDescription} textAlign="left" />
-            <div className="cui-button-group cui-button-group--blue">
-              {
-                component.style &&
-                  <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/style`}>
-                    Style
-                  </NavLink>
-              }
-              {
-                component.usage &&
-                  <NavLink className="cui-button cui-button--36" activeClassName='active' to={`${match.url}/usage`}>
-                    Usage
-                  </NavLink>
-              }
-              {
-                hasCodeExamples &&
-                  <NavLink
-                    className="cui-button cui-button--36"
-                    activeClassName='active'
-                    to={`${match.url}/code`}
-                  >
-                    Code
-                  </NavLink>
-                }
-            </div>
+            <GirdTab matchUrl={match.url} component={component} hasCodeExamples={hasCodeExamples} />
             <div className="docs-content-area docs-content-area--with-pagenav">
               {loading
                 ? <Spinner />
