@@ -47,6 +47,7 @@ class CodeTab extends React.PureComponent {
           }
           {
             sections.props
+            && sections.props.react
             && sections.props.react.length >= 0
             && (
               <div className="docs-section docs-grid">
