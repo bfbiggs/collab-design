@@ -1,5 +1,5 @@
 const API_URL = process.env.NODE_ENV === 'production'
-  ? 'http://collab-ui-server-1.us-west-2.elasticbeanstalk.com'
+  ? 'https://api.collab-ui.com'
   : 'http://127.0.0.1:3300';
 
 

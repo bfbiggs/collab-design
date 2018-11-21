@@ -8,6 +8,7 @@ import fetchRoutes from './actions';
 import LoginPage from '../../containers/Login';
 import NotFoundPage from '../../containers/NotFound';
 import ParentPage from '../../containers/ParentPage';
+import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
 import ComponentPage from '../../containers/ComponentPage';
 import HomePage from '../../containers/HomePage';
 import DefaultPage from '../../containers/DefaultPageTemplate';
@@ -50,6 +51,7 @@ class Routes extends React.Component {
     return (
       <Switch>
         <Route key={'home0'} path="/" exact component={HomePage} />
+        <Route key={'components0'} path="/components" exact component={ComponentOverviewPage} />
         {routes && (!loading || !error) && createRoutes}
         <Route key={'login0'} path="/login" component={LoginPage} />
         <Route key={'NoMatch0'} component={NotFoundPage} />

@@ -14,6 +14,8 @@ $images-path: '~@collab-ui/core/images';
 @import '../collab-ui/PageHeader/PageHeader';
 @import '../components/CodeTab/CodeTab';
 @import '../components/CodeSection/CodeSection';
+@import '../components/ComponentItem/ComponentItem';
+@import '../containers/ComponentOverviewPage/ComponentOverviewPage';
 @import '../containers/ComponentPage/ComponentPage';
 @import '../containers/HomePage/home';
 @import '../containers/SideNav/SideNav';
