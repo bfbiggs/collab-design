@@ -20,7 +20,7 @@ router
         let components = await Component.find();
         res.json(components);
       } else {
-        const wpFetch = await fetch(`${config.WP_CHILD_PAGES_URL}/components`);
+        const wpFetch = await fetch(`${config.WP_PAGES_URL}/name/components`);
         const wpComponentList = await wpFetch.json();
         res.json(wpComponentList);
       }

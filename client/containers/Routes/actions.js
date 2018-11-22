@@ -20,7 +20,9 @@ const filterRouteData = menuData => {
             return grandchild;
           });
         }
-        child.path = `${item.object_slug}/${child.object_slug}`;
+        child.path = item.object_slug === child.object_slug
+          ? `${item.object_slug}`
+          : `${item.object_slug}/${child.object_slug}`;
         return child;
       });
     }

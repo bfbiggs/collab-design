@@ -24,9 +24,9 @@ class Routes extends React.Component {
     const createRoutes = routes.map((item, idx) => {
       if (item.object_slug === 'components' || item.object_slug === 'style') {
         return [
-          <Route key={`${item.id}`} exact path="/components/" render={props => <ParentPage {...props} item={item} title={item.title} />} />,
           item.children.map(child => {
             const childPath = child.path.replace(/\/$/, '');
+            if (item.object_slug === child.object_slug) return;
             return [<Route key={`${child.id}`} path={`/${childPath}/`} render={props => <ComponentPage {...props} child={child} />} />];
           }),
         ];

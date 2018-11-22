@@ -39,7 +39,7 @@ export default class PageLinks extends React.Component {
 
     const pageLinks = links.map((link, i) => (
       <a
-        href={link.sectionId ? `#${link.sectionId}` : `#${link.section}`}
+        href={link.sectionId ? `#${link.sectionId}` : `#${link.name}`}
         className={
           'cui-page-links__link' +
           `${(clickedIdx === i && ' cui-page-links__link--active') || ''}`

@@ -11,20 +11,20 @@ class CodeSection extends React.Component {
   static displayName = 'CodeSection';
 
   render() {
-    const { 
+    const {
       name,
       codePreference,
       component,
       example,
       description,
-      setCodePreference,  
+      setCodePreference,
       variations,
      } = this.props;
 
      const mkTitleCase = str => startCase(toLower(str));
 
      const rmWhiteSpace = str => str.replace(/[\s-]/g, '');
- 
+
      const componentTitleCase = rmWhiteSpace(
        mkTitleCase(component)
      );
@@ -55,14 +55,14 @@ class CodeSection extends React.Component {
         : loopCodeExamples();
 
      return (
-      <div className="docs-section">
+      <div className="docs-section" id={name}>
         <h4 className="cui-h4--bold cui-font-color--alternate docs-section__title">
           {mkTitleCase(name)}
         </h4>
         <h5>
           {description}
         </h5>
-        <AsyncComponent 
+        <AsyncComponent
           loader={() => import(`@collab-ui/react/examples/${componentTitleCase}/${rmWhiteSpace(name)}.js`)}
           Placeholder={example}
         />
@@ -74,7 +74,7 @@ class CodeSection extends React.Component {
             >
               {
                 variations.core.example &&
-                <Button 
+                <Button
                   ariaLabel='Core'
                   className={`${codePreference === 'core' && 'active' || ''}`}
                   onClick={() => setCodePreference('core')}
@@ -84,7 +84,7 @@ class CodeSection extends React.Component {
               }
               {
                 variations.react.example &&
-                <Button 
+                <Button
                   ariaLabel='React'
                   className={`${codePreference === 'react' && 'active' || ''}`}
                   onClick={() => setCodePreference('react')}

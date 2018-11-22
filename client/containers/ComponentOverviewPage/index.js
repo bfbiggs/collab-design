@@ -19,17 +19,17 @@ class ComponentOverviewPage extends React.Component {
     const { components, keyword } = this.props;
 
     return components.children.map((itm, idx) => {
-      const name = itm.name.toLowerCase();
+      const name = itm.displayName.toLowerCase();
       const reg = new RegExp(keyword);
       if (keyword == '' || reg.test(name)) {
         return (
-          <li 
+          <li
             key={idx}
           >
             <ComponentItem
-              route={itm.route}
-              thumbnail={itm.thumbnail}
-              title={itm.name}
+              route={itm.path}
+              thumbnail={itm.thumbnailImage}
+              title={itm.displayName}
             />
           </li>
         );
@@ -48,7 +48,7 @@ class ComponentOverviewPage extends React.Component {
     return (
       <React.Fragment>
         <PageHeader
-          title={components.name}
+          title={components.displayName}
           lead={components.description}
           textAlign="left"
         />
