@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CodeBlock from '../../collab-ui/CodeBlock';
 import AsyncComponent from '../AsyncComponent';
 import { Button } from '@collab-ui/react';
-import { setCodePreference } from '../../containers/ComponentPage/actions';
+import { setCodePreference } from '../../containers/Component/actions';
 
 class CodeSection extends React.Component {
   static displayName = 'CodeSection';

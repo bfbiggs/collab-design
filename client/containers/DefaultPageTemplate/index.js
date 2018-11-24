@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import comingSoon from '../../assets/coming-soon.jpg';
 import config from '../../config';
-import get from 'lodash/get';
 import PageHeader from '../../collab-ui/PageHeader';
 import { Spinner } from '@collab-ui/react';
 

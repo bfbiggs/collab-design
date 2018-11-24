@@ -1,0 +1,54 @@
+.docs-section__overview {
+  margin: 0 auto;
+  max-width: rem-calc(944);
+  @include flex($jc: space-between);
+  
+  .overview {
+    order: 1;
+    flex-basis: 100%;
+
+    &__title {
+      color: $black;
+      margin-bottom: rem-calc(16);
+    }
+
+    &__description {
+      margin-bottom: rem-calc(16);
+      max-width: rem-calc(459);
+    }
+
+    &__link {
+      @extend .cui-font-color--primary;
+      letter-spacing: 0;
+    }
+
+    &__image {
+      order: 0;
+      height: rem-calc(176);
+      width: rem-calc(176);
+      margin: 0 rem-calc(97) 0 0;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+  }
+
+  &--header {
+    .overview {
+      order: 0;
+  
+      &__description {
+        margin-bottom: 0;
+        max-width: none;
+        @extend .cui-font-color--primary;
+        @extend h4;
+      }
+  
+      &__image {
+        order: 1;
+        margin: 0 0 0 rem-calc(86);
+        height: auto;
+        width: auto;
+      }
+    }
+  }
+}

@@ -3,24 +3,25 @@ $icon-font-path: '~@collab-ui/icons/fonts';
 $images-path: '~@collab-ui/core/images';
 @import '~@collab-ui/core/scss/collab-ui';
 @import '~@collab-ui/core/scss/layouts/sites';
-@import '../collab-ui/CodeBlock/Prism';
 //TODO: Below 2 imported for Footer
 @import '~@collab-ui/core/scss/settings/fonts';
 @import '~@collab-ui/core/scss/settings/media';
 
-@import '../collab-ui/CodeBlock/CodeBlock';
 @import '../collab-ui/CodeBlock/Prism';
+@import '../collab-ui/Footer/Footer';
 @import '../collab-ui/Hero/hero';
 @import '../collab-ui/PageHeader/PageHeader';
-@import '../components/CodeTab/CodeTab';
+@import '../collab-ui/PageLinks/PageLinks';
+
 @import '../components/CodeSection/CodeSection';
+@import '../components/CodeTab/CodeTab';
 @import '../components/ComponentItem/ComponentItem';
+@import '../components/OverviewSection/OverviewSection';
+
+@import '../containers/Component/Component';
 @import '../containers/ComponentOverviewPage/ComponentOverviewPage';
-@import '../containers/ComponentPage/ComponentPage';
 @import '../containers/HomePage/home';
 @import '../containers/SideNav/SideNav';
-@import '../collab-ui/Footer/Footer';
-@import '../collab-ui/PageLinks/PageLinks';
 
 body {
   background-color: $white;

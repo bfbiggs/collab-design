@@ -1,26 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, NavLink, Redirect, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Spinner } from '@collab-ui/react';
-import { fetchComponentData } from './actions';
 import DesignTab from '../../components/DesignTab';
 import CodeTab from '../../components/CodeTab';
 import PageHeader from '../../collab-ui/PageHeader';
 
 class ComponentPage extends React.Component {
-  componentDidMount() {
-    const {
-      child,
-      components,
-      fetchComponentData
-    } = this.props;
-
-    if (!components[child.object_id]) {
-      fetchComponentData(child.object_id);
-    }
-  }
-
   render() {
     const {
       child,
@@ -113,13 +99,6 @@ class ComponentPage extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  components: state.componentsReducer.components,
-  loading: state.componentsReducer.loading,
-  error: state.componentsReducer.error,
-  codePreference: state.componentsReducer.codePreference,
-});
-
 ComponentPage.propTypes = {
   child: PropTypes.object.isRequired,
   codePreference: PropTypes.string.isRequired,
@@ -135,7 +114,4 @@ ComponentPage.defaultProps = {
   loading: false,
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchComponentData }
-)(ComponentPage);
+export default ComponentPage;

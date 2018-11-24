@@ -8,7 +8,9 @@ const PageHeader = props => {
     <div className={'cui-page-header ' + (textAlign === 'left' ? 'cui-page-header--left' : '')}>
       <div className="cui-page-header__container ">
         <div className="cui-page-header__title">{title}</div>
+        {/* eslint-disable react/no-danger */}
         <h4 className="cui-page-header__lead" dangerouslySetInnerHTML={{ __html: lead }} />
+        {/* eslint-enable react/no-danger */}
       </div>
     </div>
   );

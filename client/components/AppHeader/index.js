@@ -59,7 +59,7 @@ class AppHeader extends Component {
         <ListItem
           customRefProp="innerRef"
           customAnchorNode={
-            <NavLink exact to="/design-principles" activeClassName={'active'}>
+            <NavLink to="/design-principles" activeClassName={'active'}>
               Design Principles
             </NavLink>
           }
@@ -91,7 +91,7 @@ class AppHeader extends Component {
         <ListItem
           customRefProp="innerRef"
           customAnchorNode={
-            <NavLink to="/Resources" activeClassName={'active'}>
+            <NavLink to="/resources" activeClassName={'active'}>
               Resources
             </NavLink>
           }
