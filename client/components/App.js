@@ -5,6 +5,7 @@ import Header from './AppHeader';
 import AppFooter from './AppFooter';
 import SideNav from '../containers/SideNav';
 import Routes from '../containers/Routes';
+import { history } from '../store/configureStore';
 import { connect } from 'react-redux';
 
 class App extends React.Component {
@@ -16,7 +17,7 @@ class App extends React.Component {
           className={
             `docs-main` + `${location === '/' ? ' docs-main--home' : ''}`
           }>
-          <Header />
+          <Header history={history} />
           <SideNav />
           <Routes />
           <AppFooter />
