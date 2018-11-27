@@ -5,13 +5,14 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 
 import fetchRoutes from './actions';
 // import getAuthorization from '../../services/user/actions';
-import LoginPage from '../../containers/Login';
-import NotFoundPage from '../../containers/NotFound';
 import Component from '../../containers/Component';
 import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
-import Overview from '../../containers/Overview';
-import HomePage from '../../containers/HomePage';
 import ContentPage from '../../containers/ContentPage';
+import Feedback from '../../containers/Feedback';
+import HomePage from '../../containers/HomePage';
+import LoginPage from '../../containers/Login';
+import NotFoundPage from '../../containers/NotFound';
+import Overview from '../../containers/Overview';
 import SearchResults from '../../containers/SearchResults';
 // import PrivateRoute from './PrivateRoute';
 
@@ -100,6 +101,7 @@ class Routes extends React.Component {
       <Switch>
         <Route key='home-0' path='/' exact component={HomePage} />
         <Route key='components-0' path='/components' exact component={ComponentOverviewPage} />
+        <Route key='feedback-0' path="/feedback" exact component={Feedback} />
         {routes && (!loading || !error) && createRoutes}
         <Route key={'login0'} path="/login" component={LoginPage} />
         <Route key={'search0'} path="/search" component={SearchResults} />

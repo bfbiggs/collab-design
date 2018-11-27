@@ -23,8 +23,9 @@ $images-path: '~@collab-ui/core/images';
 
 @import '../containers/Component/Component';
 @import '../containers/ComponentOverviewPage/ComponentOverviewPage';
-@import '../containers/Icons/Icons';
+@import '../containers/Feedback/Feedback';
 @import '../containers/HomePage/home';
+@import '../containers/Icons/Icons';
 @import '../containers/SearchResults/SearchResults';
 @import '../containers/SideNav/SideNav';
 
