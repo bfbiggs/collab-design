@@ -4,6 +4,7 @@ import menu from './routes/menu';
 import pages from './routes/pages';
 import feedback from './routes/feedback';
 import icons from './routes/icons';
+import changeLog from './routes/changeLog';
 
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.use('/pages/', pages);
 router.use('/menu/', menu);
 router.use('/feedback/', feedback);
 router.use('/icons/', icons);
+router.use('/changeLog/', changeLog);
 
 // router
 //   .route('/components')
