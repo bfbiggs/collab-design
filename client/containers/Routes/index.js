@@ -77,12 +77,7 @@ class Routes extends React.Component {
               exact
               key={`${child.id}-${idx}`}
               path={`/${childPath}`}
-              render={props => (
-                <ContentPage
-                  page={child}
-                  {...props}
-                />
-              )}
+              render={props => <ContentPage page={child} {...props} />}
             />,
             child.children &&
             child.children.map((grandchild, idx) => {
@@ -93,7 +88,7 @@ class Routes extends React.Component {
                     exact
                     key={`${grandchild.id}-${idx}`}
                     path={`/${grandChildPath}`}
-                    render={props => <ContentPage {...props} page={grandchild} />}
+                    render={props => <ContentPage page={grandchild} {...props} />}
                   />
                 );
             })
