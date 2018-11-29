@@ -12,7 +12,7 @@ import Component from '../../containers/Component';
 import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
 import Overview from '../../containers/Overview';
 import HomePage from '../../containers/HomePage';
-import DefaultPage from '../../containers/DefaultPageTemplate';
+import ContentPage from '../../containers/ContentPage';
 import SearchResults from '../../containers/SearchResults';
 // import PrivateRoute from './PrivateRoute';
 
@@ -22,9 +22,9 @@ class Routes extends React.Component {
   }
 
   render() {
-    const { 
+    const {
       error,
-      loading, 
+      loading,
       routes
     } = this.props;
 
@@ -32,7 +32,7 @@ class Routes extends React.Component {
       if (['components', 'style'].includes(item.object_slug)) {
 
         return [
-          item.object_slug === 'style' && 
+          item.object_slug === 'style' &&
           <Route
             key='style'
             path='/style'
@@ -47,10 +47,10 @@ class Routes extends React.Component {
               <Route
                 key={`${child.id}`}
                 path={`/${childPath}/`}
-                render={props => <Component {...props} child={child} />} 
+                render={props => <Component {...props} child={child} />}
               />
             );
-          })    
+          })
         ];
       }
 
@@ -60,10 +60,10 @@ class Routes extends React.Component {
           key={`${item.id}-${idx}`}
           path={`/${item.path}`}
           render={props => (
-            <Overview 
+            <Overview
               child={item}
               id={item.object_id}
-              title={item.title} 
+              title={item.title}
               {...props}
             />
           )}
@@ -78,23 +78,22 @@ class Routes extends React.Component {
               key={`${child.id}-${idx}`}
               path={`/${childPath}`}
               render={props => (
-                <DefaultPage
+                <ContentPage
                   page={child}
-                  title={child.title}
                   {...props}
                 />
-              )} 
+              )}
             />,
             child.children &&
             child.children.map((grandchild, idx) => {
               const grandChildPath = grandchild.path.replace(/\/$/, '');
-                  
+
                 return (
                   <Route
                     exact
                     key={`${grandchild.id}-${idx}`}
                     path={`/${grandChildPath}`}
-                    render={props => <ParentPage {...props} title={grandchild.title} />} 
+                    render={props => <ContentPage {...props} page={grandchild} />}
                   />
                 );
             })
