@@ -7,7 +7,6 @@ import fetchRoutes from './actions';
 // import getAuthorization from '../../services/user/actions';
 import LoginPage from '../../containers/Login';
 import NotFoundPage from '../../containers/NotFound';
-import ParentPage from '../../containers/ParentPage';
 import Component from '../../containers/Component';
 import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
 import Overview from '../../containers/Overview';

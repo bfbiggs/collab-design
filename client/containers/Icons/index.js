@@ -5,6 +5,7 @@ import { SearchInput } from '@collab-ui/react';
 import fetchIcons from './actions';
 import IconsList from './IconsList';
 import IconModal from './IconModal';
+import reduce from 'lodash/reduce';
 
 class IconsContainer extends React.Component {
   state = {
@@ -41,7 +42,7 @@ class IconsContainer extends React.Component {
   filterIcons = input => {
     const icons = [...this.props.icons];
     const normalizedInput = input.toLowerCase();
-    const filteredList = _.reduce(icons, (agg, icon) => {
+    const filteredList = reduce(icons, (agg, icon) => {
       const sizes = Object.keys(icon.sizes);
       const colors = Object.keys(icon.colors);
       const tags = icon.tags;

@@ -28,7 +28,7 @@ const Tween={
 const getDomPosition=function (pObj) {
   let _left = pObj.offsetLeft || 0,
     _top = pObj.offsetTop || 0;
-  while (pObj = pObj.offsetParent) {
+  while (pObj === pObj.offsetParent) {
     _left += eval(pObj.offsetLeft);
     _top += pObj.offsetTop;
   }
@@ -59,13 +59,13 @@ class PageHeader extends React.Component {
       this.onScrollProxy = function(e){
         me.handleOnScroll(e);
       };
-      container.addEventListener('scroll',this.onScrollProxy);      
+      container.addEventListener('scroll',this.onScrollProxy);
     }
   }
 
   componentWillUnmount() {
     if(this.onScrollProxy){
-      this.props.scrollingOption.container.removeEventListener('scroll',this.onScrollProxy); 
+      this.props.scrollingOption.container.removeEventListener('scroll',this.onScrollProxy);
     }
   }
 
@@ -75,9 +75,9 @@ class PageHeader extends React.Component {
       let {
         pageHeader_warp
       } = this.refs,
-      { 
+      {
         leaderHideLength,
-        shrinkStartScrollTop, 
+        shrinkStartScrollTop,
         shrinkEndFixedTop,
         ratioMin
       } = this.props.scrollingOption,
@@ -89,7 +89,7 @@ class PageHeader extends React.Component {
         w:pageHeader_warp.clientWidth,
         bottom:pos.y+pageHeader_warp.clientHeight
       },
-      
+
       plusScroll = (warpPosition.h*(1-ratioMin))>>0,
       shrinkLength = warpPosition.y-shrinkEndFixedTop+plusScroll,
       leaderShrinkStartScrollTop;
@@ -119,8 +119,8 @@ class PageHeader extends React.Component {
   };
 
   setWarpFixedState = (left, top, scale, leaderOpacity) => {
-    let { 
-      pageHeader_container_fixed, 
+    let {
+      pageHeader_container_fixed,
       pageHeader_leader_fixed
     } = this.refs;
     pageHeader_container_fixed.style.left = left+'px';
@@ -132,14 +132,14 @@ class PageHeader extends React.Component {
   handleOnScroll = () => {
     this.checkDom();
     let me=this,
-      { 
+      {
         container,
-        shrinkStartScrollTop, 
-        shrinkEndFixedTop, 
+        shrinkStartScrollTop,
+        shrinkEndFixedTop,
         ratioMin,
         tween
       } = this.props.scrollingOption,
-      { 
+      {
         warpPosition,
         shrinkEndScrollTop,
         shrinkLength,
@@ -154,7 +154,7 @@ class PageHeader extends React.Component {
     }else if(scrollTop<= shrinkEndScrollTop){
       this.checkScrollState(1);
       let _t = scrollTop-shrinkStartScrollTop,
-        _top = Tween.linear(_t,warpPosition.y,-warpPosition.y+shrinkEndFixedTop,shrinkLength), 
+        _top = Tween.linear(_t,warpPosition.y,-warpPosition.y+shrinkEndFixedTop,shrinkLength),
         _scale = Tween[tween](_t,1,ratioMin-1,shrinkLength),
         _leaderOpacity = 1;
 

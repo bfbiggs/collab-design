@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import config from '../../config';
+// import config from '../../config';
 
 import mockData from '../../../server/mockData/searchResults.json';
 
@@ -10,12 +10,12 @@ const setSearchResultsData = results => {
   };
 };
 
-const setError = error => {
-  return {
-    type: types.FETCH_SEARCH_RESULTS_ERROR,
-    error,
-  };
-};
+// const setError = error => {
+//   return {
+//     type: types.FETCH_SEARCH_RESULTS_ERROR,
+//     error,
+//   };
+// };
 
 export const fetchSearchResultsData = () => dispatch => {
   //return fetch(`${config.SEARCH_URL}`)
@@ -25,6 +25,6 @@ export const fetchSearchResultsData = () => dispatch => {
   //  )
   //  .catch(error => dispatch(setError(error)));
 
-  dispatch(setSearchResultsData(mockData))
+  dispatch(setSearchResultsData(mockData));
 
 };

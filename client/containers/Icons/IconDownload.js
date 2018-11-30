@@ -6,7 +6,7 @@ const IconDownload = props => {
 
   return (
     <div className="download-item">
-      {
+      {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
         link
         ?
         <a href={`${link}`}>{linkDetails}</a>
@@ -14,10 +14,10 @@ const IconDownload = props => {
         <div className="i-modal__class" tabIndex={0}>
           <code>{header}</code>
         </div>
-      }
+      /* eslint-endisable jsx-a11y/no-noninteractive-tabindex */}
       {
-        subheader 
-        && 
+        subheader
+        &&
         <p>{subheader}</p>
       }
     </div>

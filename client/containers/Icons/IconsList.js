@@ -39,10 +39,10 @@ export default class IconsList extends React.Component {
               };
 
               return (
-                <div className="icon-example" onClick={() => openModal(modifiedIcon)} key={index}>
+                <button className="cui-button--none icon-example" onClick={() => openModal(modifiedIcon)} key={index}>
                   <div className={`icon-example__icon icon-${icon.name}_${modifiedIcon.defaultSize} icon-${icon.name}`} />
                   <div className="icon-example__name">{icon.name}</div>
-                </div>
+                </button>
               );
             })}
       </div>
