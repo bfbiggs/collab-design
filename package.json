@@ -7,7 +7,7 @@
   },
   "scripts": {
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "build": "babel-node tools/build.js",
+    "build": "rimraf dist && babel-node tools/build.js",
     "build:watch": "yarn build && yarn open:dist",
     "clean:dist": "yarn remove-dist && mkdir dist",
     "clean:install": "rimraf node_modules && yarn cache clean && yarn install",
