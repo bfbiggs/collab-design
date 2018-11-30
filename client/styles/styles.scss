@@ -12,16 +12,20 @@ $images-path: '~@collab-ui/core/images';
 @import '../collab-ui/Hero/hero';
 @import '../collab-ui/PageHeader/PageHeader';
 @import '../collab-ui/PageLinks/PageLinks';
+@import '../collab-ui/SearchButton/SearchButton';
 
 @import '../components/CodeSection/CodeSection';
 @import '../components/CodeTab/CodeTab';
 @import '../components/ComponentItem/ComponentItem';
 @import '../components/OverviewSection/OverviewSection';
+@import '../components/SearchResultItem/SearchResultItem.scss';
 
 @import '../containers/Component/Component';
 @import '../containers/ComponentOverviewPage/ComponentOverviewPage';
 @import '../containers/HomePage/home';
+@import '../containers/SearchResults/SearchResults';
 @import '../containers/SideNav/SideNav';
+
 
 body {
   background-color: $white;
