@@ -7,10 +7,6 @@ import ComponentItem from '../../components/ComponentItem';
 import PageHeader from '../../collab-ui/PageHeader';
 
 class ComponentOverviewPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.fetchComponentsData();
   }

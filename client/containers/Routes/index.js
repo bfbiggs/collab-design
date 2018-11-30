@@ -13,6 +13,7 @@ import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
 import Overview from '../../containers/Overview';
 import HomePage from '../../containers/HomePage';
 import DefaultPage from '../../containers/DefaultPageTemplate';
+import SearchResults from '../../containers/SearchResults';
 // import PrivateRoute from './PrivateRoute';
 
 class Routes extends React.Component {
@@ -107,8 +108,9 @@ class Routes extends React.Component {
         <Route key='home-0' path='/' exact component={HomePage} />
         <Route key='components-0' path='/components' exact component={ComponentOverviewPage} />
         {routes && (!loading || !error) && createRoutes}
-        <Route key='login-0' path='/login' component={LoginPage} />
-        <Route key='no-match-0' component={NotFoundPage} />
+        <Route key={'login0'} path="/login" component={LoginPage} />
+        <Route key={'search0'} path="/search" component={SearchResults} />
+        <Route key={'NoMatch0'} component={NotFoundPage} />
       </Switch>
     );
   }

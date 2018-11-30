@@ -14,20 +14,26 @@ import {
 } from '@collab-ui/react';
 import logo from '../../assets/collaboration-design.svg';
 import getUser from '../../services/user/actions';
+import SearchButton from '../../collab-ui/SearchButton';
+import _ from 'lodash';
 
 class AppHeader extends Component {
   state = {
     hideNav: true,
+    expandSearch: false,
+    keyword: null,
   };
 
   componentDidMount() {
     this.props.getUser(location);
     this.showNav(this.props.path);
+    this.setSearchButton(this.props.path);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.path !== this.props.path) {
       this.showNav(this.props.path);
+      this.setSearchButton(this.props.path);
     }
   }
 
@@ -44,9 +50,37 @@ class AppHeader extends Component {
 
   getDefaultAvatar = () => {};
 
+  searchPath = '/search';
+
+  setSearchButton = path => {
+    this.setState({
+      expandSearch: path === this.searchPath,
+    });
+  };
+
+  handleSearchExpand = () => {
+    this.setState({
+      expandSearch: true,
+    });
+  };
+
+  handleSearchInput = e => {
+    this.setState({
+      keyword: e.target.value.trim(),
+    });
+  };
+
   render() {
-    const { photo } = this.props;
-    const { hideNav } = this.state;
+    const {
+      history,
+      photo,
+      search,
+    } = this.props;
+    const {
+      expandSearch,
+      hideNav,
+      keyword
+    } = this.state;
     // const logoIcon = <i className="icon icon-cisco-logo" />;
     const wordMark = <img src={logo} alt="Collaboration Design System" />;
     // const getAvatar = () => {
@@ -128,7 +162,22 @@ class AppHeader extends Component {
           {!hideNav && <TopbarNav>{navItems}</TopbarNav>}
           {/* <TopbarNav>{navItems}</TopbarNav> */}
           {/* <TopbarNav>Hello</TopbarNav> */}
-          <TopbarRight>{topbarRight}</TopbarRight>
+          <TopbarRight>
+            <SearchButton
+              name="searchButton"
+              htmlId="searchButton"
+              expanded={expandSearch}
+              value={search && search.q || ''}
+              onExpand={this.handleSearchExpand}
+              onChange={this.handleSearchInput}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && keyword.length > 0) {
+                  history.push(this.searchPath + '?q=' + keyword);
+                }
+              }}
+            />
+            {topbarRight}
+          </TopbarRight>
         </Topbar>
       </Fragment>
     );
@@ -136,16 +185,19 @@ class AppHeader extends Component {
 }
 
 AppHeader.propTypes = {
+  history: PropTypes.object.isRequired,
   getUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
   path: PropTypes.string,
   photo: PropTypes.string,
+  search: PropTypes.object,
 };
 
 AppHeader.defaultProps = {
   isAuthenticated: false,
   path: '',
   photo: null,
+  search: null,
 };
 
 function mapStateToProps(state) {
@@ -153,6 +205,12 @@ function mapStateToProps(state) {
     isAuthenticated: state.user.isAuthenticated,
     photo: state.user.photo,
     path: state.routing.location.pathname,
+    search: _.chain(state.routing.location.search)
+      .replace('?', '')
+      .split('&')
+      .map(_.partial(_.split, _, '=', 2))
+      .fromPairs()
+      .value(),
   };
 }
 

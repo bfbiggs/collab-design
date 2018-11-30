@@ -21,8 +21,9 @@ $images-path: '~@collab-ui/core/images';
 @import '../containers/Component/Component';
 @import '../containers/ComponentOverviewPage/ComponentOverviewPage';
 @import '../containers/HomePage/home';
+@import '../containers/SearchResults/SearchResults';
 @import '../containers/SideNav/SideNav';
-
+@import '../collab-ui/SearchButton/SearchButton';
 body {
   background-color: $white;
 }
