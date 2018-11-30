@@ -110,7 +110,7 @@ class AppHeader extends Component {
           customRefProp="innerRef"
           customAnchorNode={
             <NavLink to="/style" activeClassName={'active'}>
-              Style
+              Styles
             </NavLink>
           }
         />
@@ -176,7 +176,7 @@ class AppHeader extends Component {
                 }
               }}
             />
-            {topbarRight}
+            {/* {topbarRight} */}
           </TopbarRight>
         </Topbar>
       </Fragment>
