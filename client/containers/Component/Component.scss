@@ -37,6 +37,15 @@
 
 }
 
+.gird-tabs-fixed{
+  position:fixed !important;
+  top:64px;
+  background:white;
+  padding-left:240px;
+  grid-area:none;
+  z-index: 1200;
+}
+
 .#{$button-group__class}--blue {
   grid-area: tabs;
 }
