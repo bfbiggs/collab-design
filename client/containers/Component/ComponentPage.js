@@ -2,19 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Spinner } from '@collab-ui/react';
-import DesignTab from '../../components/DesignTab';
 import CodeTab from '../../components/CodeTab';
+import DesignTab from '../../components/DesignTab';
+import IconsTab from '../../containers/Icons';
 import PageHeader from '../../collab-ui/PageHeader';
 import GirdTab from '../../components/GirdTab';
 
 class ComponentPage extends React.Component {
-  componentDidMount() {
-    const {
-      child,
-      components,
-    } = this.props;
-  }
-
   render() {
     const {
       child,
@@ -54,10 +48,11 @@ class ComponentPage extends React.Component {
     const hasCodeExamples = verifyCodeExamples();
 
     const getDefaultTab = () => {
-      return component.style ? `${match.path}style`
-              : component.usage ? `${match.path}usage`
-                : hasCodeExamples ? `${match.path}code`
-                  : match.path;
+      return (component.name === 'icons') ? `${match.path}library`
+              : component.style ? `${match.path}style`
+                : component.usage ? `${match.path}usage`
+                  : hasCodeExamples ? `${match.path}code`
+                    : match.path;
     };
 
     return (
@@ -72,6 +67,7 @@ class ComponentPage extends React.Component {
               {loading
                 ? <Spinner />
                 : <Switch>
+                    <Route path={`${match.path}library`} render={props => <IconsTab {...props} />} />
                     <Route path={`${match.path}style`} render={props => <DesignTab {...props} sections={component.style} />} />
                     <Route path={`${match.path}usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
                     <Route path={`${match.path}code`} render={props => hasCodeExamples && <CodeTab {...props} sections={component.code && component.code} codePreference={codePreference} />} />
