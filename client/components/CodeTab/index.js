@@ -23,7 +23,7 @@ class CodeTab extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <div className="docs-content__column">
+        <div className="docs-content__column row">
           {
             codeSections
             &&

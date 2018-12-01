@@ -6,6 +6,7 @@ $images-path: '~@collab-ui/core/images';
 //TODO: Below 2 imported for Footer
 @import '~@collab-ui/core/scss/settings/fonts';
 @import '~@collab-ui/core/scss/settings/media';
+@import '../collab-ui/flex-grid/flex-grid';
 
 @import '../collab-ui/CodeBlock/Prism';
 @import '../collab-ui/Footer/Footer';

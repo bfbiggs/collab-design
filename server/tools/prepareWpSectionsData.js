@@ -10,12 +10,23 @@ const prepareWpSectionsData = async (wpSections, slug) => {
       const { sectionTitleText, sectionBodyContent, sectionImageArray, sectionImageDescription, sectionImageSize, sectionImagePosition } = flatSection;
       const sectionImage = get(sectionImageArray, 'url');
       const sectionId = `${slug}-${kebabCase(sectionTitleText)}`;
-      const subSections = [];
+      const subSections = wpSection.subSections ? [] : false;
 
       if (wpSection.subSections) {
-        for (const subSection of wpSection.subSections) {
-          const flatSubSection = await flattenAcfSection(subSection.subSectionContent);
-          subSections.push(flatSubSection);
+        for (const wpSubSection of wpSection.subSections) {
+          const flatSubSection = await flattenAcfSection(wpSubSection.subSectionContent);
+          const { subSectionTitleText, subSectionBodyContent, subSectionImageArray, subSectionImageDescription, subSectionImageSize, subSectionImagePosition } = flatSubSection;
+          const subSectionImage = get(subSectionImageArray, 'url');
+          const subSectionId = `${slug}-${kebabCase(subSectionTitleText)}`;
+          const subSection = {};
+          subSection.subSectionId = subSectionId || '';
+          subSection.subSectionTitleText = subSectionTitleText || '';
+          subSection.subSectionBodyContent = subSectionBodyContent || '';
+          subSection.subSectionImage = subSectionImage || '';
+          subSection.subSectionImageDescription = subSectionImageDescription || '';
+          subSection.subSectionImageSize = subSectionImageSize || '6';
+          subSection.subSectionImagePosition = subSectionImagePosition || 'right';
+          subSections.push(subSection);
         }
       }
       const section = {};

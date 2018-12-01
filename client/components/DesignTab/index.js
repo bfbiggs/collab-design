@@ -11,7 +11,7 @@ class DesignTab extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <div className="docs-content__column">
+        <div className="docs-content__column row">
           {
             sections
             && sections.map((section, idx) => (

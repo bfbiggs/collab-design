@@ -17,9 +17,20 @@ class DesignSection extends React.PureComponent {
         {/* eslint-enable react/no-danger */}
         {
           section.sectionImage
-          && <img src={section.sectionImage} alt={section.sectionImageDescription} />
+          && (
+            <div
+              className={
+                'flex-row' +
+                `${section.sectionImagePosition && ` flex-row--${section.sectionImagePosition}` || ''}`
+              }>
+              <div className={`medium-${section.sectionImageSize} columns`} >
+                <img src={section.sectionImage} alt={section.sectionImageDescription} />
+              </div>
+              {section.sectionImageDescription && <div className={`medium-${12 - section.sectionImageSize} columns`}>{section.sectionImageDescription}</div>
+              }
+            </div>
+          )
         }
-        <div>{section.sectionImageDescription}</div>
         {section.subSections &&
           section.subSections.map((subSection, idx) => {
             return <SubSection subSection={subSection} key={idx} />;
