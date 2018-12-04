@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import path from 'path';
 
 const GLOBALS = {
@@ -45,7 +46,6 @@ export default {
     // Generate HTML file that contains references to generated bundles. See here for how this works: https://github.com/ampedandwired/html-webpack-plugin#basic-usage
     new HtmlWebpackPlugin({
       template: 'client/index.ejs',
-      favicon: 'client/favicon.ico',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -63,6 +63,11 @@ export default {
       // To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token below.
       trackJSToken: ''
     }),
+    new CopyWebpackPlugin([{
+      from: 'client/favicon/**/*',
+      to: path.resolve(__dirname, 'dist'),
+      flatten: true
+    }]),
 
   ],
   module: {
