@@ -13,19 +13,6 @@ export const resetFeedback = form => dispatch =>
     form
   });
 
-export const addFileFeedback = newFile => dispatch =>
-  dispatch({
-      type: types.FEEDBACK_ADD_FILE,
-      newFile
-  });
-
-export const removeFileFeedback = fileIndexToRemove => dispatch =>
-  dispatch({
-    type: types.FEEDBACK_REMOVE_FILE,
-    fileIndexToRemove
-  });
-
-
 export const submitFeedback = form => async(dispatch) => {
   dispatch({ type: types.FEEDBACK_LOADING });
 

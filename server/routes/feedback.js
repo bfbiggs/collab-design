@@ -41,8 +41,8 @@ router.route('/').post(async (req, res) => {
         const fileData = {
           value: fs.createReadStream(file.path),
           options: {
-              filename: file.name,
-              contentType: file.type
+            filename: file.name,
+            contentType: file.type
           }
         };
         files.push(fileData);

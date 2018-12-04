@@ -11,7 +11,6 @@ const initialState = {
   version: '',
   browser: '',
   description: '',
-  files: []
 };
 
 const contactUsReducer = (state = initialState, action) => {
@@ -36,16 +35,6 @@ const contactUsReducer = (state = initialState, action) => {
       });
     case types.FEEDBACK_INITIAL_FORM:
       return Object.assign({}, initialState);
-    case types.FEEDBACK_ADD_FILE:
-      return Object.assign({}, state, {
-        files: state.files.concat(action.newFile)
-      });
-    case types.FEEDBACK_REMOVE_FILE:
-      return Object.assign({}, state, {
-        files: state.files
-          .slice(0, action.fileIndexToRemove)
-          .concat(state.files.slice(action.fileIndexToRemove + 1))
-      });
     case types.FEEDBACK_ERROR:
       return Object.assign({}, state, {
         isError: true,

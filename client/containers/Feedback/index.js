@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  addFileFeedback,
-  removeFileFeedback,
+import { 
   resetFeedback,
   submitFeedback,
   updateFeedback,
@@ -35,21 +33,22 @@ class Feedback extends React.PureComponent {
 
   state = {
     emailValid: false,
+    files: [],
     formErrors: { email: '' },
     formValid: false,
     formTouched: false,
     formDisabled: false,
   };
-
+  
   componentDidUpdate(prevProps, prevState) {
     (this.props !== prevProps || this.state !== prevState)
     && this.validateForm();
   }
-
+  
   componentWillUnMount() {
     this.props.resetFeedback();
   }
-
+  
   browseFiles = () => {
     this.refFileInput.current.click();
   };
@@ -57,7 +56,7 @@ class Feedback extends React.PureComponent {
   getFileExt = ext => {
     const lowerExt = ext.toLowerCase();
 
-    switch(lowerExt) {
+    switch(true) {
       case /txt|text/.test(lowerExt):
         return 'text';
       case /image/.test(lowerExt):
@@ -87,23 +86,22 @@ class Feedback extends React.PureComponent {
   };
 
   handleFileUploadAdd = e => {
-    const files = Array.from(e.target.files);
+    this.setState({
+      files: [
+        ...this.state.files,
+        ...e.target.files
+      ]
+    });
 
-    const arr = files.length
-      && files.reduce((agg, file) => ([
-        ...agg,
-        {
-          ...file,
-          name: file.name,
-          type: this.getFileExt(file.type),
-        }
-      ]), []);
+    // Must exist to clear DOM
+    // If not repeated file names will not upload
+    this.refFileInput.current.value = '';
+  };
 
-      this.props.addFileFeedback(arr);
-
-      // Must exist to clear DOM
-      // If not repeated file names will not upload
-      this.refFileInput.current.value = '';
+  handleFileUploadRemove = index => {
+    this.setState({
+      files: this.state.files.filter((ele, idx) => idx !== index)
+    });
   };
 
   handleFormReset = clearSelects => {
@@ -115,10 +113,11 @@ class Feedback extends React.PureComponent {
     this.setState(
       {
         emailValid: false,
+        files: [],
         formErrors: { email: '' },
         formValid: false,
         formTouched: false,
-        formDisabled: false
+        formDisabled: false,
       },
       () => this.props.resetFeedback()
     );
@@ -133,6 +132,43 @@ class Feedback extends React.PureComponent {
   handleSelectReset = ref => {
     ref.current.state.selected = [];
   }
+
+  handleSubmit = e => {
+    e && e.preventDefault();
+    this.setState({
+      formDisabled: true
+    });
+
+    const {
+      browser,
+      category,
+      description,
+      email,
+      library,
+      type,
+      version
+    } = this.props;
+
+    const {
+      files
+    } = this.state;
+
+    let formData = new FormData();
+
+    formData.append('form_id', 1);
+    formData.append('1', email);
+    formData.append('3', category);
+    formData.append('4', type);
+    formData.append('8', description);
+    formData.append('file', files);
+    if (category == 'code') {
+      formData.append('5', library);
+      formData.append('6', version);
+      formData.append('7', browser);
+    }
+
+    this.props.submitFeedback(formData);
+  };
 
   handleUpdateForm = (event, jsonName, ifSelector) => {
     const obj = {
@@ -166,7 +202,7 @@ class Feedback extends React.PureComponent {
   };
 
   renderFileListItems = () => {
-    const { files } = this.props;
+    const { files } = this.state;
     const { formDisabled } = this.state;
 
     return files.map((itm, idx) => {
@@ -201,51 +237,12 @@ class Feedback extends React.PureComponent {
     });
   };
 
-  handleFileUploadRemove = index => {
-    this.props.removeFileFeedback(index);
-  };
-
-  handleSubmit = e => {
-    e && e.preventDefault();
-    this.setState({
-      formDisabled: true
-    });
-
-    const {
-      browser,
-      category,
-      description,
-      email,
-      files,
-      library,
-      type,
-      version
-    } = this.props;
-
-    let formData = new FormData();
-
-    formData.append('form_id', 1);
-    formData.append('1', email);
-    formData.append('3', category);
-    formData.append('4', type);
-    formData.append('8', description);
-    formData.append('files', files);
-    if (category == 'code') {
-      formData.append('5', library);
-      formData.append('6', version);
-      formData.append('7', browser);
-    }
-
-    this.props.submitFeedback(formData);
-  };
-
   render() {
     const {
       browser,
       category,
       description,
       email,
-      files,
       isError,
       isLoading,
       isSuccess,
@@ -254,6 +251,7 @@ class Feedback extends React.PureComponent {
 
     const {
       emailValid,
+      files,
       formErrors,
       formDisabled,
       formTouched,
@@ -434,7 +432,7 @@ class Feedback extends React.PureComponent {
               type='file'
             />
 
-            {files.length > 0
+            {files.length > 0 
               ? (
                 <React.Fragment>
                   <List className="cui-panel__form--files">
@@ -494,25 +492,20 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  addFileFeedback,
-  removeFileFeedback,
   resetFeedback,
   submitFeedback,
   updateFeedback,
 };
 
 Feedback.propTypes = {
-  addFileFeedback: PropTypes.func.isRequired,
   browser: PropTypes.string,
   category: PropTypes.string,
   description: PropTypes.string,
   email: PropTypes.string,
-  files: PropTypes.arrayOf(PropTypes.object),
   isLoading: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   library: PropTypes.string,
-  removeFileFeedback: PropTypes.func.isRequired,
   resetFeedback: PropTypes.func.isRequired,
   submitFeedback: PropTypes.func.isRequired,
   type: PropTypes.string,
@@ -525,7 +518,6 @@ Feedback.defaultProps = {
   category: 'code',
   description: '',
   email: '',
-  files: [],
   library: '',
   type: '',
   version:'',
