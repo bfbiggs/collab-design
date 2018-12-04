@@ -31,8 +31,7 @@ export const submitFeedback = form => async(dispatch) => {
 
   try {
     const response = await fetch(`${config.FEEDBACK_URL}`, {
-      method: 'POST', 
-      headers: { "Content-Type": "multipart/form-data" }, 
+      method: 'POST',
       body: form
     });
 
@@ -45,4 +44,4 @@ export const submitFeedback = form => async(dispatch) => {
   } catch (error) {
     dispatch({ type: types.FEEDBACK_ERROR });
   }
-};  
+};

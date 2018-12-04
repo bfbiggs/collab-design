@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../collab-ui/Footer';
 import FooterSection from '../../collab-ui/Footer/FooterSection';
-import { Button, List, ListItem, SocialList} from '@collab-ui/react';
+
+import { List, ListItem, SocialList} from '@collab-ui/react';
 
 const AppFooter = () => {
   return (
@@ -12,15 +14,17 @@ const AppFooter = () => {
             Didn’t find what you need? Have feedback for us? Let us know!
           </div>
           <div className="docs-footer--centered">
-            <Button color="blue">
+            {/* <Button color="blue"> */}
+              <Link className="cui-button cui-button--blue" to="/feedback">
               Send feedback
-            </Button>
+              </Link>
+            {/* </Button> */}
           </div>
         </div>
       </FooterSection>
 
       {/* Footer Mid */}
-      <FooterSection>
+      {/* <FooterSection>
         <div className="docs-footer__list-container">
           <div>
             <h5 className="docs-footer__list-item-title">Connect</h5>
@@ -55,7 +59,7 @@ const AppFooter = () => {
             </List>
           </div>
         </div>
-      </FooterSection>
+      </FooterSection> */}
 
       {/* Footer Bottom */}
       <FooterSection isBottom={true}>

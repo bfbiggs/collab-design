@@ -88,10 +88,12 @@ router.route('/').post(async (req, res) => {
           const postForm = await request(formOptions);
           res.json(postForm);
         } catch (err) {
+          res.status(500);
           res.send(err.message);
         }
       });
   } catch (err) {
+    res.status(500);
     res.send(err.message);
   }
 });
