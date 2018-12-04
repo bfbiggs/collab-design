@@ -5,30 +5,32 @@ import Header from './AppHeader';
 import AppFooter from './AppFooter';
 import SideNav from '../containers/SideNav';
 import Routes from '../containers/Routes';
-import { history } from '../store/configureStore';
 import { connect } from 'react-redux';
+import ScrollToTop from '../collab-ui/ScrollToTop';
 
 class App extends React.Component {
   render() {
     const { location } = this.props;
+
     return (
-      <React.Fragment>
+      <ScrollToTop>
         <div
           className={
-            `docs-main` + `${location === '/' ? ' docs-main--home' : ''}`
+            `docs-main` +
+            `${location === '/' ? ' docs-main--home' : ''}`
           }>
-          <Header history={history} />
+          <Header />
           <SideNav />
           <Routes />
           <AppFooter />
         </div>
-      </React.Fragment>
+      </ScrollToTop>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  location: state.routing.location.pathname,
+  location: state.router.location.pathname,
 });
 
 App.propTypes = {

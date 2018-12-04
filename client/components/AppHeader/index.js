@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import {
   // List,
@@ -72,8 +73,8 @@ class AppHeader extends Component {
 
   render() {
     const {
-      history,
       photo,
+      push,
       search,
     } = this.props;
     const {
@@ -172,7 +173,7 @@ class AppHeader extends Component {
               onChange={this.handleSearchInput}
               onKeyDown={e => {
                 if (e.key === 'Enter' && keyword.length > 0) {
-                  history.push(this.searchPath + '?q=' + keyword);
+                  push(this.searchPath + '?q=' + keyword);
                 }
               }}
             />
@@ -185,9 +186,9 @@ class AppHeader extends Component {
 }
 
 AppHeader.propTypes = {
-  history: PropTypes.object.isRequired,
   getUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  push: PropTypes.func.isRequired,
   path: PropTypes.string,
   photo: PropTypes.string,
   search: PropTypes.object,
@@ -204,8 +205,8 @@ function mapStateToProps(state) {
   return {
     isAuthenticated: state.user.isAuthenticated,
     photo: state.user.photo,
-    path: state.routing.location.pathname,
-    search: _.chain(state.routing.location.search)
+    path: state.router.location.pathname,
+    search: _.chain(state.router.location.search)
       .replace('?', '')
       .split('&')
       .map(_.partial(_.split, _, '=', 2))
@@ -216,5 +217,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getUser }
+  { getUser, push }
 )(AppHeader);

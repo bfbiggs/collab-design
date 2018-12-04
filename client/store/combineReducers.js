@@ -7,19 +7,18 @@ import feedbackReducer from '../containers/Feedback/reducer';
 import iconsReducer from '../containers/Icons/reducer';
 import pageReducer from '../containers/Overview/reducer';
 import searchResultsReducer from '../containers/SearchResults/reducer';
-import { routerReducer } from 'react-router-redux';
+import { connectRouter } from 'connected-react-router';
 
-const rootReducer = combineReducers({
+const createRootReducer = history => combineReducers({
   componentOverviewReducer,
   componentsReducer,
   feedbackReducer,
   iconsReducer,
   pageReducer,
   routesReducer,
-  routing: routerReducer,
-  user: userReducer,
+  router: connectRouter(history),
   searchResultsReducer: searchResultsReducer,
-
+  user: userReducer,
 });
 
-export default rootReducer;
+export default createRootReducer;

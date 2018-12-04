@@ -66,7 +66,7 @@ class SearchResults extends React.Component {
 const mapStateToProps = state => {
   return {
     keyword: _.result(
-      _.chain(state.routing.location.search)
+      _.chain(state.router.location.search)
         .replace('?', '')
         .split('&')
         .map(_.partial(_.split, _, '=', 2))

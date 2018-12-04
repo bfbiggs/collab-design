@@ -1,12 +1,17 @@
-import {createStore, compose, applyMiddleware} from 'redux';
+import { 
+  applyMiddleware,
+  compose,
+  createStore,
+} from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
-// 'routerMiddleware': the new way of storing route changes with redux middleware since rrV4.
-import { routerMiddleware } from 'react-router-redux';
-import rootReducer from './combineReducers';
+import { routerMiddleware } from 'connected-react-router';
+import createRootReducer from './combineReducers';
+
 export const history = createHistory();
-function configureStoreProd(initialState) {
+
+const configureStoreProd = initialState => {
   const reactRouterMiddleware = routerMiddleware(history);
   const middlewares = [
     // Add other middleware on this line...
@@ -17,13 +22,14 @@ function configureStoreProd(initialState) {
     reactRouterMiddleware,
   ];
 
-  return createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middlewares)
-    )
+  return createStore(
+    createRootReducer(history), 
+    initialState, 
+    compose(applyMiddleware(...middlewares))
   );
-}
+};
 
-function configureStoreDev(initialState) {
+const configureStoreDev = initialState => {
   const reactRouterMiddleware = routerMiddleware(history);
   const middlewares = [
     // Add other middleware on this line...
@@ -38,21 +44,21 @@ function configureStoreDev(initialState) {
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
-  const store = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(...middlewares)
-    )
+  const store = createStore(
+    createRootReducer(history),  
+    initialState, 
+    composeEnhancers(applyMiddleware(...middlewares))
   );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./combineReducers', () => {
-      const nextReducer = require('./combineReducers').default; // eslint-disable-line global-require
-      store.replaceReducer(nextReducer);
+      store.replaceReducer(createRootReducer(history));
     });
   }
 
   return store;
-}
+};
 
 const configureStore = process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev;
 
