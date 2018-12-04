@@ -12,7 +12,7 @@ import {
   // Popover,
   // Button,
 } from '@collab-ui/react';
-import logo from '../../assets/collaboration-design.svg';
+import logo from '../../assets/momentum-design.svg';
 import getUser from '../../services/user/actions';
 import SearchButton from '../../collab-ui/SearchButton';
 import _ from 'lodash';
@@ -109,7 +109,7 @@ class AppHeader extends Component {
         <ListItem
           customRefProp="innerRef"
           customAnchorNode={
-            <NavLink to="/style" activeClassName={'active'}>
+            <NavLink to="/styles" activeClassName={'active'}>
               Styles
             </NavLink>
           }

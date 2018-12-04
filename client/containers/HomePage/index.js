@@ -37,12 +37,16 @@ class HomePage extends React.PureComponent {
               <section
                 className={
                   'cui-landing-section' +
-                  (section.imagePosition === 'right'
-                    ? ' cui-landing-section--image-right'
-                    : ' cui-landing-section--image-left' ) +
+                  (section.image
+                    ? section.imagePosition === 'right'
+                      ? ' cui-landing-section--image-right'
+                        : ' cui-landing-section--image-left'
+                          : '') +
+                  (section.callToAction ? ' cui-landing-section--cta' : '') +
                   (section.backgroundColor && ` cui-background-color--${section.backgroundColor}`)
                 }
                 key={`homeSection-${idx}`}
+                style={{ backgroundImage: `url(${section.backgroundImage})` }}
               >
                 <div className="cui-landing-section__container">
                   {section.image && (
@@ -51,15 +55,30 @@ class HomePage extends React.PureComponent {
                     </div>
                   )}
                   <div className="cui-landing-section__content">
-                    <h2 className="cui-ls-content__header cui-h2--bold">{section.header}</h2>
+                    <h2 className="cui-landing-section__header cui-h2--bold">{section.header}</h2>
                     {/* eslint-disable react/no-danger */}
                     {/* <div dangerouslySetInnerHTML={{ __html: section.content }} /> */}
                     {/* eslint-enable react/no-danger */}
-                    <div className="cui-ls-content__sub-header">
+                    <div className="cui-landing-section__sub-header">
                       <h4 className="cui-font-color--secondary">{section.content}</h4>
-                      {section.ctaText && (
-                        <Link className="cui-ls-content__cta cui-h4" to={section.ctaLink}>{section.ctaText}</Link>
+                      {section.callToAction && (
+                        <Link className="cui-landing-section__cta cui-h4" to={section.callToAction[0].ctaLink}>{section.callToAction[0].ctaText}</Link>
                       )}
+                    </div>
+                    <div className="cui-landing-section__icon-links">
+                    {section.iconLinks && section.iconLinks.map((iconLink, idx) => {
+                      return (
+                        <Link className="cui-landing-section__icon-link" key={`linkSection${idx}`} to={iconLink.link}>
+                          <div className="icon-link__image-container">
+                            <img src={iconLink.linkImage} alt="" />
+                          </div>
+                          <h4>{iconLink.linkText}</h4>
+                        </Link>
+                      );
+                    })
+
+                    }
+
                     </div>
                   </div>
                 </div>

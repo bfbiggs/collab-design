@@ -197,55 +197,6 @@
   }
 }
 
-.hero {
-  min-height: auto;
-  &__title {
-    margin-top: 7rem;
-    margin-bottom: 2rem;
-    font-family: $brand-font-regular;
-    font-size: 4.5rem;
-    color: $black;
-  }
-  &__lead {
-    margin-bottom: 3rem;
-    font-size: 1.25rem;
-    color: $gray-1;
-  }
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  &--center {
-    .hero__content {
-      align-items: center;
-    }
-  }
-}
-
-.hero {
-  &.sticky-search {
-    .hero {
-      &__title,
-      &__lead {
-        display: none;
-      }
-    }
-    .i-search {
-      position: fixed;
-      top: 58px;
-      z-index: 88;
-      width: 100vw;
-      padding-top: 32px;
-      padding-bottom: 32px;
-      background: $white;
-    }
-    main & {
-      background-image: none;
-    }
-  }
-}
-
 pre {
   white-space: pre-wrap;
 }
