@@ -29,13 +29,13 @@ class Routes extends React.Component {
     } = this.props;
 
     const createRoutes = routes.map((item, idx) => {
-      if (['components', 'style'].includes(item.object_slug)) {
+      if (['components', 'styles'].includes(item.object_slug)) {
 
         return [
-          item.object_slug === 'style' &&
+          item.object_slug === 'styles' &&
           <Route
-            key='style'
-            path='/style'
+            key='styles'
+            path='/styles'
             exact
             render={props => <Overview {...props} child={item} id={item.object_id} title={item.title} />}
           />,

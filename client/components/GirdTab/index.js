@@ -83,7 +83,7 @@ class GirdTab extends React.Component {
           <NavLink
             className="cui-button cui-button--36"
             activeClassName="active"
-            to={`${matchUrl}/styles`}
+            to={`${matchUrl}/style`}
           >
             Style
           </NavLink>
