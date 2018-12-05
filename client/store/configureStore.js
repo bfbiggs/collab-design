@@ -1,4 +1,4 @@
-import { 
+import {
   applyMiddleware,
   compose,
   createStore,
@@ -7,7 +7,9 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'connected-react-router';
+import ReactGA from 'react-ga';
 import createRootReducer from './combineReducers';
+import config from '../config';
 
 export const history = createHistory();
 
@@ -22,9 +24,12 @@ const configureStoreProd = initialState => {
     reactRouterMiddleware,
   ];
 
+  ReactGA.initialize(config.GA_TRACKING_ID);
+  history.listen(location => ReactGA.pageview(location.pathname));
+
   return createStore(
-    createRootReducer(history), 
-    initialState, 
+    createRootReducer(history),
+    initialState,
     compose(applyMiddleware(...middlewares))
   );
 };
@@ -45,8 +50,8 @@ const configureStoreDev = initialState => {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
   const store = createStore(
-    createRootReducer(history),  
-    initialState, 
+    createRootReducer(history),
+    initialState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
 

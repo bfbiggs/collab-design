@@ -13,7 +13,7 @@ const config = {
   ICONS_URL: `${API_URL}/icons`,
   MENUS_URL: `${API_URL}/menu`,
   PAGES_URL: `${API_URL}/pages`,
-
+  GA_TRACKING_ID: process.env.NODE_ENV === 'production' ? 'UA-110792431-9' : '',
 };
 
 export default config;
