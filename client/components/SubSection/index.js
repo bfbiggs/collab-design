@@ -14,11 +14,15 @@ class SubSection extends React.PureComponent {
         {/* eslint-disable react/no-danger */}
         <div className="docs-sub-section__body" dangerouslySetInnerHTML={{ __html: subSection.subSectionBodyContent }} />
         {/* eslint-enable react/no-danger */}
-        <div className="row">
+        <div
+              className={
+                'flex-row' +
+                `${subSection.subSectionImagePosition && ` flex-row--${subSection.subSectionImagePosition}` || ''}`
+              }>
           <div className={`docs-sub-section__image-section medium-${subSection.subSectionImageSize} columns`}>
             <img src={subSection.subSectionImage} alt={subSection.subSectionImageDescription} />
-            <div className={`medium-${12 - subSection.subSectionImageSize} columns`}>{subSection.subSectionImageDescription}</div>
           </div>
+          <div className={`medium-${12 - subSection.subSectionImageSize} columns`} dangerouslySetInnerHTML={{ __html: subSection.subSectionImageDescription }} />
         </div>
       </div>
     );

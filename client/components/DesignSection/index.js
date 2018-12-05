@@ -26,7 +26,7 @@ class DesignSection extends React.PureComponent {
               <div className={`medium-${section.sectionImageSize} columns`} >
                 <img src={section.sectionImage} alt={section.sectionImageDescription} />
               </div>
-              {section.sectionImageDescription && <div className={`medium-${12 - section.sectionImageSize} columns`}>{section.sectionImageDescription}</div>
+              {section.sectionImageDescription && <div className={`medium-${12 - section.sectionImageSize} columns`} dangerouslySetInnerHTML={{ __html: section.sectionImageDescription }} />
               }
             </div>
           )
