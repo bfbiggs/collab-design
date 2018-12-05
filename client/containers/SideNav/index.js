@@ -83,15 +83,15 @@ class SideNavContainer extends React.PureComponent {
                         }
                       </List>
                     </SideNav>
-                  )
-                  : (
+                  ) : (
                     <ListItem
                       key={`${child.id}-${idx}`}
                       customAnchorNode={
                         <NavLink 
                          activeClassName='cui-active-nav'
-                         exact
                          to={`/${child.path}`} 
+                         //Only make Overview Pages exact matches
+                         {...!child.path.match(/\//g) && { exact: true }}
                         />
                       }
                       type={36}
