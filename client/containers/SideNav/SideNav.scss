@@ -16,12 +16,47 @@
         }
       }
     
-      &--secondary {
+      &--secondary,
+      &--tertiary {
         padding-left: rem-calc(56);
+        padding-right: rem-calc(20);
+        //TODO remove 3 section requirement in ListItem, and remove destructuring in SideNav (ln 53)
+        .cui-list-item__left {
+          margin-right: 0;
+        }
+
+        .cui-list-item__right {
+          color: $black-60;
+          fill: $black-60;
+        }
+      }
+
+      &--tertiary {
+        @extend .cui-body-small;
+        width: auto;
+        margin-left: rem-calc(56);
+        margin-right: rem-calc(20);
+        padding-left: rem-calc(12);
+        border-left: 2px solid $black-12;
+
+        &.cui-active-nav {
+          border-color: $blue-press;
+          color: $blue-press;
+          background-color: transparent;
+        }
       }
 
       &:focus {
         box-shadow: none;
+      }
+
+      &.cui-active-nav:not(.cui-list-item--tertiary) {
+        background-color: $list-blue-16;
+      }
+
+      &:active,
+      &.active {
+        background-color: transparent;
       }
     }
   }

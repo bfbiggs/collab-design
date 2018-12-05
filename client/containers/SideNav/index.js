@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { Icon, SideNav, List, ListItem, ListItemSection } from '@collab-ui/react';
+import { NavLink, withRouter } from 'react-router-dom';
+import {
+  Icon,
+  List,
+  ListItem,
+  ListItemSection,
+  SideNav,
+} from '@collab-ui/react';
 
 class SideNavContainer extends React.PureComponent {
-
-  componentDidMount() {
-
-  }
-
   render() {
     const {
       // error,
@@ -26,12 +27,13 @@ class SideNavContainer extends React.PureComponent {
               <ListItem className='cui-list-item--primary'>
                 {
                   item.classes
-                  && <ListItemSection position='left'>
+                  && 
+                  <ListItemSection position='left'>
                     <Icon name={item.classes} />
                   </ListItemSection>
                 }
                 <ListItemSection position='center'>
-                  <h5 className='cui-font-color--alternate'>
+                  <h5 className='cui-font-color--alternate cui-h5--bold'>
                     {item.title}
                   </h5>
                 </ListItemSection>
@@ -47,6 +49,16 @@ class SideNavContainer extends React.PureComponent {
                   ? (
                     <SideNav
                       key={`${child.id}-${childIdx}`}
+                      navSectionNode={
+                        <ListItem className='cui-list-item--secondary'>
+                          <ListItemSection position='left'/>
+                          <ListItemSection position='center'>
+                            <h6 className='cui-font-color--primary cui-h5--bold'>
+                              {child.title}
+                            </h6>
+                          </ListItemSection>
+                        </ListItem>
+                      }
                       expandable
                       expanded={false}
                     >
@@ -54,24 +66,38 @@ class SideNavContainer extends React.PureComponent {
                         {
                           child.children.map((grandchild, grandChildIdx) => (
                             <ListItem
+                              className='cui-list-item--tertiary'
                               key={`${grandchild.id}-${grandChildIdx}`}
                               label={grandchild.title}
-                              customAnchorNode={<NavLink to={`/${grandchild.path}`} />}
+                              customAnchorNode={
+                                <NavLink 
+                                  activeClassName='cui-active-nav'
+                                  className='cui-body-small cui-font-color--primary'
+                                  to={`/${grandchild.path}`} 
+                                />
+                              }
                               type={36}
                             />
                           )
-                        )}
+                          )
+                        }
                       </List>
                     </SideNav>
                   )
                   : (
                     <ListItem
                       key={`${child.id}-${idx}`}
-                      customAnchorNode={<NavLink to={`/${child.path}`} />}
+                      customAnchorNode={
+                        <NavLink 
+                         activeClassName='cui-active-nav'
+                         exact
+                         to={`/${child.path}`} 
+                        />
+                      }
                       type={36}
                       className='cui-list-item--secondary'
                     >
-                      <h6>{child.title}</h6>
+                      <h6 className='cui-font-color--primary cui-h5--bold'>{child.title}</h6>
                     </ListItem>
                   )
                 ))
@@ -83,7 +109,9 @@ class SideNavContainer extends React.PureComponent {
         (
           <ListItem
             key={`${item.id}-${idx}`}
-            customAnchorNode={<NavLink to={`/${item.path}`} />}
+            customAnchorNode={
+              <NavLink activeClassName='cui-active-nav' to={`/${item.path}`} />
+            }
             className='cui-list-item--primary'
           >
             <h5 className='cui-font-color--alternate'>
@@ -124,4 +152,6 @@ SideNavContainer.defaultProps = {
   loading: false,
 };
 
-export default connect(mapStateToProps)(SideNavContainer);
+export default withRouter(
+  connect(mapStateToProps)(SideNavContainer)
+);
