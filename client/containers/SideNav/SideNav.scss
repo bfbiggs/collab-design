@@ -40,9 +40,16 @@
         border-left: 2px solid $black-12;
 
         &.cui-active-nav {
-          border-color: $blue-press;
           color: $blue-press;
           background-color: transparent;
+
+          &:before {
+            position: absolute;
+            content: '';
+            height: 24px;
+            width: 2px;
+            box-shadow: -14px 0 0 0 $blue-press;
+          }
         }
       }
 

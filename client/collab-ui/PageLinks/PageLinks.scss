@@ -7,14 +7,23 @@
   }
 
   &__link {
-    padding: 0.3rem;
+    @include flex($fd: column, $ai: flex-start);
+    height: rem-calc(32);
+    padding-left: rem-calc(12);
     color: $gray-1;
     cursor: default;
     border-left: 2px solid $black-12;
 
     &--active {
       color: $blue-press;
-      border-color: $blue-press;
+
+      &:before {
+        position: absolute;
+        content: '';
+        height: 24px;
+        width: 2px;
+        box-shadow: -14px 0 0 0 $blue-press;
+      }
     }
   }
 }
