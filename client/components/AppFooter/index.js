@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Footer from '../../collab-ui/Footer';
 import FooterSection from '../../collab-ui/Footer/FooterSection';
 
@@ -67,33 +67,63 @@ const AppFooter = () => {
           © 2018 Cisco and /or its affiliate
         </div>
         <div className="docs-footer__bottom-list">
-          <List focusFirst={false} tabType="horizontal" className="docs-footer--flex-item">
-            <ListItem style={{ width: '140px', flex: '0 0 auto' }}>
-              Support & Feedback
+          <List 
+            className="docs-footer--flex-item"
+            focusFirst={false}
+            tabType="horizontal" 
+          >
+            <ListItem 
+              customAnchorNode={
+                <NavLink 
+                  activeClassName='cui-active-nav'
+                  className='docs-footer__link cui-link--nav'
+                  to="/feedback" 
+                >
+                  Support & Feedback
+                </NavLink>
+              }
+            />
+            <ListItem 
+              link="https://www.cisco.com/c/en/us/about/legal/privacy.html"
+              className='docs-footer__link cui-link--nav'
+              target="_blank"
+            >
+              Privacy Policy
             </ListItem>
-            <ListItem style={{ width: '100px', flex: '0 0 auto' }}>
-              Developers
-            </ListItem>
-            <ListItem style={{ width: '100px', flex: '0 0 auto' }}>
-              Submit App
-            </ListItem>
-            <ListItem style={{ width: '70px', flex: '0 0 auto' }}>
-              Terms
-            </ListItem>
-            <ListItem style={{ width: '70px', flex: '0 0 auto' }}>
-              Privacy
+            <ListItem 
+              link="https://www.cisco.com/c/en/us/about/legal/privacy.html#cookies"
+              className='docs-footer__link cui-link--nav'
+              target="_blank"
+            >
+              Cookie Policy
             </ListItem>
           </List>
 
           <SocialList className="docs-footer--flex-item">
-            <List focusFirst={false} tabType="horizontal" className="social-list">
-              <ListItem>
+            <List 
+              className="social-list"
+              focusFirst={false}
+              tabType="horizontal" 
+            >
+              <ListItem
+                link="https://www.facebook.com/CiscoCollab/"
+                className='cui-link--nav'
+                target="_blank"
+              >
                 <i className="icon icon-facebook-circle_24" />
               </ListItem>
-              <ListItem>
+              <ListItem
+                link="https://twitter.com/ciscowebexdev"
+                className='cui-link--nav'
+                target="_blank"
+              >
                 <i className="icon icon-twitter-circle_24" />
               </ListItem>
-              <ListItem>
+              <ListItem
+                link="https://github.com/collab-ui"
+                className='cui-link--nav'
+                target="_blank"
+              >
                 <i className="icon icon-linkedin-circle_24" />
               </ListItem>
             </List>
