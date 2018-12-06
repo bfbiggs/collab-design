@@ -3,30 +3,61 @@ import PropTypes from 'prop-types';
 import SubSection from '../../components/SubSection';
 
 class DesignSection extends React.PureComponent {
-  static displayName = 'Section';
-
   render() {
     const { section } = this.props;
     return (
       <div className="docs-section">
-        <h4 className="cui-h4--bold cui-font-color--alternate docs-section__title" id={section.sectionId}>
+        <h4 
+          className={
+            'cui-h4--bold' +
+            ' cui-font-color--alternate' +
+            ' docs-section__title'
+          }
+          id={section.sectionId}
+        >
           {section.sectionTitleText}
         </h4>
         {/* eslint-disable react/no-danger */}
-        <div className="docs-section__body" dangerouslySetInnerHTML={{ __html: section.sectionBodyContent }} />
+        <div 
+          className="docs-section__body" 
+          dangerouslySetInnerHTML={{ __html: section.sectionBodyContent }} 
+        />
         {/* eslint-enable react/no-danger */}
         {
-          section.sectionImage
+          (section.sectionImage || section.sectionImageDescription)
           && (
             <div
               className={
                 'flex-row' +
-                `${section.sectionImagePosition && ` flex-row--${section.sectionImagePosition}` || ''}`
-              }>
-              <div className={`medium-${section.sectionImageSize} columns`} >
-                <img src={section.sectionImage} alt={section.sectionImageDescription} />
-              </div>
-              {section.sectionImageDescription && <div className={`medium-${12 - section.sectionImageSize} columns`} dangerouslySetInnerHTML={{ __html: section.sectionImageDescription }} />
+                `${
+                  section.sectionImagePosition 
+                  && 
+                  ` flex-row--${
+                      section.sectionImageDescription
+                      ?
+                      section.sectionImagePosition
+                      : 
+                      'center'
+                  }` || ''
+                }`
+              }
+            >
+              {
+                section.sectionImage
+                &&
+                <div className={`medium-${section.sectionImageSize} columns`} >
+                  <img src={section.sectionImage} alt={section.sectionImageDescription} />
+                </div>
+              }
+              {
+                section.sectionImageDescription 
+                && 
+                <div 
+                  className={`medium-${12 - section.sectionImageSize} columns`}
+                  /* eslint-disable react/no-danger */
+                  dangerouslySetInnerHTML={{ __html: section.sectionImageDescription }}
+                  /* eslint-enable react/no-danger */
+                />
               }
             </div>
           )
@@ -45,5 +76,7 @@ DesignSection.propTypes = {
 };
 
 DesignSection.defaultProps = {};
+
+DesignSection.displayName = 'Section';
 
 export default DesignSection;
