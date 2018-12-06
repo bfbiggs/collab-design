@@ -124,7 +124,7 @@ const AppFooter = () => {
                 className='cui-link--nav'
                 target="_blank"
               >
-                <i className="icon icon-linkedin-circle_24" />
+                <i className="icon icon-github-circle_24" />
               </ListItem>
             </List>
           </SocialList>

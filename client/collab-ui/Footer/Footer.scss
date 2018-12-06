@@ -20,6 +20,10 @@
 
       &.active {
         background-color: transparent;
+        &:hover {
+          color: $blue-hover;
+          fill: $blue-hover;
+        }
       }
 
       @include link-color(
