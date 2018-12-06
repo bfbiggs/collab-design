@@ -15,8 +15,21 @@ class SideNavContainer extends React.PureComponent {
     const {
       // error,
       // loading,
+      location,
       routes,
     } = this.props;
+
+    
+    const isMatchingRoute = (index, path) => {
+      const routesArray = location.pathname.match(/[^/]+/g) || [];
+      const pathArray = path.match(/[^/]+/g) || [];
+
+      return (
+        routesArray[index] 
+        && 
+        pathArray[pathArray.length - 1] === routesArray[index]
+      );
+    };
 
     const createNavLinks = routes.map((item, idx) => {
       return item.children
@@ -40,7 +53,7 @@ class SideNavContainer extends React.PureComponent {
               </ListItem>
             }
             expandable
-            expanded={false}
+            {...isMatchingRoute(0, item.path) && { expanded: true }}
           >
             <List>
               {
@@ -60,7 +73,7 @@ class SideNavContainer extends React.PureComponent {
                         </ListItem>
                       }
                       expandable
-                      expanded={false}
+                      {...isMatchingRoute(1, child.path) && { expanded: true }}
                     >
                       <List>
                         {
@@ -143,6 +156,7 @@ SideNavContainer.propTypes = {
   error: PropTypes.bool,
   hide: PropTypes.bool,
   loading: PropTypes.bool,
+  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
 };
 
