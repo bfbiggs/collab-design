@@ -7,6 +7,7 @@ const DOWNLOADS_URL = 'https://downloads.collab-ui.com';
 
 
 const config = {
+  CHANGELOG_URL: `${API_URL}/changeLog`,
   COMPONENTS_URL: `${API_URL}/components`,
   FEEDBACK_URL: `${API_URL}/feedback/`,
   ICONS_DOWNLOADS_URL: `${DOWNLOADS_URL}/icons`,

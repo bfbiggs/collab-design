@@ -5,6 +5,7 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 
 import fetchRoutes from './actions';
 // import getAuthorization from '../../services/user/actions';
+import Changelog from '../../containers/Changelog';
 import Component from '../../containers/Component';
 import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
 import ContentPage from '../../containers/ContentPage';
@@ -100,6 +101,7 @@ class Routes extends React.Component {
     return (
       <Switch>
         <Route key='home-0' path='/' exact component={HomePage} />
+        <Route key='changelog-0' path="/changelog" component={Changelog} />
         <Route key='components-0' path='/components' exact component={ComponentOverviewPage} />
         <Route key='feedback-0' path="/feedback" exact component={Feedback} />
         {routes && (!loading || !error) && createRoutes}

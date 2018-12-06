@@ -91,6 +91,7 @@
     "jest-cli": "~20.0.4",
     "json-loader": "~0.5.4",
     "lodash": "^4.17.10",
+    "marked": "~0.5.2",
     "mockdate": "~2.0.1",
     "mongoose": "^5.1.5",
     "mongoose-findorcreate": "^3.0.0",
