@@ -67,7 +67,7 @@ const AppFooter = () => {
           © 2018 Cisco and /or its affiliate
         </div>
         <div className="docs-footer__bottom-list">
-          <List tabType="horizontal" className="docs-footer--flex-item">
+          <List focusFirst={false} tabType="horizontal" className="docs-footer--flex-item">
             <ListItem style={{ width: '140px', flex: '0 0 auto' }}>
               Support & Feedback
             </ListItem>
@@ -86,7 +86,7 @@ const AppFooter = () => {
           </List>
 
           <SocialList className="docs-footer--flex-item">
-            <List tabType="horizontal" className="social-list">
+            <List focusFirst={false} tabType="horizontal" className="social-list">
               <ListItem>
                 <i className="icon icon-facebook-circle_24" />
               </ListItem>
