@@ -17,7 +17,7 @@ export default class PageLinks extends React.Component {
   handleScroll = () => {
     const { scrollY } = window;
     const elm = document.querySelector('.cui-page-links__container');
-    const reTop = 322 <= scrollY ? 77 : (400 - scrollY);
+    const reTop = 288 <= scrollY ? 112 : (400 - scrollY);
 
     elm.style.top = `${reTop}px`;
     return reTop;
@@ -37,12 +37,16 @@ export default class PageLinks extends React.Component {
 
     const { clickedIdx } = this.state;
 
-    const pageLinks = links.map((link, i) => (
+    const filteredLinks = links.filter((link => link.sectionTitleText || link.name));
+
+    const pageLinks = filteredLinks.map((link, i, arr) => (
+
       <a
         href={link.sectionId ? `#${link.sectionId}` : `#${link.name}`}
         className={
           'cui-page-links__link' +
-          `${(clickedIdx === i && ' cui-page-links__link--active') || ''}`
+          `${(clickedIdx === i && ' cui-page-links__link--active') || ''}` +
+          `${(arr.length > 11 && ' cui-page-links__link--shrink') || ''}`
         }
         onClick={() => this.selectLink(i)}
         key={i}
