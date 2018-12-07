@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import marked from 'marked';
 
 class ChangelogTab extends React.PureComponent {
-  static displayName = 'ChangelogTab';
-
   render() {
     const { content } = this.props;
 
     let renderer = new marked.Renderer();
+
     renderer.heading = (text, level) => {
       if (level <= 2) {
         const regexVersion = /(\d+)\.(\d+)\.(\d+)/g;
@@ -21,40 +20,51 @@ class ChangelogTab extends React.PureComponent {
         if (matchVersion) {
           const date = matchDate[0];
 
-          return `
-            <h1>
+          return (
+            `<h1>
               ${text.replace(regexDateWithBrackets, '')}
             </h1>
-            <div class="docs-changelog__date"/>${date}</div>`;
+            <div class="docs-changelog__date"/>
+              ${date}
+            </div>`
+          );
         } else {
-          return `
-            <h${level}>
+          return (
+            `<h${level}>
               ${text}
-            </h${level}>`;
+            </h${level}>`
+          );
         }
       } else if (level == 3) {
-        return `
-          <h${level} class="docs-changelog__type--${text
-          .toLowerCase()
-          .replace(/[^\w]+/g, '-')}">
+        return (
+          `<h${level} 
+            class="docs-changelog__type--${
+              text
+              .toLowerCase()
+              .replace(/[^\w]+/g, '-')
+            }"
+          >
             ${text}
-          </h${level}>`;
+          </h${level}>`
+        );
       } else {
-        return `
-          <h${level}>
+        return (
+          `<h${level}>
             ${text}
-          </h${level}>`;
+          </h${level}>`
+        );
       }
     };
+
     const html = marked(content, { renderer: renderer });
 
     return (
-      <React.Fragment>
-        <div
-          className="docs-content__column docs-changelog"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </React.Fragment>
+      /* eslint-disable react/no-danger */
+      <div
+        className="docs-content__column docs-changelog"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+      /* eslint-enable react/no-danger */
     );
   }
 }
@@ -62,5 +72,11 @@ class ChangelogTab extends React.PureComponent {
 ChangelogTab.propTypes = {
   content: PropTypes.string,
 };
+
+ChangelogTab.defaultProps = {
+  content: '',
+};
+
+ChangelogTab.displayName = 'ChangelogTab';
 
 export default ChangelogTab;
