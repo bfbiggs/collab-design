@@ -8,11 +8,22 @@
     .cui-list-item {
       &--primary {
         padding: 0 rem-calc(20);
+
+        &:hover {
+          background-color: $black-04;
+        }
   
         .cui-list-item__left,
         .cui-list-item__right {
           color: $black-60;
           fill: $black-60;
+        }
+      }
+
+      &--secondary {
+
+        &:hover {
+          background-color: $black-04;
         }
       }
     
@@ -39,6 +50,19 @@
         padding-left: rem-calc(12);
         border-left: 2px solid $black-12;
 
+        &:hover {
+          color: $blue-dark-hover;
+          background-color: transparent;
+
+          &:before {
+            position: absolute;
+            content: '';
+            height: 24px;
+            width: 2px;
+            box-shadow: -14px 0 0 0 $blue-dark-hover;
+          }
+        }
+
         &.cui-active-nav {
           color: $blue-press;
           background-color: transparent;
@@ -58,7 +82,7 @@
       }
 
       &.cui-active-nav:not(.cui-list-item--tertiary) {
-        background-color: $list-blue-16;
+        background-color: $black-08;
       }
 
       &:active,
