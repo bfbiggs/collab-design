@@ -7,7 +7,7 @@ class DesignSection extends React.PureComponent {
     const { section } = this.props;
     return (
       <div className="docs-section">
-        <h4 
+        <h4
           className={
             'cui-h4--bold' +
             ' cui-font-color--alternate' +
@@ -18,9 +18,9 @@ class DesignSection extends React.PureComponent {
           {section.sectionTitleText}
         </h4>
         {/* eslint-disable react/no-danger */}
-        <div 
-          className="docs-section__body" 
-          dangerouslySetInnerHTML={{ __html: section.sectionBodyContent }} 
+        <div
+          className="docs-section__body copy-spacing"
+          dangerouslySetInnerHTML={{ __html: section.sectionBodyContent }}
         />
         {/* eslint-enable react/no-danger */}
         {
@@ -30,13 +30,13 @@ class DesignSection extends React.PureComponent {
               className={
                 'flex-row' +
                 `${
-                  section.sectionImagePosition 
-                  && 
+                  section.sectionImagePosition
+                  &&
                   ` flex-row--${
                       section.sectionImageDescription
                       ?
                       section.sectionImagePosition
-                      : 
+                      :
                       'center'
                   }` || ''
                 }`
@@ -50,9 +50,9 @@ class DesignSection extends React.PureComponent {
                 </div>
               }
               {
-                section.sectionImageDescription 
-                && 
-                <div 
+                section.sectionImageDescription
+                &&
+                <div
                   className={`medium-${12 - section.sectionImageSize} columns`}
                   /* eslint-disable react/no-danger */
                   dangerouslySetInnerHTML={{ __html: section.sectionImageDescription }}

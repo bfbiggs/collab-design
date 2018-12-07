@@ -14,6 +14,7 @@
     "lint": "esw webpack.config.* client server tools --color",
     "lint:watch": "yarn lint -- --watch",
     "open:cover": "yarn test:cover && opn ./coverage/lcov-report/index.html",
+    "open:client": "babel-node tools/devClient.js",
     "open:dev": "babel-node tools/devServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "prestart": "yarn start-message",

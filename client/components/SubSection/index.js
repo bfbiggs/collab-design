@@ -7,20 +7,20 @@ class SubSection extends React.PureComponent {
 
     return (
       <div className='docs-sub-section'>
-        <h5 
+        <h5
           className={
             'cui-h4--bold' +
             ' cui-font-color--alternate' +
             ' docs-sub-section__title'
-          } 
+          }
           id={subSection.subSectionId}
         >
           {subSection.subSectionTitleText}
         </h5>
         {/* eslint-disable react/no-danger */}
-        <div 
-          className='docs-sub-section__body' 
-          dangerouslySetInnerHTML={{ __html: subSection.subSectionBodyContent }} 
+        <div
+          className='docs-sub-section__body copy-spacing'
+          dangerouslySetInnerHTML={{ __html: subSection.subSectionBodyContent }}
         />
         {/* eslint-enable react/no-danger */}
         {
@@ -30,8 +30,8 @@ class SubSection extends React.PureComponent {
             className={
               'flex-row' +
               `${
-                subSection.subSectionImagePosition 
-                && 
+                subSection.subSectionImagePosition
+                &&
                 ` flex-row--${
                     subSection.subSectionImageDescription
                     ?
@@ -49,9 +49,9 @@ class SubSection extends React.PureComponent {
               </div>
             }
             {
-              subSection.subSectionImageDescription 
-              && 
-              <div 
+              subSection.subSectionImageDescription
+              &&
+              <div
                 className={`medium-${12 - subSection.subSectionImageSize} columns`}
                 /* eslint-disable react/no-danger */
                 dangerouslySetInnerHTML={{ __html: subSection.subSectionImageDescription }}
