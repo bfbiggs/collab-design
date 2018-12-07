@@ -189,25 +189,25 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@collab-ui/core@^10.37.1":
-  version "10.37.5"
-  resolved "https://registry.yarnpkg.com/@collab-ui/core/-/core-10.37.5.tgz#7ccf206aea6b292723aa1180986321c17e4b04a1"
-  integrity sha512-ONqtbZhenHYcUXj5yauKky4PjVTlJrC4IIPS71PmGmpy/XRGQrupjXZOTVkGhyE41ov5U1nJVHt3kT1y+Drpog==
+"@collab-ui/core@^10.39.2":
+  version "10.39.2"
+  resolved "https://registry.yarnpkg.com/@collab-ui/core/-/core-10.39.2.tgz#83bac657124d6cddc4ac9c4f000aaa108cf86ac4"
+  integrity sha512-Hgu/189J3bnM1xqpZIvybPbxm4zosaSllriNnLbCmM6wnoiMk1/m03vQlsIMJ3BvI3UMf+u4ja6Vi8QWVjsTNw==
   dependencies:
-    "@collab-ui/icons" "^3.38.0"
+    "@collab-ui/icons" "^3.41.0"
 
-"@collab-ui/icons@^3.38.0":
-  version "3.39.0"
-  resolved "https://registry.yarnpkg.com/@collab-ui/icons/-/icons-3.39.0.tgz#816bef921f920ae110a9137fdfe5a3ccb55bce7d"
-  integrity sha512-n4EktkI9d4QDVTIKyEcUfM1oNkuVXknqdBja+R7vjVcaBYoQxwh7XFB4kbS+bCresX6Rj1oaRmdwXaXLU+LtmQ==
+"@collab-ui/icons@^3.41.0":
+  version "3.41.0"
+  resolved "https://registry.yarnpkg.com/@collab-ui/icons/-/icons-3.41.0.tgz#0e9a063441f34ad94f6afe9dae0baa25a505b3e0"
+  integrity sha512-2M/6O6gMX6SlDOlFRiW4+denEhPbLclLknmbTcdVKr9BAoq4fzX3UTBI3hTxb6PTppYMVIdDkv0d5hqxB7kW8w==
 
-"@collab-ui/react@^10.0.4":
-  version "10.0.4"
-  resolved "https://registry.yarnpkg.com/@collab-ui/react/-/react-10.0.4.tgz#8b6420100fdd0a97d920b325ff2c1126bacf9a3b"
-  integrity sha512-jJaO070W00+ITT/z3ePU7/HhLBY4MPDiYR3iL1rEIM6hLtCtDTSttXF1PMDGQ0IKQYtfq6Nyoy+0XX7q99nD+w==
+"@collab-ui/react@^10.0.7":
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/@collab-ui/react/-/react-10.0.7.tgz#d1b9c013f03bef36af1879b49a8d7300f0e7f4ac"
+  integrity sha512-Pjo0TFxu8ORqh10jnv42OxEydEn+Xc9rs8yNBO1+sgurehYBlMtCo0gJcY36uPxuveF+vlyVq243gag9orgw/A==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.47"
-    "@collab-ui/core" "^10.37.1"
+    "@collab-ui/core" "^10.39.2"
     moment "^2.22.0"
     object-assign "4.1.1"
     react-aria-modal "^2.11.1"
