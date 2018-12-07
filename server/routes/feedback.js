@@ -61,7 +61,7 @@ router.route('/').post(async (req, res) => {
                   'Content-Type': 'multipart/form-data',
                   Authorization: `Bearer ${token}`,
                   processData: false,
-                  'Content-Disposition': `attachment; filename=${file.options.name}`,
+                  'Content-Disposition': `attachment; filename=${file.options.filename}`,
                 },
                 formData: { file },
                 json: true,
