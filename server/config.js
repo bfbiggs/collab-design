@@ -1,6 +1,6 @@
 require('dotenv').config();
 const WP_URL = process.env.WP_URL || 'https://wp.collab-ui.com';
-const CHANGE_LOG_URL = process.env.WP_URL || 'https://raw.githubusercontent.com/collab-ui';
+const CHANGE_LOG_URL = process.env.CHANGE_LOG_URL || 'https://raw.githubusercontent.com/collab-ui';
 
 const CHANGE_LOG_URLS = {
   'collab-ui-icons':`${CHANGE_LOG_URL}/collab-ui-icons/master/CHANGELOG.md`,

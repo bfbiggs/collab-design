@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { 
+import {
   addFileFeedback,
   removeFileFeedback,
   resetFeedback,
   submitFeedback,
   updateFeedback,
 } from './actions';
+import PageHeader from '../../collab-ui/PageHeader';
 import {
   AlertContainer,
   Button,
@@ -97,7 +98,7 @@ class Feedback extends React.PureComponent {
           type: this.getFileExt(file.type),
         }
       ]), []);
-      
+
       this.props.addFileFeedback(arr);
 
       // Must exist to clear DOM
@@ -282,6 +283,11 @@ class Feedback extends React.PureComponent {
 
     const renderFormView = () => (
       <React.Fragment>
+        <PageHeader
+          title="Contact Us"
+          textAlign="left"
+          key='feedback-0'
+        />
         <div className="docs-content-area docs-content-feedback">
           <form
             className="cui-panel__form"
@@ -428,7 +434,7 @@ class Feedback extends React.PureComponent {
               type='file'
             />
 
-            {files.length > 0 
+            {files.length > 0
               ? (
                 <React.Fragment>
                   <List className="cui-panel__form--files">

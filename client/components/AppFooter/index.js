@@ -64,33 +64,34 @@ const AppFooter = () => {
       {/* Footer Bottom */}
       <FooterSection isBottom={true}>
         <div className="docs-footer__bottom--left">
-          © 2018 Cisco and /or its affiliate
+          <i className="icon icon-cisco-logo" />
+          <span>© 2018 Cisco and/or its affiliates. All rights reserved.</span>
         </div>
         <div className="docs-footer__bottom-list">
-          <List 
+          <List
             className="docs-footer--flex-item"
             focusFirst={false}
-            tabType="horizontal" 
+            tabType="horizontal"
           >
-            <ListItem 
+            <ListItem
               customAnchorNode={
-                <NavLink 
+                <NavLink
                   activeClassName='cui-active-nav'
                   className='docs-footer__link cui-link--nav'
-                  to="/feedback" 
+                  to="/feedback"
                 >
                   Support & Feedback
                 </NavLink>
               }
             />
-            <ListItem 
+            <ListItem
               link="https://www.cisco.com/c/en/us/about/legal/privacy.html"
               className='docs-footer__link cui-link--nav'
               target="_blank"
             >
               Privacy Policy
             </ListItem>
-            <ListItem 
+            <ListItem
               link="https://www.cisco.com/c/en/us/about/legal/privacy.html#cookies"
               className='docs-footer__link cui-link--nav'
               target="_blank"
@@ -100,10 +101,10 @@ const AppFooter = () => {
           </List>
 
           <SocialList className="docs-footer--flex-item">
-            <List 
+            <List
               className="social-list"
               focusFirst={false}
-              tabType="horizontal" 
+              tabType="horizontal"
             >
               <ListItem
                 link="https://www.facebook.com/CiscoCollab/"
