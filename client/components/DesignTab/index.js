@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DesignSection from '../DesignSection';
 import PageLinks from '../../collab-ui/PageLinks';
+import Media from 'react-media';
 
 class DesignTab extends React.PureComponent {
   static displayName = 'DesignTab';
@@ -20,9 +21,14 @@ class DesignTab extends React.PureComponent {
             || 'Coming Soon'
           }
         </div>
-        <div className="docs-content__nav">
-          <PageLinks links={sections} />
-        </div>
+        <Media
+          query="(min-width: 1025px)"
+          render={() => (
+            <div className="docs-content__nav">
+              <PageLinks links={sections} />
+            </div>
+          )}
+        />
       </React.Fragment>
     );
   }

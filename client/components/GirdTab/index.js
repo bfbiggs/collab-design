@@ -17,11 +17,13 @@ class GirdTab extends React.Component {
   };
 
   componentDidMount() {
-    let { container } = this.props;
-    this.onScrollProxy = e => {
-      this.handleScroll(e);
-    };
-    container.addEventListener('scroll', this.onScrollProxy);
+    let { container, isMobile } = this.props;
+    if (!isMobile ) {
+      this.onScrollProxy = e => {
+        this.handleScroll(e);
+      };
+      container.addEventListener('scroll', this.onScrollProxy);
+    }
   }
 
   componentWillUnmount() {
@@ -113,6 +115,7 @@ class GirdTab extends React.Component {
 
 GirdTab.propTypes = {
   component: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool,
   matchUrl: PropTypes.string.isRequired,
   hasCodeExamples: PropTypes.bool.isRequired,
   container: PropTypes.object,
@@ -120,6 +123,7 @@ GirdTab.propTypes = {
 
 GirdTab.defaultProps = {
   component: {},
+  isMobile: false,
   matchUrl: '',
   hasCodeExamples: false,
   container: window,

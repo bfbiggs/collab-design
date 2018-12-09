@@ -54,8 +54,9 @@ class PageHeader extends React.Component {
 
   componentDidMount() {
     let me = this,
-      { container, enable } = this.props.scrollingOption;
-    if(enable){
+      { collapse } = this.props,
+      { container } = this.props.scrollingOption;
+    if(collapse){
       this.onScrollProxy = function(e){
         me.handleOnScroll(e);
       };
@@ -220,6 +221,8 @@ class PageHeader extends React.Component {
 }
 
 PageHeader.propTypes = {
+  /** @prop Sets whether to collapse component when scrolling | true */
+  collapse: PropTypes.bool,
   /** @prop Text to display for title features | '' */
   title: PropTypes.string.isRequired,
   /** @prop Text to display for descriptions features | '' */
@@ -228,8 +231,6 @@ PageHeader.propTypes = {
   textAlign: PropTypes.string,
   /** @prop Sets scrolling options  */
   scrollingOption:PropTypes.shape({
-    /** @prop Sets whether to fix component when scrolling | true */
-    enable:PropTypes.bool,
     /** @prop Sets the dom to bind the onscroll event to | window */
     container:PropTypes.object,
     /** @prop shrink motion will be called when the scrollTop of the container is bigger than this value | 0 */
@@ -246,11 +247,11 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
+  collapse: true,
   title:'',
   lead: null,
   textAlign: 'center',
   scrollingOption:{
-    enable:true,
     container:window,
     shrinkStartScrollTop:0,
     shrinkEndFixedTop:20,

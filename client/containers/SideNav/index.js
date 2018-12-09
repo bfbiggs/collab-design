@@ -13,20 +13,19 @@ import {
 class SideNavContainer extends React.PureComponent {
   render() {
     const {
-      // error,
-      // loading,
+      onClick,
       location,
       routes,
     } = this.props;
 
-    
+
     const isMatchingRoute = (index, path) => {
       const routesArray = location.pathname.match(/[^/]+/g) || [];
       const pathArray = path.match(/[^/]+/g) || [];
 
       return (
-        routesArray[index] 
-        && 
+        routesArray[index]
+        &&
         pathArray[pathArray.length - 1] === routesArray[index]
       );
     };
@@ -40,7 +39,7 @@ class SideNavContainer extends React.PureComponent {
               <ListItem className='cui-list-item--primary'>
                 {
                   item.classes
-                  && 
+                  &&
                   <ListItemSection position='left'>
                     <Icon name={item.classes} />
                   </ListItemSection>
@@ -79,14 +78,15 @@ class SideNavContainer extends React.PureComponent {
                         {
                           child.children.map((grandchild, grandChildIdx) => (
                             <ListItem
-                              className='cui-list-item--tertiary'
+                            onClick={onClick}
+                            className='cui-list-item--tertiary'
                               key={`${grandchild.id}-${grandChildIdx}`}
                               label={grandchild.title}
                               customAnchorNode={
-                                <NavLink 
+                                <NavLink
                                   activeClassName='cui-active-nav'
                                   className='cui-body-small cui-font-color--primary'
-                                  to={`/${grandchild.path}`} 
+                                  to={`/${grandchild.path}`}
                                 />
                               }
                               type={36}
@@ -99,12 +99,13 @@ class SideNavContainer extends React.PureComponent {
                   ) : (
                     <ListItem
                       key={`${child.id}-${idx}`}
+                      onClick={onClick}
                       customAnchorNode={
-                        <NavLink 
-                         activeClassName='cui-active-nav'
-                         to={`/${child.path}`} 
-                         //Only make Overview Pages exact matches
-                         {...!child.path.match(/\//g) && { exact: true }}
+                        <NavLink
+                          activeClassName='cui-active-nav'
+                          to={`/${child.path}`}
+                          //Only make Overview Pages exact matches
+                          {...!child.path.match(/\//g) && { exact: true }}
                         />
                       }
                       type={36}
@@ -122,6 +123,7 @@ class SideNavContainer extends React.PureComponent {
         (
           <ListItem
             key={`${item.id}-${idx}`}
+            onClick={onClick}
             customAnchorNode={
               <NavLink activeClassName='cui-active-nav' to={`/${item.path}`} />
             }
@@ -135,7 +137,7 @@ class SideNavContainer extends React.PureComponent {
     });
 
     const sideNav = (
-      <div className='docs-side-nav'>
+      <div className={this.props.className && this.props.className}>
         <SideNav>
           <List>{createNavLinks}</List>
         </SideNav>

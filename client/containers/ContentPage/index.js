@@ -5,6 +5,7 @@ import config from '../../config';
 import PageHeader from '../../collab-ui/PageHeader';
 import { Spinner } from '@collab-ui/react';
 import DesignTab from '../../components/DesignTab';
+import Media from 'react-media';
 
 class DefaultPage extends React.Component {
   state = {
@@ -71,7 +72,11 @@ class DefaultPage extends React.Component {
 
     return (
       <React.Fragment>
-        { displayName && <PageHeader title={displayName} lead={description} textAlign="left" /> }
+        { displayName && (
+          <Media query="(min-width: 1025px)">
+            {isDesktop => <PageHeader title={displayName} lead={description} textAlign="left" collapse={isDesktop} />}
+            </Media>
+        )}
         <div className="docs-content-area">
         {loading
           ? <Spinner />

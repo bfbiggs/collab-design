@@ -21,6 +21,7 @@
           fill: $blue-hover;
         }
       }
+      padding: 0 8px;
       @include link-color(
         $color: $white-80,
         $color-hover: $blue-hover,
@@ -29,6 +30,9 @@
       &.cui-active-nav {
         color: $blue-base;
         background-color: transparent;
+      }
+      @media #{$large-up} {
+        padding: 0;
       }
     }
   }
@@ -88,13 +92,13 @@
     align-items: center;
     &-list {
       display: flex;
-      flex: 2 1 0px;
+      flex: 2 1 auto;
       justify-content: space-around;
     }
     &--left {
       display: flex;
       align-items: center;
-      flex: 1 1 0px;
+      flex: 1 1 auto;
       font-family: $brand-font-light;
       font-size: 12px;
       line-height: 16px;

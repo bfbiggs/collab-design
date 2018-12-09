@@ -8,7 +8,7 @@ import {
   ListItem,
   Topbar,
   TopbarNav,
-  // TopbarMobile,
+  TopbarMobile,
   TopbarRight,
   // Popover,
   // Button,
@@ -16,6 +16,7 @@ import {
 import logo from '../../assets/momentum-design.svg';
 import getUser from '../../services/user/actions';
 import SearchButton from '../../collab-ui/SearchButton';
+import SideNav from '../../containers/SideNav';
 import _ from 'lodash';
 
 class AppHeader extends Component {
@@ -164,7 +165,7 @@ class AppHeader extends Component {
           {/* <TopbarNav>{navItems}</TopbarNav> */}
           {/* <TopbarNav>Hello</TopbarNav> */}
           <TopbarRight>
-            <SearchButton
+            {/* <SearchButton
               name="searchButton"
               htmlId="searchButton"
               expanded={expandSearch}
@@ -176,9 +177,12 @@ class AppHeader extends Component {
                   push(this.searchPath + '?q=' + keyword);
                 }
               }}
-            />
+            /> */}
             {/* {topbarRight} */}
           </TopbarRight>
+          <TopbarMobile shouldCloseOnClick={false} >
+            <SideNav className="docs-mobile-nav" />
+          </TopbarMobile>
         </Topbar>
       </Fragment>
     );

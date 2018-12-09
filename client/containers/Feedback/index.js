@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { 
+import {
   resetFeedback,
   submitFeedback,
   updateFeedback,
@@ -21,6 +21,7 @@ import {
   SelectOption,
   Spinner
 } from '@collab-ui/react';
+import Media from 'react-media';
 
 class Feedback extends React.PureComponent {
   constructor(props) {
@@ -39,16 +40,16 @@ class Feedback extends React.PureComponent {
     formTouched: false,
     formDisabled: false,
   };
-  
+
   componentDidUpdate(prevProps, prevState) {
     (this.props !== prevProps || this.state !== prevState)
     && this.validateForm();
   }
-  
+
   componentWillUnMount() {
     this.props.resetFeedback();
   }
-  
+
   browseFiles = () => {
     this.refFileInput.current.click();
   };
@@ -281,11 +282,17 @@ class Feedback extends React.PureComponent {
 
     const renderFormView = () => (
       <React.Fragment>
-        <PageHeader
-          title="Contact Us"
-          textAlign="left"
-          key='feedback-0'
-        />
+        <Media query="(min-width: 1025px)">
+          {isDesktop => (
+              <PageHeader
+                title="Contact Us"
+                textAlign="left"
+                key='feedback-0'
+                collapse={isDesktop}
+              />
+            )
+          }
+        </Media>
         <div className="docs-content-area docs-content-feedback">
           <form
             className="cui-panel__form"
@@ -432,7 +439,7 @@ class Feedback extends React.PureComponent {
               type='file'
             />
 
-            {files.length > 0 
+            {files.length > 0
               ? (
                 <React.Fragment>
                   <List className="cui-panel__form--files">

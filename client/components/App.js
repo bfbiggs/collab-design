@@ -6,6 +6,7 @@ import AppFooter from './AppFooter';
 import SideNav from '../containers/SideNav';
 import Routes from '../containers/Routes';
 import { connect } from 'react-redux';
+import Media from 'react-media';
 import ScrollToTop from '../collab-ui/ScrollToTop';
 
 class App extends React.Component {
@@ -20,7 +21,10 @@ class App extends React.Component {
             `${location === '/' ? ' docs-main--home' : ''}`
           }>
           <Header />
-          <SideNav />
+          <Media
+            query="(min-width: 1025px)"
+            render={() => <SideNav className="docs-side-nav"/>}
+          />
           <Routes />
           <AppFooter />
         </div>

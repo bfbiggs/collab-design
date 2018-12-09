@@ -5,6 +5,7 @@ import { SearchInput, Spinner } from '@collab-ui/react';
 import { fetchComponentsData, filterComponentsData } from './actions';
 import ComponentItem from '../../components/ComponentItem';
 import PageHeader from '../../collab-ui/PageHeader';
+import Media from 'react-media';
 
 class ComponentOverviewPage extends React.Component {
   componentDidMount() {
@@ -43,11 +44,17 @@ class ComponentOverviewPage extends React.Component {
 
     return (
       <React.Fragment>
-        <PageHeader
-          title={components.displayName}
-          lead={components.description}
-          textAlign="left"
-        />
+        <Media query="(min-width: 1025px)">
+          {isDesktop => (
+              <PageHeader
+                title={components.displayName}
+                lead={components.description}
+                textAlign="left"
+                collapse={isDesktop}
+              />
+            )
+          }
+        </Media>
         <div className="docs-content-area docs-component-overview">
           {loading ? (
             <div className="docs-component-overview__spinner">

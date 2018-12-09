@@ -7,6 +7,7 @@ import DesignTab from '../../components/DesignTab';
 import IconsTab from '../../containers/Icons';
 import PageHeader from '../../collab-ui/PageHeader';
 import GirdTab from '../../components/GirdTab';
+import Media from 'react-media';
 
 class ComponentPage extends React.Component {
   render() {
@@ -56,27 +57,35 @@ class ComponentPage extends React.Component {
     };
 
     return (
-      !component
-        ? <PageHeader textAlign="left" />
-        : (
-          <React.Fragment>
-            <PageHeader title={component.displayName} lead={component.description} textAlign="left" />
-            <GirdTab matchUrl={match.url} component={component} hasCodeExamples={hasCodeExamples} />
+      <Media query="(min-width: 1025px)">
+        {isDesktop => {
+          return !component
+            ? (
+              <PageHeader collapse={isDesktop} textAlign="left" />
+            )
+            : (
+              <React.Fragment>
+                <PageHeader title={component.displayName} lead={component.description} textAlign="left" collapse={isDesktop} />
+                <GirdTab matchUrl={match.url} component={component} hasCodeExamples={hasCodeExamples} isMobile={!isDesktop}/>
 
-            <div className="docs-content-area docs-content-area--with-pagenav">
-              {loading
-                ? <Spinner />
-                : <Switch>
-                    <Route path={`${match.path}library`} render={props => <IconsTab {...props} />} />
-                    <Route path={`${match.path}style`} render={props => <DesignTab {...props} sections={component.style} />} />
-                    <Route path={`${match.path}usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
-                    <Route path={`${match.path}code`} render={props => hasCodeExamples && <CodeTab {...props} sections={component.code && component.code} codePreference={codePreference} />} />
-                    <Redirect exact path={`${match.path}`} to={getDefaultTab()} />
-                  </Switch>
-              }
-            </div>
-          </React.Fragment>
-        )
+                <div className="docs-content-area docs-content-area--with-pagenav">
+                  {loading
+                    ? <Spinner />
+                    : <Switch>
+                      <Route path={`${match.path}library`} render={props => <IconsTab {...props} />} />
+                      <Route path={`${match.path}style`} render={props => <DesignTab {...props} sections={component.style} />} />
+                      <Route path={`${match.path}usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
+                      <Route path={`${match.path}code`} render={props => hasCodeExamples && <CodeTab {...props} sections={component.code && component.code} codePreference={codePreference} />} />
+                      <Redirect exact path={`${match.path}`} to={getDefaultTab()} />
+                    </Switch>
+                  }
+                </div>
+              </React.Fragment>
+            )
+        }}
+      </Media>
+
+
     );
   }
 }

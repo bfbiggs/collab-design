@@ -6,6 +6,7 @@ import { fetchSearchResultsData } from './actions';
 import SearchResultItem from '../../components/SearchResultItem';
 import PageHeader from '../../collab-ui/PageHeader';
 import _ from 'lodash';
+import Media from 'react-media';
 
 class SearchResults extends React.Component {
   componentDidMount() {
@@ -38,10 +39,16 @@ class SearchResults extends React.Component {
 
     return (
       <React.Fragment>
-        <PageHeader
-          title={`Results for "${keyword}"`}
-          textAlign="left"
-        />
+        <Media query="(min-width: 1025px)">
+          {isDesktop => (
+              <PageHeader
+                title={`Results for "${keyword}"`}
+                textAlign="left"
+                collapse={isDesktop}
+              />
+            )
+          }
+        </Media>
         <div className="docs-content-area docs-search-results">
           {loading ? (
             <div className="docs-search-results__spinner">

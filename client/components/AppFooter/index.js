@@ -100,7 +100,7 @@ const AppFooter = () => {
             </ListItem>
           </List>
 
-          <SocialList className="docs-footer--flex-item">
+          {/* <SocialList className="docs-footer--flex-item">
             <List
               className="social-list"
               focusFirst={false}
@@ -128,7 +128,7 @@ const AppFooter = () => {
                 <i className="icon icon-github-circle_24" />
               </ListItem>
             </List>
-          </SocialList>
+          </SocialList> */}
         </div>
       </FooterSection>
     </Footer>

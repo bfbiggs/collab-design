@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PageHeader from '../../collab-ui/PageHeader';
 import OverviewSection from '../../components/OverviewSection';
 import { Spinner } from '@collab-ui/react';
+import Media from 'react-media';
 
 class OverviewPage extends React.Component {
   render() {
@@ -11,12 +12,12 @@ class OverviewPage extends React.Component {
     const getSubSections = () => (
       data.children.length > 0
         && data.children.map(subsection => (
-          <OverviewSection 
+          <OverviewSection
             key={`${subsection.id}-${subsection.name}`}
             description={subsection.description}
             title={subsection.displayName}
             link={`${data.name}/${subsection.name}`}
-            {...subsection.thumbnailImage 
+            {...subsection.thumbnailImage
               && {
                 image: subsection.thumbnailImage,
                 imageDescription: subsection.description,
@@ -28,12 +29,18 @@ class OverviewPage extends React.Component {
 
     return (
       <React.Fragment>
-        <PageHeader 
-          title={child.title}
-          lead={child.description}
-          textAlign="left" 
-          key='overview-0'
-        />
+        <Media query="(min-width: 1025px)">
+          {isDesktop => (
+              <PageHeader
+                title={child.title}
+                lead={child.description}
+                textAlign="left"
+                key='overview-0'
+                collapse={isDesktop}
+              />
+            )
+          }
+        </Media>
         <div className="docs-content-area" key='overview-1'>
         {
           data.loading
@@ -41,10 +48,10 @@ class OverviewPage extends React.Component {
             : (
               <div className="docs-content__column row">
                 <div className="medium-12">
-                  <OverviewSection 
+                  <OverviewSection
                     isHeader
-                    description={data.description} 
-                    {...data.thumbnailImage 
+                    description={data.description}
+                    {...data.thumbnailImage
                       && {
                         image: data.thumbnailImage,
                         imageDescription: data.description,

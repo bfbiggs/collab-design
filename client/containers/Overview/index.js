@@ -4,6 +4,7 @@ import PageHeader from '../../collab-ui/PageHeader';
 import OverviewPage from './OverviewPage';
 import { fetchPageData } from './actions';
 import { connect } from 'react-redux';
+import Media from 'react-media';
 
 class OverviewContainer extends React.Component {
   componentDidMount() {
@@ -18,10 +19,15 @@ class OverviewContainer extends React.Component {
     } = this.props;
 
     return (
-      pageData 
+      pageData
         && pageData[id]
         && <OverviewPage data={pageData[id]} {...props} />
-        || <PageHeader textAlign="left" />
+        || (
+        <Media query="(min-width: 1025px)">
+          {isDesktop => <PageHeader textAlign="left" collapse={isDesktop} />}
+        </Media>
+
+        )
     );
   }
 }

@@ -1,4 +1,5 @@
-.docs-side-nav {
+.docs-side-nav,
+.docs-mobile-nav {
   background-color: $black-04;
   padding-top: 24px;
   box-shadow: -1px solid $black-08;
@@ -12,7 +13,7 @@
         &:hover {
           background-color: $black-04;
         }
-  
+
         .cui-list-item__left,
         .cui-list-item__right {
           color: $black-60;
@@ -26,7 +27,7 @@
           background-color: $black-04;
         }
       }
-    
+
       &--secondary,
       &--tertiary {
         padding-left: rem-calc(56);
@@ -91,4 +92,11 @@
       }
     }
   }
+}
+
+.docs-mobile-nav {
+  background: $white;
+}
+.cui-list-separator {
+  background: $white !important;
 }

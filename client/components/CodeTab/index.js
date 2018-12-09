@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CodeSection from '../CodeSection';
 import PageLinks from '../../collab-ui/PageLinks';
+import Media from 'react-media';
 
 class CodeTab extends React.PureComponent {
   static displayName = 'CodeTab';
@@ -78,9 +79,14 @@ class CodeTab extends React.PureComponent {
             )
           }
         </div>
-        <div className="docs-content__nav">
-          <PageLinks links={codeSections} />
-        </div>
+        <Media
+          query="(min-width: 1025px)"
+          render={() => (
+            <div className="docs-content__nav">
+              <PageLinks links={codeSections} />
+            </div>
+          )}
+        />
       </React.Fragment>
     );
   }
