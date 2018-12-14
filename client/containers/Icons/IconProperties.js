@@ -3,24 +3,36 @@ import PropTypes from 'prop-types';
 
 export default class IconProperties extends React.Component {
   render() {
-    const { values, selectedValue, onSelect } = this.props;
+    const {
+      onSelect,
+      selectedValue,
+      type,
+      values,
+    } = this.props;
 
-    return values.reduce((agg, size, idx) => {
-      const addComma = idx !== values.length - 1 && <span key={`size-${idx}-0`}>, </span>;
-      return size == selectedValue
-        ? agg.concat([<span key={`size-${idx}`}>{size}</span>, addComma])
-        : agg.concat([
-            <button className="cui-button--none cui-link cui-link--blue" tabIndex={0} onClick={() => onSelect(size)} key={`size-${idx}-1`}>
-              {size}
-            </button>,
-            addComma,
-          ]);
+    return values.reduce((agg, value, idx) => {
+      if (type === 'color') {
+        return value == selectedValue
+          ? agg.concat([<button className={`cui-button--none icon__swatch icon__swatch--${value} selected`} key={`value-${idx}`} />])
+          : agg.concat([<button className={`cui-button--none icon__swatch icon__swatch--${value}`} tabIndex={0} onClick={() => onSelect(value)} key={`value-${idx}-1`} />]);
+      } else {
+        const addComma = idx !== values.length - 1 && <span key={`value-${idx}-0`}>, </span>;
+        return value == selectedValue
+          ? agg.concat([<span key={`value-${idx}`}>{value}</span>, addComma])
+          : agg.concat([
+              <button className="cui-button--none cui-link cui-link--blue" tabIndex={0} onClick={() => onSelect(value)} key={`value-${idx}-1`}>
+                {value}
+              </button>,
+              addComma,
+            ]);
+      }
     }, []);
   }
 }
 
 IconProperties.propTypes = {
-  values: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired,
   selectedValue: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  values: PropTypes.array.isRequired,
 };

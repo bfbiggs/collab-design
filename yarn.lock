@@ -542,6 +542,11 @@ asap@~2.0.3:
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
 
+ash-motion@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ash-motion/-/ash-motion-1.0.1.tgz#f7f62ee2369fe67d983e39a9ac9ed26477b884b6"
+  integrity sha512-8ky9YcsmsEpONmy+uOhVZwaRLnU2Zbmz2UYd/j2oPj13DOSgI36xHwtxaEYSI4Zl09xhG/mfqIpTiPh48vmj0w==
+
 asn1.js@^4.0.0:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-4.10.1.tgz#b9c2bf5805f1e64aadeed6df3a2bfafb5a73f5a0"

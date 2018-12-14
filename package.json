@@ -37,6 +37,7 @@
     "@collab-ui/core": "^10.39.2",
     "@collab-ui/icons": "^3.41.0",
     "@collab-ui/react": "^10.0.7",
+    "ash-motion": "^1.0.1",
     "connected-react-router": "^5.0.1",
     "dotenv": "^6.1.0",
     "formidable": "^1.2.1",

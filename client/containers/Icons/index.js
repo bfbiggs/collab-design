@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SearchInput } from '@collab-ui/react';
+import { Link, SearchInput } from '@collab-ui/react';
 import fetchIcons from './actions';
 import IconsList from './IconsList';
-import IconModal from './IconModal';
 import reduce from 'lodash/reduce';
 
 class IconsContainer extends React.Component {
   state = {
     icons: this.props.icons,
-    currentIcon: null,
-    isModalOpen: false,
   };
 
   componentDidMount() {
@@ -30,14 +27,6 @@ class IconsContainer extends React.Component {
       icons,
     });
   }
-
-  openModal = icon => {
-    this.setState({ isModalOpen: true, currentIcon: icon });
-  };
-
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
-  };
 
   filterIcons = input => {
     const icons = [...this.props.icons];
@@ -65,38 +54,32 @@ class IconsContainer extends React.Component {
   };
 
   render() {
-    const { icons, currentIcon, isModalOpen } = this.state;
+    const { icons } = this.state;
     const { loading, error } = this.props;
 
     return (
-      <div className="docs-content__column">
-        <div className="row">
+      <div className="docs-icons">
+        <div className="docs-icons__top">
           <SearchInput
             onChange={this.handleSearchChange}
             disabled={loading || error}
             type="pill"
           />
+          <Link
+            color="none"
+            className="cui-button cui-button--gray"
+            to="/request-new-icon"
+          >
+            Request new icon
+          </Link>
         </div>
-        <div className="row">
-          <div className="icon-container docs-container">
-            {error ? (
-              error
-            ) : (
-                <React.Fragment>
-                  <IconsList
-                    iconsList={icons}
-                    loading={loading}
-                    openModal={this.openModal}
-                  />
-                  <IconModal
-                    isOpen={isModalOpen}
-                    onClose={this.closeModal}
-                    currentIcon={currentIcon}
-                  />
-                </React.Fragment>
-              )}
-          </div>
-        </div>
+        {error ? (
+          error
+        ) : (
+          <React.Fragment>
+            <IconsList iconsList={icons} loading={loading} />
+          </React.Fragment>
+        )}
       </div>
     );
   }

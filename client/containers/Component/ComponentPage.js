@@ -16,6 +16,7 @@ class ComponentPage extends React.Component {
       codePreference,
       components,
       loading,
+      location,
       match,
     } = this.props;
 
@@ -68,7 +69,10 @@ class ComponentPage extends React.Component {
                 <PageHeader title={component.displayName} lead={component.description} textAlign="left" collapse={isDesktop} />
                 <GirdTab matchUrl={match.url} component={component} hasCodeExamples={hasCodeExamples} isMobile={!isDesktop}/>
 
-                <div className="docs-content-area docs-content-area--with-pagenav">
+                <div className={
+                  'docs-content-area' +
+                  `${!/library/.test(location.pathname) && ' docs-content-area--with-pagenav'}`
+                }>
                   {loading
                     ? <Spinner />
                     : <Switch>

@@ -1,207 +1,391 @@
-.icon {
-  &-container {
-    display: flex;
-    flex-direction: column;
-  }
-  &-search {
-    display: flex;
-    width: 100%;
-    max-width: rem-calc(1238);
-    margin: 0 auto;
-    align-self: center;
-    flex-direction: column;
-    align-items: center;
-    &__wrapper {
-      position: relative;
-      width: 30rem;
-      height: 3.5rem;
-    }
-    .cui-input {
-      width: 100%;
-      height: 100%;
-      padding-right: 1.75rem;
-      padding-left: 3.375rem;
-      font-size: 1.5rem;
-      color: $black;
-      background: $black-8;
-      border: none;
-      border-radius: 1rem;
-      border-radius: 1.75rem;
-      &::placeholder {
-        color: $black-60;
-      }
-    }
-    .icon {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-    }
-  }
-  &-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  &-example {
-    flex: 0 0 33.33333%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-    cursor: pointer;
-    &__icon {
-      @extend %icon;
-      display: flex;
-      width: 100px;
-      height: 100px;
-      margin-bottom: 0.5rem;
-      text-align: center;
-      background-color: $black-8;
-      border-radius: 0.25rem;
-      align-items: center;
-      justify-content: center;
-      &:before {
-        width: inherit;
-        font-size: rem-calc(36);
-      }
-    }
-    &:hover {
-      .i-example__icon {
-        background-color: $black-24;
-      }
-    }
-    &__name {
-      font-size: rem-calc(10);
-    }
-    @media #{$medium-up} {
-      flex-basis: 25%;
-    }
-    @media #{$large-up} {
-      flex-basis: 20%;
-    }
-  }
-  &-usage {
-    display: flex;
-    flex-direction: column;
-    .icon {
-      display: flex;
-      align-items: center;
-      span {
-        margin-left: 0.25rem;
-        font-family: $brand-font-regular;
-      }
-    }
-    .i-spacing {
-      margin: 0.5rem;
-    }
-  }
-}
+.docs-icons {
+  $item-margin-left: 20px;
 
-.i-modal {
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  justify-content: center;
-  padding: 0 2rem;
-  &__icon {
-    @extend %icon;
-    display: flex;
-    width: 200px;
-    height: 200px;
-    padding: rem-calc(50);
-    background-color: $black-8;
-    border-radius: 1rem;
-    align-items: center;
-    justify-content: center;
-    flex: 1 0 auto;
-    &:before {
-      padding: rem-calc(20);
+  @function item-width($nav-width, $total) {
+    @return calc((100vw - #{$nav-width} - #{$item-margin-left} * (#{$total} + 1)) / #{$total});
+  }
+  @function icon-size($nav-width, $total) {
+    @return calc(((100vw - #{$nav-width} - #{$item-margin-left} * (#{$total} + 1)) / #{$total}) * 0.8);
+  }
+  @function icon-font-size($nav-width, $total) {
+    @return calc(((100vw - #{$nav-width} - #{$item-margin-left} * (#{$total} + 1)) / #{$total}) * 0.32);
+  }
+
+  &__viewer {
+    position: relative;
+    background-color: $gray-5;
+    margin-bottom: 2rem;
+    height: 0;
+    width: 100%;
+    display: none;
+    &--arrow {
+      position: absolute;
+      margin-top: -12px;
+      margin-left: -10px;
+      border-right: 10px solid transparent;
+      border-bottom: 14px solid $gray-5;
+      border-left: 10px solid transparent;
+      width: 22px;
     }
-    &[class*='icon--w'] {
-      background-color: $black-40;
+    &--close {
+      @include flex($jc: flex-end);
+      margin: 1rem 2rem 0 0;
+    }
+    &--feedback {
+      @include flex($jc: flex-end);
+      margin: 0.5rem 2rem 1rem;
+    }
+    &--body {
+      max-height: 412px;
+      overflow: scroll;
     }
   }
-  &__info {
-    margin-left: rem-calc(32);
+  &__top {
+    @include flex($fw: wrap, $jc: space-between);
+    height: rem-calc(100);
+    margin: 0 2rem;
+    .cui-input-group {
+      width: rem-calc(368);
+      margin: 0;
+    }
   }
+  &__list {
+    @include flex($fw: wrap, $jc: flex-start, $ai: flex-start);
+    &-item {
+      @include button-base;
+      @include flex($fd: column);
+      margin-bottom: rem-calc(20);
+      margin-left: $item-margin-left;
+      cursor: pointer;
+      border-radius: 0;
+      &--icon {
+        @extend %icon;
+        @include flex;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        background-color: $black-8;
+        border-radius: 0.25rem;
+        &:before {
+          width: inherit;
+        }
+      }
+      &--name {
+        font-size: rem-calc(16);
+      }
+      @media #{$small-only} {
+        width: item-width(0px, 2);
+        &--icon {
+          width: icon-size(0px, 2);
+          height: icon-size(0px, 2);
+          &:before {
+            font-size: icon-font-size(0px, 2);
+          }
+        }
+      }
+      @media #{$medium-only} {
+        width: item-width(0px, 4);
+        &--icon {
+          width: icon-size(0px, 4);
+          height: icon-size(0px, 4);
+          &:before {
+            font-size: icon-font-size(0px, 4);
+          }
+        }
+      }
+      @media #{$large-only} {
+        width: item-width($side-nav-width, 6);
+        &--icon {
+          width: icon-size($side-nav-width, 6);
+          height: icon-size($side-nav-width, 6);
+          &:before {
+            font-size: icon-font-size($side-nav-width, 6);
+          }
+        }
+      }
+      @media #{$xlarge-only} {
+        width: item-width($side-nav-width, 8);
+        &--icon {
+          width: icon-size($side-nav-width, 8);
+          height: icon-size($side-nav-width, 8);
+          &:before {
+            font-size: icon-font-size($side-nav-width, 8);
+          }
+        }
+      }
+      @media #{$xxlarge-up} {
+        width: item-width($side-nav-width, 10);
+        &--icon {
+          width: icon-size($side-nav-width, 10);
+          height: icon-size($side-nav-width, 10);
+          &:before {
+            font-size: icon-font-size($side-nav-width, 10);
+          }
+        }
+      }
+    }
+  }
+
   &__header {
-    .cui-modal__title {
-      margin-bottom: 1rem;
-      font-family: $brand-font-bold;
-      font-size: rem-calc(32);
-      line-height: 1.33;
-      color: $black;
-      text-transform: capitalize;
-    }
+    text-align: center;
+    font-size: rem-calc(26);
+    padding-bottom: rem-calc(20);
   }
-  &__section {
-    h2 {
+  &__content {
+    @include flex($fd: row, $ai: flex-start, $ac: flex-start);
+    padding: 0 2rem;
+    @media #{$small-only} {
+      flex-flow: column;
+      justify-content: flex-start;
+    }
+    &--icon {
+      @extend %icon;
+      @include flex;
+      width: rem-calc(272);
+      height: rem-calc(272);
+      background-color: $white;
+      margin-bottom: rem-calc(22);
+      &:before {
+        padding: rem-calc(20);
+      }
+      &[class*='icon--w'] {
+        background-color: $black-40;
+      }
+      @media #{$small-up} {
+        width: rem-calc(100);
+        height: rem-calc(100);
+      }
+      @media #{$medium-up} {
+        width: rem-calc(100);
+        height: rem-calc(100);
+      }
+      @media #{$large-up} {
+        width: rem-calc(200);
+        height: rem-calc(200);
+      }
+      @media #{$xlarge-up} {
+        width: rem-calc(272);
+        height: rem-calc(272);
+      }
+    }
+    &--info {
+      &:not(:first-child) {
+        margin-left: rem-calc(32);
+        padding-left: rem-calc(20);
+        border-left: 2px solid $black-4;
+      }
+      &__section {
+        h2 {
+          color: $black;
+          font-size: rem-calc(16);
+          margin-bottom: rem-calc(4);
+        }
+        margin-bottom: rem-calc(22);
+      }
+      @media #{$small-only} {
+        margin-left: rem-calc(32);
+        padding-left: rem-calc(20);
+        &:not(:first-child) {
+          border-left: none;
+        }
+      }
+    }
+    .download-item {
+      code {
+        padding-left: 0;
+      }
+      p {
+        color: $gray-3;
+        font-size: rem-calc(12);
+        line-height: 1;
+      }
       margin-bottom: rem-calc(16);
-      font-family: $brand-font-bold;
-      font-size: rem-calc(20);
-      color: $black;
     }
-    margin-bottom: rem-calc(32);
-  }
-  &__sizes-colors {
-    display: flex;
-    margin-bottom: rem-calc(32);
-    flex-direction: column;
     @media #{$medium-up} {
       flex-direction: row;
     }
   }
-  &__sizes {
-    margin-right: rem-calc(32);
-  }
-  &__label {
-    font-size: 1rem;
-    color: #333;
-  }
-  &__class,
-  &__variable {
-    code {
-      padding: 0;
-      font-size: rem-calc(16);
-      color: #333;
-    }
-  }
-  .download-item {
-    p {
-      font-size: rem-calc(12);
-      line-height: 1;
-    }
-    margin-bottom: rem-calc(16);
-  }
-  @media #{$medium-up} {
-    flex-direction: row;
-  }
-}
-
-.reveal-modal.full .modal-content {
-  max-width: calc(100vw - 48px);
-  .modal {
-    &-body {
-      padding-top: 10vh;
-      background: $white;
-    }
-    &-header {
-      height: 20px;
-      background: $white;
-      .close {
-        color: $black;
-      }
-    }
-  }
-}
-
-pre {
-  white-space: pre-wrap;
 }
 
 .icon {
+  &__swatch {
+    display: inline-block;
+    width: rem-calc(28);
+    height: rem-calc(28);
+    border: 2px solid rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 1px $black-08;
+    margin-right: 8px;
+    &.selected {
+      border: 2px solid $blue;
+    }
+    &--default {
+      background-color: $black;
+      &:hover {
+        background-color: $black;
+      }
+    }
+    &--w {
+      background-color: $white;
+      &:hover {
+        background-color: $white;
+      }
+    }
+    &--w60 {
+      background-color: $white-60;
+      &:hover {
+        background-color: $white-60;
+      }
+    }
+    &--d20 {
+      background-color: $black-20;
+      &:hover {
+        background-color: $black-20;
+      }
+    }
+    &--d40 {
+      background-color: $black-40;
+      &:hover {
+        background-color: $black-40;
+      }
+    }
+    &--d60 {
+      background-color: $black-60;
+      &:hover {
+        background-color: $black-60;
+      }
+    }
+    &--d80 {
+      background-color: $black-80;
+      &:hover {
+        background-color: $black-80;
+      }
+    }
+    &--a1 {
+      background-color: $purple-base;
+      &:hover {
+        background-color: $purple-base;
+      }
+    }
+    &--a2 {
+      background-color: $purple-press;
+      &:hover {
+        background-color: $purple-press;
+      }
+    }
+    &--a3 {
+      background-color: $purple-light;
+      &:hover {
+        background-color: $purple-light;
+      }
+    }
+    &--b1 {
+      background-color: $blue-base;
+      &:hover {
+        background-color: $blue-base;
+      }
+    }
+    &--b2 {
+      background-color: $blue-press;
+      &:hover {
+        background-color: $blue-press;
+      }
+    }
+    &--b3 {
+      background-color: $blue-light;
+      &:hover {
+        background-color: $blue-light;
+      }
+    }
+    &--g1 {
+      background-color: $green-base;
+      &:hover {
+        background-color: $green-base;
+      }
+    }
+    &--g2 {
+      background-color: $green-press;
+      &:hover {
+        background-color: $green-press;
+      }
+    }
+    &--g3 {
+      background-color: $green-light;
+      &:hover {
+        background-color: $green-light;
+      }
+    }
+    &--m1 {
+      background-color: $mint-base;
+      &:hover {
+        background-color: $mint-base;
+      }
+    }
+    &--m2 {
+      background-color: $mint-press;
+      &:hover {
+        background-color: $mint-press;
+      }
+    }
+    &--m3 {
+      background-color: $mint-light;
+      &:hover {
+        background-color: $mint-light;
+      }
+    }
+    &--o1 {
+      background-color: $orange-base;
+      &:hover {
+        background-color: $orange-base;
+      }
+    }
+    &--o2 {
+      background-color: $orange-press;
+      &:hover {
+        background-color: $orange-press;
+      }
+    }
+    &--o3 {
+      background-color: $orange-light;
+      &:hover {
+        background-color: $orange-light;
+      }
+    }
+    &--r1 {
+      background-color: $red-base;
+      &:hover {
+        background-color: $red-base;
+      }
+    }
+    &--r2 {
+      background-color: $red-press;
+      &:hover {
+        background-color: $red-press;
+      }
+    }
+    &--r3 {
+      background-color: $red-light;
+      &:hover {
+        background-color: $red-light;
+      }
+    }
+    &--y1 {
+      background-color: $yellow-base;
+      &:hover {
+        background-color: $yellow-base;
+      }
+    }
+    &--y2 {
+      background-color: $yellow-press;
+      &:hover {
+        background-color: $yellow-press;
+      }
+    }
+    &--y3 {
+      background-color: $yellow-light;
+      &:hover {
+        background-color: $yellow-light;
+      }
+    }
+  }
   &--w {
     color: $white;
   }
