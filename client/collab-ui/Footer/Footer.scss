@@ -1,9 +1,12 @@
+$zindex-footer: 99999;
+
 .docs-footer {
   display: flex;
   width: 100%;
   background: $gray-1;
   justify-content: space-between;
   &__wrapper {
+    z-index: $zindex-footer;
     grid-area: page-footer;
   }
   .cui-list-item {

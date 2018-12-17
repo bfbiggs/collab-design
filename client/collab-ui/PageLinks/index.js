@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ScrollSpy from '../ScrollSpy/ScrollSpy';
 
-export default class PageLinks extends React.Component {
-  state = {
-    clickedIdx: 0,
-  };
+class PageLinks extends React.Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -23,32 +21,23 @@ export default class PageLinks extends React.Component {
     return reTop;
   }
 
-  selectLink = i => {
-    this.setState({
-      clickedIdx: i,
-    });
-  };
 
   render() {
     const {
-      className,
       links,
     } = this.props;
 
-    const { clickedIdx } = this.state;
-
     const filteredLinks = links.filter((link => link.sectionTitleText || link.name));
+
+    const hrefs = filteredLinks.map(link => link.sectionId || link.name);
 
     const pageLinks = filteredLinks.map((link, i, arr) => (
 
       <a
         href={link.sectionId ? `#${link.sectionId}` : `#${link.name}`}
         className={
-          'cui-page-links__link' +
-          `${(clickedIdx === i && ' cui-page-links__link--active') || ''}` +
           `${(arr.length > 11 && ' cui-page-links__link--shrink') || ''}`
         }
-        onClick={() => this.selectLink(i)}
         key={i}
       >
         {link.sectionTitleText ? link.sectionTitleText : link.name}
@@ -56,14 +45,15 @@ export default class PageLinks extends React.Component {
     ));
 
     return (
-      <div
-        className={
-          'cui-page-links__container' +
-          `${(className && ` ${className}`) || ''}`
-        }
+      <ScrollSpy
+        items={hrefs}
+        activeClassName="cui-page-links__link--active"
+        defaultClassName="cui-page-links__link"
+        className="cui-page-links__container"
+        componentTag='div'
       >
         {pageLinks}
-      </div>
+      </ScrollSpy>
     );
   }
 }
@@ -82,3 +72,7 @@ PageLinks.defaultProps = {
   links: [],
   onClick: null,
 };
+
+ScrollSpy.displayName = 'PageLinks';
+
+export default PageLinks;
