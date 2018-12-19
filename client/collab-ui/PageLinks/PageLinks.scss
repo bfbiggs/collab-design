@@ -12,21 +12,58 @@
     padding-left: rem-calc(12);
     color: $gray-1;
     cursor: default;
-    border-left: 2px solid $black-12;
+    position: relative;
 
     &--shrink {
       height: auto;
     }
 
-    &--active {
-      color: $blue-press;
 
+    &:before {
+      position: absolute;
+      content: '';
+      height: rem-calc(32);
+      width: 2px;
+      box-shadow: -12px 0 0 0 $black-12;
+
+    }
+
+    &:first-of-type {
       &:before {
+        height: rem-calc(28);
+        bottom: 0;
+      }          
+    }
+
+    &:last-of-type {
+      &:before {
+        top: 0;
+        height: rem-calc(28);
+      }
+    }
+
+    &:hover {
+      color: $blue-dark-hover;
+      background-color: transparent;
+
+      &:after {
         position: absolute;
         content: '';
         height: 24px;
         width: 2px;
-        box-shadow: -14px 0 0 0 $blue-press;
+        box-shadow: -12px 0 0 0 $blue-dark-hover;
+      }
+    }
+
+    &--active {
+      color: $blue-press;
+
+      &:after {
+        position: absolute;
+        content: '';
+        height: 24px;
+        width: 2px;
+        box-shadow: -12px 0 0 0 $blue-dark-hover;
       }
     }
   }

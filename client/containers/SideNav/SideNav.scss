@@ -49,18 +49,40 @@
         margin-left: rem-calc(56);
         margin-right: rem-calc(20);
         padding-left: rem-calc(12);
-        border-left: 2px solid $black-12;
+
+        &:before {
+          position: absolute;
+          content: '';
+          height: rem-calc(36);
+          width: 2px;
+          box-shadow: -12px 0 0 0 $black-12;
+
+        }
+
+        &:first-of-type {
+          &:before {
+            height: rem-calc(30);
+            bottom: 0;
+          }          
+        }
+
+        &:last-of-type {
+          &:before {
+            top: 0;
+            height: rem-calc(30);
+          }
+        }
 
         &:hover {
           color: $blue-dark-hover;
           background-color: transparent;
 
-          &:before {
+          &:after {
             position: absolute;
             content: '';
             height: 24px;
             width: 2px;
-            box-shadow: -14px 0 0 0 $blue-dark-hover;
+            box-shadow: -12px 0 0 0 $blue-dark-hover;
           }
         }
 
@@ -68,12 +90,12 @@
           color: $blue-press;
           background-color: transparent;
 
-          &:before {
+          &:after {
             position: absolute;
             content: '';
             height: 24px;
             width: 2px;
-            box-shadow: -14px 0 0 0 $blue-press;
+            box-shadow: -12px 0 0 0 $blue-press;
           }
         }
       }
