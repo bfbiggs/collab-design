@@ -71,7 +71,7 @@ class ComponentPage extends React.Component {
 
                 <div className={
                   'docs-content-area' +
-                  `${!/library/.test(location.pathname) && ' docs-content-area--with-pagenav'}`
+                  `${!/library/.test(location.pathname) && ' docs-content-area--with-pagenav' || ''}`
                 }>
                   {loading
                     ? <Spinner />
