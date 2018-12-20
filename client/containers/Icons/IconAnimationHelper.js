@@ -1,6 +1,6 @@
 import Ash from 'ash-motion';
 
-export default class IconAnimationHelper {
+class IconAnimationHelper {
   constructor(container, pops, popHeight) {
     this.Con = container;
     this.Pops = pops || [];
@@ -228,3 +228,7 @@ export default class IconAnimationHelper {
     }
   };
 }
+
+IconAnimationHelper.displayName = 'IconAnimationHelper';
+
+export default IconAnimationHelper;

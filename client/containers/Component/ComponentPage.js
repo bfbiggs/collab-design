@@ -85,11 +85,9 @@ class ComponentPage extends React.Component {
                   }
                 </div>
               </React.Fragment>
-            )
+            );
         }}
       </Media>
-
-
     );
   }
 }

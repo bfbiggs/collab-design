@@ -6,7 +6,7 @@ import IconProperties from './IconProperties';
 import IconDownload from './IconDownload';
 import config from '../../config';
 
-export default class IconViewer extends React.Component {
+class IconViewer extends React.Component {
   constructor(props) {
     super(props);
     this.rootNode = React.createRef();
@@ -206,3 +206,7 @@ IconViewer.defaultProps = {
   },
   onClose: null,
 };
+
+IconViewer.displayName = 'IconViewer';
+
+export default IconViewer;

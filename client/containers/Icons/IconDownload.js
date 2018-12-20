@@ -5,7 +5,7 @@ const IconDownload = props => {
   const { header, subheader, link, linkDetails } = props;
 
   return (
-    <div className="download-item" >
+    <div className="download-item">
       {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
         link
         ?

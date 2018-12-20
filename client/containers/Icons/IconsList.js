@@ -6,7 +6,7 @@ import reduce from 'lodash/reduce';
 import IconViewer from './IconViewer';
 import IconAnimationHelper from './IconAnimationHelper';
 
-export default class IconsList extends React.Component {
+class IconsList extends React.Component {
   constructor(props) {
     super(props);
     this.refIconList = React.createRef();
@@ -144,3 +144,7 @@ IconsList.defaultProps = {
   iconsList: [],
   loading: false,
 };
+
+IconsList.displayName = 'IconsList';
+
+export default IconsList;

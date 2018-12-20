@@ -104,6 +104,8 @@ IconsContainer.propTypes = {
   error: PropTypes.string
 };
 
+IconsContainer.displayName = 'IconsContainer';
+
 export default connect(
   mapStateToProps,
   { fetchIcons }
