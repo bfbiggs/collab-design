@@ -5,6 +5,10 @@ import ScrollSpy from '../ScrollSpy/ScrollSpy';
 class PageLinks extends React.Component {
 
   componentDidMount() {
+    const { links } = this.props;
+
+    links.length > 1
+    &&
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -45,6 +49,8 @@ class PageLinks extends React.Component {
     ));
 
     return (
+      links.length > 1
+      &&
       <ScrollSpy
         items={hrefs}
         activeClassName="cui-page-links__link--active"
