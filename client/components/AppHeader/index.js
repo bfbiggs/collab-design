@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
-import { push } from 'connected-react-router';
+import { NavLink } from 'react-router-dom';
+// import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import {
   // List,
@@ -15,7 +15,7 @@ import {
 } from '@collab-ui/react';
 import logo from '../../assets/momentum-design.svg';
 import getUser from '../../services/user/actions';
-import SearchButton from '../../collab-ui/SearchButton';
+// import SearchButton from '../../collab-ui/SearchButton';
 import SideNav from '../../containers/SideNav';
 import _ from 'lodash';
 
@@ -73,15 +73,15 @@ class AppHeader extends Component {
   };
 
   render() {
+    // const {
+      // photo,
+      // push,
+      // search,
+    // } = this.props;
     const {
-      photo,
-      push,
-      search,
-    } = this.props;
-    const {
-      expandSearch,
+      // expandSearch,
       hideNav,
-      keyword
+      // keyword
     } = this.state;
     // const logoIcon = <i className="icon icon-cisco-logo" />;
     const wordMark = <img src={logo} alt="Collaboration Design System" />;
@@ -140,23 +140,23 @@ class AppHeader extends Component {
     //   </List>
     // );
 
-    const topbarRight = this.props.isAuthenticated ? (
-      <div className="cui-top-bar__user">
-        {/* <Popover
-          direction="bottom-right"
-          content={topBarPopoverContent}
-          popoverTrigger="Click"
-          closeOnClick> */}
-        <button className="cui-avatar cui-button--none" aria-haspopup="true" onClick={this.logoutUser}>
-          <img className="user-image" src={photo} onError={this.getDefaultAvatar} alt="user" />
-        </button>
-        {/*</Popover> */}
-      </div>
-    ) : (
-      <div className="cui-top-bar__logged-out">
-        <Link to="/login">Log In</Link>
-      </div>
-    );
+    // const topbarRight = this.props.isAuthenticated ? (
+    //   <div className="cui-top-bar__user">
+    //     {/* <Popover
+    //       direction="bottom-right"
+    //       content={topBarPopoverContent}
+    //       popoverTrigger="Click"
+    //       closeOnClick> */}
+    //     <button className="cui-avatar cui-button--none" aria-haspopup="true" onClick={this.logoutUser}>
+    //       <img className="user-image" src={photo} onError={this.getDefaultAvatar} alt="user" />
+    //     </button>
+    //     {/*</Popover> */}
+    //   </div>
+    // ) : (
+    //   <div className="cui-top-bar__logged-out">
+    //     <Link to="/login">Log In</Link>
+    //   </div>
+    // );
 
     return (
       <Fragment>
@@ -192,16 +192,16 @@ class AppHeader extends Component {
 AppHeader.propTypes = {
   getUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
-  push: PropTypes.func.isRequired,
+  // push: PropTypes.func.isRequired,
   path: PropTypes.string,
-  photo: PropTypes.string,
+  // photo: PropTypes.string,
   search: PropTypes.object,
 };
 
 AppHeader.defaultProps = {
   isAuthenticated: false,
   path: '',
-  photo: null,
+  // photo: null,
   search: null,
 };
 
@@ -221,5 +221,8 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getUser, push }
+  { 
+    getUser,
+    // push 
+  }
 )(AppHeader);

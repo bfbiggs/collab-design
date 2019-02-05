@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Footer from '../../collab-ui/Footer';
 import FooterSection from '../../collab-ui/Footer/FooterSection';
 
-import { List, ListItem, SocialList} from '@collab-ui/react';
+import { List, ListItem } from '@collab-ui/react';
 
 const AppFooter = () => {
   return (

@@ -168,6 +168,8 @@ SideNavContainer.defaultProps = {
   loading: false,
 };
 
+SideNavContainer.displayName = 'SideNavContainer';
+
 export default withRouter(
   connect(mapStateToProps)(SideNavContainer)
 );

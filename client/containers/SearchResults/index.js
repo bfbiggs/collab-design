@@ -99,6 +99,8 @@ SearchResults.defaultProps = {
   loading: false,
 };
 
+SearchResults.displayName= 'SearchResults';
+
 export default connect(
   mapStateToProps,
   { fetchSearchResultsData }
