@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
 const initialState = {
-  components: {},
+  components: null,
   loading: true,
   error: null,
   keyword: '',

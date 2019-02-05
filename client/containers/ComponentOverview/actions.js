@@ -22,7 +22,7 @@ export const filterComponentsData = keyword => dispatch => {
   });
 };
 
-export const fetchComponentsData = () => dispatch => {
+export const fetchAllComponentData = () => dispatch => {
   return fetch(`${config.COMPONENTS_URL}`)
     .then(res => res.json())
     .then(components =>

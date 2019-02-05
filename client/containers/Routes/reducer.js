@@ -2,8 +2,8 @@ import * as types from './actionTypes';
 
 const initialState = {
   routes: [],
-  loading: false,
-  error: null
+  loading: true,
+  error: false
 };
 
 const routesReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const routesReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         ...state,
         loading: true,
-        error: null
+        error: false
       });
     case types.FETCH_ROUTES_ERROR:
       return Object.assign({}, state, {
@@ -24,7 +24,7 @@ const routesReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         routes: action.routes,
         loading: false,
-        error: null
+        error: false
       });
     default:
       return state;

@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom';
 
 /**
  * @category controls
- * @component GirdTab
+ * @component GridTab
  * @variations collab-ui-design
  */
 
-class GirdTab extends React.Component {
+class GridTab extends React.Component {
   state = {
     isFixed: false,
     checkTime: 0,
@@ -34,7 +34,7 @@ class GirdTab extends React.Component {
 
   checkDom = () => {
     let { isFixed, checkTime, fixedTop } = this.state,
-      offsetHeight = this.getDomPosition(this.refs.gird_tabs).y;
+      offsetHeight = this.getDomPosition(this.refs.grid_tabs).y;
     if (checkTime < 2 && !isFixed) {
       this.setState({
         checkTime: checkTime + 1,
@@ -69,9 +69,9 @@ class GirdTab extends React.Component {
 
   render() {
     const { component, matchUrl, hasCodeExamples } = this.props;
-    let className = 'cui-button-group cui-button-group--blue' + (this.state.isFixed ? ' gird-tabs-fixed' : '');
+    let className = 'cui-button-group cui-button-group--blue' + (this.state.isFixed ? ' grid-tabs-fixed' : '');
     return (
-      <div ref="gird_tabs" className={className}>
+      <div ref="grid_tabs" className={className}>
         {component.name === 'icons' && (
           <NavLink
             className="cui-button cui-button--36"
@@ -113,7 +113,7 @@ class GirdTab extends React.Component {
   }
 }
 
-GirdTab.propTypes = {
+GridTab.propTypes = {
   component: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   matchUrl: PropTypes.string.isRequired,
@@ -121,7 +121,7 @@ GirdTab.propTypes = {
   container: PropTypes.object,
 };
 
-GirdTab.defaultProps = {
+GridTab.defaultProps = {
   component: {},
   isMobile: false,
   matchUrl: '',
@@ -129,4 +129,4 @@ GirdTab.defaultProps = {
   container: window,
 };
 
-export default GirdTab;
+export default GridTab;

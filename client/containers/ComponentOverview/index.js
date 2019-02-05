@@ -2,24 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SearchInput, Spinner } from '@collab-ui/react';
-import { fetchComponentsData, filterComponentsData } from './actions';
+import { fetchAllComponentData, filterComponentsData } from './actions';
 import ComponentItem from '../../components/ComponentItem';
 import PageHeader from '../../collab-ui/PageHeader';
 import Media from 'react-media';
 
 class ComponentOverviewPage extends React.Component {
   componentDidMount() {
-    this.props.fetchComponentsData();
+    const { components, fetchAllComponentData } = this.props;
+
+    if(!components) {
+      fetchAllComponentData();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { components, fetchAllComponentData } = this.props;
+
+    if(prevProps.components !== components && !components) {
+      fetchAllComponentData();
+    }
   }
 
   renderComponentItems = () => {
     const { components, keyword } = this.props;
 
-    return components.children.map((itm, idx) => {
+    return components.children.reduce((agg, itm, idx) => {
       const name = itm.displayName.toLowerCase();
       const reg = new RegExp(keyword);
       if (keyword == '' || reg.test(name)) {
-        return (
+        return [
+          ...agg,
           <li
             key={idx}
           >
@@ -29,9 +42,9 @@ class ComponentOverviewPage extends React.Component {
               title={itm.displayName}
             />
           </li>
-        );
-      }
-    });
+        ];
+      } else return agg;
+    }, []);
   };
 
   handleSearchInput = e => {
@@ -40,21 +53,25 @@ class ComponentOverviewPage extends React.Component {
   };
 
   render() {
-    const { components, loading } = this.props;
+    const { components, keyword, loading } = this.props;
 
     return (
       <React.Fragment>
-        <Media query="(min-width: 1025px)">
-          {isDesktop => (
-              <PageHeader
-                title={components.displayName}
-                lead={components.description}
-                textAlign="left"
-                collapse={isDesktop}
-              />
-            )
-          }
-        </Media>
+        {
+          components && (
+            <Media query="(min-width: 1025px)">
+              {isDesktop => (
+                <PageHeader
+                  title={components.displayName}
+                  lead={components.description}
+                  textAlign="left"
+                  collapse={isDesktop}
+                />
+              )
+            }
+          </Media>
+          )
+        }
         <div className="docs-content-area docs-component-overview">
           {loading ? (
             <div className="docs-component-overview__spinner">
@@ -68,6 +85,7 @@ class ComponentOverviewPage extends React.Component {
                   htmlId="filterSearchInput"
                   type="pill"
                   onChange={this.handleSearchInput}
+                  value={keyword}
                 />
               </div>
               <ul className="docs-component-overview__component-list">
@@ -91,7 +109,7 @@ ComponentOverviewPage.propTypes = {
   keyword: PropTypes.string,
   components: PropTypes.object,
   error: PropTypes.string,
-  fetchComponentsData: PropTypes.func.isRequired,
+  fetchAllComponentData: PropTypes.func.isRequired,
   filterComponentsData: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 };
@@ -101,7 +119,9 @@ ComponentOverviewPage.defaultProps = {
   loading: false,
 };
 
+ComponentOverviewPage.displayName = 'ComponentOverviewPage';
+
 export default connect(
   mapStateToProps,
-  { fetchComponentsData, filterComponentsData }
+  { fetchAllComponentData, filterComponentsData }
 )(ComponentOverviewPage);

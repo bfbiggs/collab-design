@@ -6,7 +6,7 @@ import CodeTab from '../../components/CodeTab';
 import DesignTab from '../../components/DesignTab';
 import IconsTab from '../../containers/Icons';
 import PageHeader from '../../collab-ui/PageHeader';
-import GirdTab from '../../components/GirdTab';
+import GridTab from '../../components/GridTab';
 import Media from 'react-media';
 
 class ComponentPage extends React.Component {
@@ -49,13 +49,13 @@ class ComponentPage extends React.Component {
 
     const hasCodeExamples = verifyCodeExamples();
 
-    const getDefaultTab = () => {
-      return (component.name === 'icons') ? `${match.path}library`
-              : component.style ? `${match.path}style`
-                : component.usage ? `${match.path}usage`
-                  : hasCodeExamples ? `${match.path}code`
-                    : match.path;
-    };
+    const getDefaultTab = () => (
+      component.name === 'icons' ? `${match.url}/library`
+        : component.style ? `${match.url}/style`
+          : component.usage ? `${match.url}/usage`
+            : hasCodeExamples ? `${match.url}/code`
+              : match.url
+    );
 
     return (
       <Media query="(min-width: 1025px)">
@@ -67,7 +67,7 @@ class ComponentPage extends React.Component {
             : (
               <React.Fragment>
                 <PageHeader title={component.displayName} lead={component.description} textAlign="left" collapse={isDesktop} />
-                <GirdTab matchUrl={match.url} component={component} hasCodeExamples={hasCodeExamples} isMobile={!isDesktop}/>
+                <GridTab matchUrl={match.url} component={component} hasCodeExamples={hasCodeExamples} isMobile={!isDesktop}/>
 
                 <div className={
                   'docs-content-area' +
@@ -76,12 +76,20 @@ class ComponentPage extends React.Component {
                   {loading
                     ? <Spinner />
                     : <Switch>
-                      <Route path={`${match.path}library`} render={props => <IconsTab {...props} />} />
-                      <Route path={`${match.path}style`} render={props => <DesignTab {...props} sections={component.style} />} />
-                      <Route path={`${match.path}usage`} render={props => <DesignTab {...props} sections={component.usage} />} />
-                      <Route path={`${match.path}code`} render={props => hasCodeExamples && <CodeTab {...props} sections={component.code && component.code} codePreference={codePreference} />} />
-                      <Redirect exact path={`${match.path}`} to={getDefaultTab()} />
-                    </Switch>
+                        {component.name === 'icons' && <Route path={`${match.url}/library`} render={props => <IconsTab {...props} />} />}
+                        {component.style && <Route exact path={`${match.url}/style`} render={props => <DesignTab {...props} sections={component.style} />} />}
+                        {component.usage && <Route exact path={`${match.url}/usage`} render={props => <DesignTab {...props} sections={component.usage} />} />}
+                        {component.code && <Route exact path={`${match.url}/code`} render={props => hasCodeExamples && 
+                          <CodeTab 
+                            codePreference={codePreference}
+                            sections={component.code && component.code}
+                            {...props}
+                          />}
+                        />}
+                        <Route exact path={`${match.url}`}>
+                          <Redirect to={getDefaultTab()}/>
+                        </Route>
+                      </Switch>
                   }
                 </div>
               </React.Fragment>
@@ -97,7 +105,6 @@ ComponentPage.propTypes = {
   codePreference: PropTypes.string.isRequired,
   components: PropTypes.object.isRequired,
   error: PropTypes.bool,
-  fetchComponentData: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   match: PropTypes.object.isRequired,
 };
@@ -106,5 +113,7 @@ ComponentPage.defaultProps = {
   error: false,
   loading: false,
 };
+
+ComponentPage.displayName = 'ComponentPage';
 
 export default ComponentPage;

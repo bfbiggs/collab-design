@@ -17,6 +17,21 @@ class ComponentContainer extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      child,
+      components,
+      fetchComponentData
+    } = this.props;
+
+    if(
+      prevProps.child.object_id !== child.object_id 
+      && !components[child.object_id]
+    ) {
+      fetchComponentData(child.object_id);
+    }
+  }
+
   render() {
     return (
       <ComponentPage {...this.props} />
@@ -44,6 +59,8 @@ ComponentContainer.defaultProps = {
   error: false,
   loading: false,
 };
+
+ComponentContainer.displayName = 'ComponentContainer';
 
 export default connect(
   mapStateToProps,

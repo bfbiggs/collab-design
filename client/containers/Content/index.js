@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PageHeader from '../../collab-ui/PageHeader';
-import OverviewPage from './OverviewPage';
-import { fetchPageData } from '../../services/page/actions';
 import { connect } from 'react-redux';
+import PageHeader from '../../collab-ui/PageHeader';
+import { fetchPageData } from '../../services/page/actions';
+import ContentPage from './ContentPage';
 import Media from 'react-media';
 
-class OverviewContainer extends React.Component {
+class ContentPageContainer extends React.Component {
   componentDidMount() {
     const { fetchPageData, id, pageData } = this.props;
 
@@ -24,21 +24,16 @@ class OverviewContainer extends React.Component {
   }
 
   render() {
-    const {
-      id,
-      pageData,
-      ...props
-    } = this.props;
+    const { id, pageData } = this.props;
 
     return (
-      pageData
-        && pageData[id]
-        && <OverviewPage data={pageData[id]} {...props} />
-        || (
+      pageData &&
+      pageData[id] && 
+      <ContentPage data={pageData[id]} {...this.props} />
+      || (
         <Media query="(min-width: 1025px)">
           {isDesktop => <PageHeader textAlign="left" collapse={isDesktop} />}
         </Media>
-
         )
     );
   }
@@ -48,15 +43,14 @@ const mapStateToProps = state => ({
   pageData: state.pageReducer.pages
 });
 
-OverviewContainer.propTypes = {
-  child: PropTypes.shape({}).isRequired,
+ContentPageContainer.propTypes = {
   fetchPageData: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   pageData: PropTypes.shape({}),
 };
 
-OverviewContainer.defaultProps = {
+ContentPageContainer.defaultProps = {
   pageData: {}
 };
 
-export default connect(mapStateToProps, { fetchPageData })(OverviewContainer);
+export default connect(mapStateToProps, { fetchPageData })(ContentPageContainer);

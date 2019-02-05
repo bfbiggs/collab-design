@@ -4,17 +4,15 @@ import PropTypes from 'prop-types';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
 import fetchRoutes from './actions';
-// import getAuthorization from '../../services/user/actions';
 import Changelog from '../../containers/Changelog';
-import Component from '../../containers/Component';
-import ComponentOverviewPage from '../../containers/ComponentOverviewPage';
-import ContentPage from '../../containers/ContentPage';
+import ComponentOverview from '../../containers/ComponentOverview';
 import Feedback from '../../containers/Feedback';
-import HomePage from '../../containers/HomePage';
-import LoginPage from '../../containers/Login';
-import NotFoundPage from '../../containers/NotFound';
-import Overview from '../../containers/Overview';
+import Home from '../../containers/Home';
+import Login from '../../containers/Login';
+import NotFound from '../../components/NotFound';
+import RouteContainer from './RouteContainer';
 import SearchResults from '../../containers/SearchResults';
+// import getAuthorization from '../../services/user/actions';
 // import PrivateRoute from './PrivateRoute';
 
 class Routes extends React.Component {
@@ -23,117 +21,32 @@ class Routes extends React.Component {
   }
 
   render() {
-    const {
-      error,
-      loading,
-      routes
-    } = this.props;
-
-    const createRoutes = routes.map((item, idx) => {
-      if (['components', 'styles'].includes(item.object_slug)) {
-
-        return [
-          item.object_slug === 'styles' &&
-          <Route
-            key='styles'
-            path='/styles'
-            exact
-            render={props => <Overview {...props} child={item} id={item.object_id} title={item.title} />}
-          />,
-          item.children.map(child => {
-            if (item.object_slug === child.object_slug) return;
-            const childPath = child.path.replace(/\/$/, '');
-
-            return (
-              <Route
-                key={`${child.id}`}
-                path={`/${childPath}/`}
-                render={props => <Component {...props} child={child} />}
-              />
-            );
-          })
-        ];
-      }
-
-      return [
-        <Route
-          exact
-          key={`${item.id}-${idx}`}
-          path={`/${item.path}`}
-          render={props => (
-            <Overview
-              child={item}
-              id={item.object_id}
-              title={item.title}
-              {...props}
-            />
-          )}
-        />,
-        item.children &&
-        item.children.map((child, idx) => {
-          const childPath = child.path.replace(/\/$/, '');
-
-          return [
-            <Route
-              exact
-              key={`${child.id}-${idx}`}
-              path={`/${childPath}`}
-              render={props => <ContentPage page={child} {...props} />}
-            />,
-            child.children &&
-            child.children.map((grandchild, idx) => {
-              const grandChildPath = grandchild.path.replace(/\/$/, '');
-
-                return (
-                  <Route
-                    exact
-                    key={`${grandchild.id}-${idx}`}
-                    path={`/${grandChildPath}`}
-                    render={props => <ContentPage page={grandchild} {...props} />}
-                  />
-                );
-            })
-          ];
-        })
-      ];
-    });
-
     return (
       <Switch>
-        <Route key='home-0' path='/' exact component={HomePage} />
-        <Route key='changelog-0' path="/changelog" component={Changelog} />
-        <Route key='components-0' path='/components' exact component={ComponentOverviewPage} />
-        <Route key='feedback-0' path="/feedback" exact component={Feedback} />
-        {routes && (!loading || !error) && createRoutes}
-        <Route key={'login0'} path="/login" component={LoginPage} />
-        <Route key={'search0'} path="/search" component={SearchResults} />
-        <Route key={'NoMatch0'} component={NotFoundPage} />
+        <Route path='/' exact component={Home} />
+        <Route path='/components' exact component={ComponentOverview} />
+        <Route path='/guidelines/:section/:subSection' exact component={props => <RouteContainer {...props} />} />
+        <Route path='/changelog' component={Changelog} />
+        <Route path='/feedback' exact component={Feedback} />
+        <Route path='/login' component={Login} />
+        <Route path='/search' component={SearchResults} />
+        <Route path='/:category' exact render={props => <RouteContainer {...props} />} />
+        <Route path='/:category/:section' render={props => <RouteContainer {...props} />} />
+        <Route component={NotFound} />
       </Switch>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  routes: state.routesReducer.routes,
-  loading: state.routesReducer.loading,
-  error: state.routesReducer.error,
-});
-
 Routes.propTypes = {
-  error: PropTypes.bool,
   fetchRoutes: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  routes: PropTypes.array.isRequired,
 };
 
-Routes.defaultProps = {
-  error: false,
-  loading: false,
-};
+Routes.displayName = 'Routes';
 
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     { fetchRoutes }
   )(Routes)
 );
