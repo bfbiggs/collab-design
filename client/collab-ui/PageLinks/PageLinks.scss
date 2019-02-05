@@ -18,19 +18,17 @@
       height: auto;
     }
 
-
     &:before {
       position: absolute;
       content: '';
-      height: rem-calc(32);
+      height: 100%;
       width: 2px;
       box-shadow: -12px 0 0 0 $black-12;
-
     }
 
     &:first-of-type {
       &:before {
-        height: rem-calc(28);
+        height: calc(100% - 12.5%);
         bottom: 0;
       }          
     }
@@ -38,7 +36,7 @@
     &:last-of-type {
       &:before {
         top: 0;
-        height: rem-calc(28);
+        height: calc(100% - 12.5%);
       }
     }
 
@@ -49,7 +47,7 @@
       &:after {
         position: absolute;
         content: '';
-        height: 24px;
+        height: calc(100% - 25%);
         width: 2px;
         box-shadow: -12px 0 0 0 $blue-dark-hover;
       }
@@ -61,7 +59,7 @@
       &:after {
         position: absolute;
         content: '';
-        height: 24px;
+        height: calc(100% - 25%);
         width: 2px;
         box-shadow: -12px 0 0 0 $blue-dark-hover;
       }
