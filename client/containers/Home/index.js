@@ -68,7 +68,14 @@ class HomePage extends React.PureComponent {
                     <div className="cui-landing-section__icon-links">
                     {section.iconLinks && section.iconLinks.map((iconLink, idx) => {
                       return (
-                        <Link className="cui-landing-section__icon-link" key={`linkSection${idx}`} to={iconLink.link}>
+                        <Link 
+                          className={
+                            "cui-landing-section__icon-link" +
+                            `${section.iconLinks.length > 2 ? ' cui-landing-section__icon-link--center' : ''}`
+                          } 
+                          key={`linkSection${idx}`} 
+                          to={iconLink.link}
+                        >
                           <div className="icon-link__image-container">
                             <img src={iconLink.linkImage} alt="" />
                           </div>
