@@ -59,17 +59,23 @@
 
         }
 
-        &:first-of-type {
+        &:only-child {
           &:before {
-            height: rem-calc(30);
+            height: 100%;
+          }
+        }
+
+        &:first-of-type:not(:only-child) {
+          &:before {
+            height: calc(100% - 16%);
             bottom: 0;
           }          
         }
 
-        &:last-of-type {
+        &:last-of-type:not(:only-child) {
           &:before {
             top: 0;
-            height: rem-calc(30);
+            height: calc(100% - 16%);
           }
         }
 
@@ -80,7 +86,7 @@
           &:after {
             position: absolute;
             content: '';
-            height: 24px;
+            height: calc(100% - 33%);
             width: 2px;
             box-shadow: -12px 0 0 0 $blue-dark-hover;
           }
@@ -93,7 +99,7 @@
           &:after {
             position: absolute;
             content: '';
-            height: 24px;
+            height: calc(100% - 33%);
             width: 2px;
             box-shadow: -12px 0 0 0 $blue-press;
           }
