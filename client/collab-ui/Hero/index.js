@@ -2,40 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Hero extends React.PureComponent {
-  static displayName = 'Hero';
 
   render() {
     const {
-      title,
+      className,
+      color,
       description,
       image,
+      style,
       textAlign,
       textColor,
-      color,
+      title,
+      ...props
     } = this.props;
-    const leadElement = () => {
-      return description ? <h4 className="cui-hero__lead cui-font-color--secondary">{description}</h4> : '';
-    };
+
+    const leadElement = () => (
+      description 
+        && (
+          <h4 className='cui-hero__lead cui-font-color--secondary'>
+            {description}
+          </h4>
+        ) 
+    );
 
     return (
       <div
         className={
-          'hero ' +
-          (textAlign === 'center' ? 'text-center' : 'cui-hero--fluid') +
-          ' ' +
-          (textAlign === 'left' ? 'cui-page-header--left' : '') +
-          ' ' +
-          (textColor === 'light' ? 'cui-hero--dark' : '')
+          'cui-hero' +
+          `${textAlign === 'left' ? ' cui-hero--left' : ''}` +
+          `${textColor === 'light' ? ' cui-hero--dark' : ''}` +
+          `${className ? ` ${className}` : '' }`
         }
-        style={{ backgroundColor: color, backgroundImage: `url(${image})` }}>
-        <div
-          className={
-            'cui-page-header__container ' +
-            (textAlign === 'left' ? 'cui-page-header--left' : '')
-          }>
-        {/* eslint-disable react/no-danger */}
-        <h1 className="cui-hero__title cui-font-color--alternate cui-h1--bold" dangerouslySetInnerHTML={{ __html: title }} />
-        {/* eslint-enable react/no-danger */}
+        style={{ 
+          backgroundColor: color, 
+          backgroundImage: `url(${image})`,
+          ...style
+        }}
+        {...props}
+      >
+        <div className='cui-hero__container'>
+          <h1 className='cui-hero__title cui-font-color--alternate cui-h1--bold'>
+            {title}
+          </h1>
           {leadElement()}
         </div>
       </div>
@@ -44,20 +52,28 @@ class Hero extends React.PureComponent {
 }
 
 Hero.propTypes = {
-  title: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  color: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
+  style: PropTypes.object,
   textAlign: PropTypes.string,
   textColor: PropTypes.string,
-  color: PropTypes.string,
+  title: PropTypes.node.isRequired,
 };
 
 Hero.defaultProps = {
+  className: '',
+  color: '',
   description: '',
   image: '',
+  style: {},
   textAlign: '',
   textColor: '',
-  color: '',
 };
 
+Hero.displayName = 'Hero';
+
 export default Hero;
+
+

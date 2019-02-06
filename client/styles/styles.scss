@@ -73,14 +73,6 @@ body {
       display: none;
     }
   }
-
-  .cui-page-header {
-    margin-top: rem-calc(80);
-    @media #{$large-up} {
-      margin-top: 0;
-    }
-
-  }
 }
 
 .docs-content {

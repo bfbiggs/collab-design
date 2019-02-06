@@ -1,11 +1,21 @@
-
 .cui-page-header {
   grid-area: page-header;
+  margin-top: rem-calc(80);
 
-  .cui-page-header__container{
+  @media #{$large-up} {
+    margin-top: 0;
+  }
+
+  &--left {
+    .cui-page-header__container {
+      margin-right: rem-calc(48);
+    }
+  }
+
+  &__container {
     transform-origin: 0 0;
     z-index: 1100;
-    margin-left: rem-calc(24);
+    margin: 0 auto rem-calc(48) rem-calc(24);
   }
 
   &__title {

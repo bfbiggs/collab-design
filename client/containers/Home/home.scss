@@ -1,25 +1,5 @@
 .docs-home-page {
   grid-area: home;
-  .hero {
-    height: 320px;
-    min-height: auto;
-    padding: 0;
-    margin: 80px auto;
-    background-size: cover;
-    background-position-x: 60%;
-    .cui-hero__title {
-      visibility: hidden;
-    }
-    @media #{$large-up} {
-      height: 400px;
-      background-size: contain;
-      background-position-x: -48px;
-    }
-    @media #{$xlarge-up} {
-      height: 480px; // background-size: contain;
-      background-position-x: center;
-    }
-  }
 }
 
 .cui-landing-section {

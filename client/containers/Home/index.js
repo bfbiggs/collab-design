@@ -25,11 +25,20 @@ class HomePage extends React.PureComponent {
   }
 
   render () {
-    const { mainImage, description, displayName, homeSections } = this.state;
+    const {
+      description,
+      displayName,
+      homeSections,
+      mainImage,
+    } = this.state;
 
     return (
       <div className="docs-home-page">
-        <Hero title={displayName} description={description} textAlign="center" image={mainImage} className="docs-hero--home"/>
+        <Hero
+          description={description}
+          image={mainImage}
+          title={displayName}
+        />
 
         <div className="docs-home-sections">
           {homeSections && homeSections.map((section, idx) => {
